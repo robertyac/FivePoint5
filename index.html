@@ -14,8 +14,8 @@
     <title>FivePoint5</title>
 
     <!-- NavBar -->
-    <nav class="navbar bg-body-tertiary sticky-sm-top">
-        <div class="container-fluid d-flex flex-column flex-sm-row justify-content-between align-items-center">
+    <nav class="navbar bg-body-tertiary sticky-top">
+        <div class="container-fluid d-flex flex-row justify-content-center flex-nowrap">
 
             <!-- LOGO -->
             <!-- First Div (5.5) - Visible on smaller screens -->
@@ -24,8 +24,7 @@
                     <img src="/img/5.5.png" alt="Logo" width="45" class="d-inline-block align-text-top">
                 </a>
             </div>
-
-            <!-- Second Div (word logo)- Visible on xl screens and up -->
+            <!-- Second Div (word logo)- Visible on lg screens and up -->
             <div class="d-none d-lg-block">
                 <a class="navbar-brand" href="#">
                     <img src="/img/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
@@ -34,7 +33,7 @@
 
             <!-- Tags Dropdown Menu -->
             <div class="dropdown ">
-                <button class="btn btn-secondary dropdown-toggle mx-2 my-2" type="button" data-bs-toggle="dropdown"
+                <button class="btn btn-secondary dropdown-toggle mx-sm-2 my-sm-2" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Tags
                 </button>
@@ -54,16 +53,29 @@
                 </ul>
             </div>
 
-            <!-- Search Form -->
-            <div class="flex-grow-1 mx-2 my-2">
+            <!-- Search -->
+            <!-- Search button (smaller displays)-->
+            <div class="d-flex my-2 d-block d-sm-none">
+                <button class="btn btn-outline-dark mx-1 mx-sm-2 px-4" type="button">
+                    <!--Search Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                </button>
+            </div>
+            <!-- Search Form (larger Displays) -->
+            <div class="flex-grow-1 mx-2 my-2 d-none d-sm-block">
                 <form class="d-flex align-items-center" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search FivePoint5" aria-label="Search">
                 </form>
             </div>
 
+
             <!-- Create Post Button -->
             <div class="d-flex my-2">
-                <button class="btn btn-outline-dark mx-2 px-4" type="button">
+                <button class="btn btn-outline-dark mx-sm-2 px-4" type="button">
                     <!--Plus Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-plus-lg" viewBox="0 0 16 16">
@@ -74,7 +86,7 @@
             </div>
 
             <!-- Profile Button -->
-            <div class="nav-item dropdown d-flex justify-content-center mx-1 my-2">
+            <div class="nav-item dropdown d-flex justify-content-center mx-sm-1 my-2">
                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://xsgames.co/randomusers/assets/images/favicon.png" class="rounded-circle"
