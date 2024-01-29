@@ -14,28 +14,35 @@
     <title>FivePoint5</title>
 
     <!-- NavBar -->
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar bg-body-tertiary sticky-top">
         <div class="container-fluid d-flex flex-row justify-content-between align-items-center">
 
-
             <!-- LOGO -->
-            <div class="d-flex align-items-center ">
+            <!-- First Div (5.5) - Visible on smaller screens -->
+            <div class="d-flex align-items-center d-block d-lg-none">
                 <a class="navbar-brand" href="#">
                     <img src="/img/5.5.png" alt="Logo" width="45" class="d-inline-block align-text-top">
                 </a>
             </div>
 
+            <!-- Second Div (word logo)- Visible on xl screens and up -->
+            <div class="d-none d-lg-block">
+                <a class="navbar-brand" href="#">
+                    <img src="/img/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
+                </a>
+            </div>
+
             <!-- Tags Dropdown Menu -->
             <div class="dropdown ">
-                <button class="btn btn-secondary dropdown-toggle mx-2 px-xxl-5" type="button" data-bs-toggle="dropdown"
+                <button class="btn btn-secondary dropdown-toggle mx-2 px-lg-5" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Tags
                 </button>
                 <!-- Search for a tag dropdown-->
-                <ul class="dropdown-menu end-0 mt-2" style="min-width: 300px;">
+                <ul class="dropdown-menu end-0 mt-2" style="min-width: 250px;">
                     <form class="navbar-form d-flex mx-2" action="">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Filter Posts by Tag">
+                            <input type="text" class="form-control" placeholder="Tag">
                         </div>
                         <button class="btn btn-outline-success ml-2" type="submit">Filter
                         </button>
@@ -79,27 +86,18 @@
                 </ul>
             </div>
 
-
         </div>
     </nav>
 
 </head>
+
 <!-- this stylesheet is for different breakpoints in browsers used with Bootstrap ***** remove after ***** -->
 <link rel="stylesheet" href="css/bootstrap-breakpoint.css">
 
 <body>
 
-    <!-- Posts Carousel-->
-    <section class="bg-body p5">
-        <div class="container">
-            <div class="d-flex">
-                <div>
-                    <h1>Welcome To</h1>
-                </div>
-                <img class="img-fluid w-50" src="img/logo.jpeg" alt="">
-            </div>
-        </div>
-    </section>
+    <!--Welcone -->
+
 
 </body>
 
