@@ -62,7 +62,6 @@
             </div>
         </div>
 
-
         <!-- Search Form (larger Displays) -->
         <div class="flex-grow-1 mx-2 d-none d-sm-block">
             <form class="d-flex align-items-center" role="search">
@@ -70,6 +69,20 @@
             </form>
         </div>
 
+
+         <!-- Profile Button -->
+         <!-- have to use order-last but code before create post because of some bug with live server -->
+         <div class="dropdown d-flex justify-content-center mx-1 order-last">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://xsgames.co/randomusers/assets/images/favicon.png" class="rounded-circle" height="45"
+                    alt="Profile Picture" />
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">My profile</a></li>
+                <li><a class="dropdown-item" href="#">Login/Logout</a></li>
+            </ul>
+        </div>
 
         <!-- Create Post Button -->
         <div class="d-flex m-auto">
@@ -85,18 +98,7 @@
             </a>
         </div>
 
-        <!-- Profile Button -->
-        <div class="nav-item dropdown d-flex justify-content-center mx-1">
-            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://xsgames.co/randomusers/assets/images/favicon.png" class="rounded-circle" height="45"
-                    alt="Profile Picture" />
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="#">My profile</a></li>
-                <li><a class="dropdown-item" href="#">Login/Logout</a></li>
-            </ul>
-        </div>
+       
 
     </div>
 </nav>
