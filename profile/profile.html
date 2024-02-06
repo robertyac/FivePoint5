@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> Vertical Menu </title>
+    <title> Profile </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="profile.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <style>
@@ -13,88 +14,149 @@
         }
     </style>
     <script> // should be moved to a separate file
-        function openPage(pageName) {
-            // Hide all elements with class="tabcontent" by default */
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-
-            // Remove the background color of all tablinks/buttons
-            tablinks = document.getElementsByClassName("tablink");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].style.backgroundColor = "";
-            }
-
-            // Show the specific tab content
-            document.getElementById(pageName).style.display = "block";
+    function openPage(pageName) {
+        // Hide all elements with class="tabcontent" by default */
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "block";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
     </script>
 </head>
 <body>
 <div id="nav" style="height: 100px;"></div>
-<div class="row">
-    <div class="col-10">
-        <div class="tabcontent" id="settings">
-            <div class="container">
-                Your profile picture:
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-light d-flex p-2 content">
+            <div class="tabcontent" id="settings">
+                <div class="container">
+                    <h1>Your settings:</h1>
+                </div>
+                <div class="container">
+                    Your profile picture:
+                </div>
+                <div class="container">
+                    <img src="../img/defaultProfilePic.svg" alt="Profile Picture" style="max-width:300px;">
+                </div>
+                <div class="container">
+                    Name: &nbsp; Connor Cahoon
+                    <form class="d-flex align-items-center w-50" role="form">
+                        Username:
+                        <input class="form-control me-2 ml-3" id="username" type="text" placeholder="Connor" aria-label="Text">
+                    </form>
+                    Age: &nbsp;&nbsp;&nbsp; 23 <br>
+                    Email: &nbsp; connor.cahoon@gmail.com <br>
+                    ...
+                </div>
             </div>
-            <img src="../img/5.5.png" alt="Map" style="max-width:300px;">
-            <div class="container">
-                Name: &nbsp; "Connor" <br>
-                Age: &nbsp;&nbsp;&nbsp; "23" <br>
-                Email: &nbsp; "connor.cahoon@gmail.com" <br>
-                ...
+            <div class="tabcontent" id="posts" style="display: none">
+                <div class="container">
+                    <h1>Your posts:</h1>
+                </div>
+                <a href="/post/viewPost.html" class="text-decoration-none">
+                    <div class="card bg-secondary text-light mb-3 p-2 zoom" style="max-width: 50%">
+                        <div class="card-body text-center">
+                            <div class="d-flex justify-content-between">
+                                    <span class="text-start h6 text-bg-light opacity-75 rounded">Tags: Coding, HTML,
+                                        UBC</span>
+                                <span class="text-end h6">Posted: 3 mins ago</span>
+                            </div>
+                            <!-- post title  -->
+                            <h3 class="card-title mt-4">POST TITLE</h3>
+                            <!-- post image -->
+                            <img src="/img/FivePoint5.png" alt="Post Image" class="card-image img-fluid">
+                            <!-- slider rating -->
+                            <div class="mt-2 text-start">
+                                <label for="rating"></label>
+                                <h4>Rating:</h4> </label>
+                                <label for="rating" class="form-label">3.57<span
+                                        class="text-dark">/5.5</span></label>
+                                <input type="range" class="form-range" id="rating" value="3.57" min="0" max="5.5"
+                                       step="0.1">
+                            </div>
+                            <!-- End slider rating -->
+                        </div>
+                    </div>
+                </a>
+                <a href="/post/viewPost.html" class="text-decoration-none">
+                    <div class="card bg-secondary text-light mb-3 p-2 zoom" style="max-width: 50%">
+                        <div class="card-body text-center">
+                            <div class="d-flex justify-content-between">
+                                    <span class="text-start h6 text-bg-light opacity-75 rounded">Tags: Coding, HTML,
+                                        UBC</span>
+                                <span class="text-end h6">Posted: 3 mins ago</span>
+                            </div>
+                            <!-- post title  -->
+                            <h3 class="card-title mt-4">POST TITLE</h3>
+                            <!-- post image -->
+                            <img src="/img/FivePoint5.png" alt="Post Image" class="card-image img-fluid">
+                            <!-- slider rating -->
+                            <div class="mt-2 text-start">
+                                <label for="rating2"></label>
+                                <h4>Rating:</h4> </label>
+                                <label for="rating2" class="form-label">3.57<span
+                                        class="text-dark">/5.5</span></label>
+                                <input type="range" class="form-range" id="rating2" value="3.57" min="0" max="5.5"
+                                       step="0.1">
+                            </div>
+                            <!-- End slider rating -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="tabcontent" id="comments" style="display: none">
+                <div class="container">
+                    <h1>Your comments:</h1>
+                </div>
+            </div>
+            <div class="tabcontent" id="rated" style="display: none">
+                <div class="container">
+                    <h1>Posts you've rated:</h1>
+                </div>
+            </div>
+            <div class="tabcontent" id="favourite" style="display: none">
+                <div class="container">
+                    <h1>Your favourite posts</h1>
+                </div>
             </div>
         </div>
-        <div class="tabcontent" id="posts" style="display: none">
-            <div class="container">
-                Your posts:
-            </div>
+
+        <div class="col sidebar">
+            <nav class="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link tablink" onclick="openPage('settings')" id="defaultOpen"> Settings </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link tablink" onclick="openPage('posts')"> Posts </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link tablink" onclick="openPage('comments')"> Comments </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link tablink" onclick="openPage('rated')"> Rated </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link tablink" onclick="openPage('favourite')"> Favourite </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <div class="tabcontent" id="comments" style="display: none">
-            <div class="container">
-                Your comments:
-            </div>
-        </div>
-        <div class="tabcontent" id="rated" style="display: none">
-            <div class="container">
-                Posts you've rated:
-            </div>
-        </div>
-        <div class="tabcontent" id="favourite" style="display: none">
-            <div class="container">
-                Your favourite posts
-            </div>
-        </div>
-    </div>
-    <div class="col-2">
-        <nav class="navbar bg-light">
-            <ul class="nav navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link tablink" onclick="openPage('settings')"  id="defaultOpen"> Settings </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link tablink" onclick="openPage('posts')" > Posts </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link tablink" onclick="openPage('comments')" > Comments </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link tablink"  onclick="openPage('rated')" > Rated </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link tablink"  onclick="openPage('favourite')" > Favourite </a>
-                </li>
-            </ul>
-        </nav>
     </div>
 </div>
-
 <!-- Script Tags - Place at End of Body -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

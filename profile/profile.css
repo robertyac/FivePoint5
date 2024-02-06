@@ -1,37 +1,20 @@
-.overlay-text {
-    /* these two are needed - the align self makes the column not stretch the whole height of the image column and the translate moves the column over the image */
-    align-self: flex-start;
-    transform: translateX(-100%);
-
-    /* the following are for example only */
-    background-color: #ffffff;
-    padding:20px;
+.sidebar {
+    -ms-flex: 0 0 150px;
+    flex: 0 0 150px;
 }
 
-.tabcontent {
-    color: white;
-    display: none;
-    padding: 100px 20px;
-    height: 100%;
+@media (max-width: 500px) {
+    .sidebar {
+        display: none;
+    }
 }
 
-.tablink {
-    background-color: #555;
-    color: white;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    font-size: 17px;
-    width: 25%;
+.content {
+    -ms-flex: 1;
+    flex: 1;
+    padding: 20px;
 }
 
-.tablink:hover {
-    background-color: #777;
-}
-
-body, html {
-    height: 100%;
-    margin: 0;
+#username {
+    width: 200px;
 }
