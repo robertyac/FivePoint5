@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FivePoint5</title>
     <!-- this stylesheet is for different breakpoints in browsers used with Bootstrap ***** remove after ***** -->
+    <link rel="stylesheet" href="css/bootstrap-breakpoint.css">
     <link rel="stylesheet" href="css/index.css">
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -27,7 +28,7 @@
             </div>
         </div>
 
-
+        <!-- Container for cards -->
         <div class="container pt-4">
             <div class="row text-center d-flex">
                 <!-- Column 1 -->
@@ -37,23 +38,27 @@
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
                             <div class="card-body text-center">
                                 <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-bg-light opacity-75 rounded">Tags: Coding, HTML,
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
                                         UBC</span>
-                                    <span class="text-end h6">Posted: 3 mins ago</span>
+                                    <span class="text-body h6">3 mins ago</span>
                                 </div>
                                 <!-- post title  -->
-                                <h3 class="card-title mt-4">POST TITLE</h3>
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
                                 <!-- post image -->
-                                <img src="/img/5.5.png" alt="Post Image" class="card-image img-fluid">
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
                                 <!-- slider rating -->
-                                <div class="mt-2 text-start">
-                                    <label for="rating"></label>
-                                    <h4>Rating:</h4> </label>
-                                    <label for="rating" class="form-label">3.57<span
-                                            class="text-dark">/5.5</span></label>
-                                    <input type="range" class="form-range" id="rating" value="3.57" min="0" max="5.5"
-                                        step="0.1">
-                                </div>
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
                                 <!-- End slider rating -->
                             </div>
                         </div>
@@ -65,23 +70,59 @@
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
                             <div class="card-body text-center">
                                 <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-bg-light opacity-75 rounded">Tags: Coding, HTML,
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
                                         UBC</span>
-                                    <span class="text-end h6">Posted: 3 mins ago</span>
+                                    <span class="text-body h6">3 mins ago</span>
                                 </div>
                                 <!-- post title  -->
-                                <h3 class="card-title mt-4">POST TITLE</h3>
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
                                 <!-- post image -->
-                                <img src="/img/FivePoint5.png" alt="Post Image" class="card-image img-fluid">
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
                                 <!-- slider rating -->
-                                <div class="mt-2 text-start">
-                                    <label for="rating"></label>
-                                    <h4>Rating:</h4> </label>
-                                    <label for="rating" class="form-label">3.57<span
-                                            class="text-dark">/5.5</span></label>
-                                    <input type="range" class="form-range" id="rating" value="3.57" min="0" max="5.5"
-                                        step="0.1">
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
+                                <!-- End slider rating -->
+                            </div>
+                        </div>
+                    </a>
+                    <!-- End Card -->
+
+                    <!-- Card -->
+                    <a href="/post/viewPost.html" class="text-decoration-none">
+                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
+                                        UBC</span>
+                                    <span class="text-body h6">3 mins ago</span>
                                 </div>
+                                <!-- post title  -->
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
+                                <!-- post image -->
+                                <img src="/img/5.5.png" alt="Post Image" class="card-image img-fluid">
+                                <!-- slider rating -->
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
                                 <!-- End slider rating -->
                             </div>
                         </div>
@@ -89,11 +130,8 @@
                     <!-- End Card -->
 
 
-
-
-                    <!-- End Column 1 -->
-
                 </div>
+                <!-- End Column 1 -->
                 <!-- Column 2 -->
                 <div class="col-md p-4">
 
@@ -102,23 +140,27 @@
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
                             <div class="card-body text-center">
                                 <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-bg-light opacity-75 rounded">Tags: Coding, HTML,
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
                                         UBC</span>
-                                    <span class="text-end h6">Posted: 3 mins ago</span>
+                                    <span class="text-body h6">3 mins ago</span>
                                 </div>
                                 <!-- post title  -->
-                                <h3 class="card-title mt-4">POST TITLE</h3>
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
                                 <!-- post image -->
-                                <img src="/img/FivePoint5.png" alt="Post Image" class="card-image img-fluid">
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
                                 <!-- slider rating -->
-                                <div class="mt-2 text-start">
-                                    <label for="rating"></label>
-                                    <h4>Rating:</h4> </label>
-                                    <label for="rating" class="form-label">3.57<span
-                                            class="text-dark">/5.5</span></label>
-                                    <input type="range" class="form-range" id="rating" value="3.57" min="0" max="5.5"
-                                        step="0.1">
-                                </div>
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
                                 <!-- End slider rating -->
                             </div>
                         </div>
@@ -129,23 +171,175 @@
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
                             <div class="card-body text-center">
                                 <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-bg-light opacity-75 rounded">Tags: Coding, HTML,
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
                                         UBC</span>
-                                    <span class="text-end h6">Posted: 3 mins ago</span>
+                                    <span class="text-body h6">3 mins ago</span>
                                 </div>
                                 <!-- post title  -->
-                                <h3 class="card-title mt-4">POST TITLE</h3>
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
+                                <!-- post image -->
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
+                                <!-- slider rating -->
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
+                                <!-- End slider rating -->
+                            </div>
+                        </div>
+                    </a>
+                    <!-- End Card -->
+                    <!-- Card -->
+                    <a href="/post/viewPost.html" class="text-decoration-none">
+                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
+                                        UBC</span>
+                                    <span class="text-body h6">3 mins ago</span>
+                                </div>
+                                <!-- post title  -->
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
+                                <!-- post image -->
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
+                                <!-- slider rating -->
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
+                                <!-- End slider rating -->
+                            </div>
+                        </div>
+                    </a>
+                    <!-- End Card -->
+
+                </div>
+                <!-- END Column 2 -->
+
+            </div>
+        </div>
+    </section>
+    <!-- END Briefing Section -->
+
+    <section class="text-sm-start text-center">
+        <div class="container p-3">
+            <div class="d-lg-flex align-items-center justify-content-between">
+                <h1>5<span class="text-primary">.</span>5 </h1>
+                <p class="lead my-2">All posts</p>
+            </div>
+        </div>
+
+         <!-- Container for cards -->
+         <div class="container pt-4">
+            <div class="row text-center d-flex">
+                <!-- Column 1 -->
+                <div class="col-md p-4">
+                    <!-- Card -->
+                    <a href="/post/viewPost.html" class="text-decoration-none">
+                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
+                                        UBC</span>
+                                    <span class="text-body h6">3 mins ago</span>
+                                </div>
+                                <!-- post title  -->
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
+                                <!-- post image -->
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
+                                <!-- slider rating -->
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
+                                <!-- End slider rating -->
+                            </div>
+                        </div>
+                    </a>
+                    <!-- End Card -->
+
+                    <!-- Card -->
+                    <a href="/post/viewPost.html" class="text-decoration-none">
+                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
+                                        UBC</span>
+                                    <span class="text-body h6">3 mins ago</span>
+                                </div>
+                                <!-- post title  -->
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
+                                <!-- post image -->
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
+                                <!-- slider rating -->
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
+                                <!-- End slider rating -->
+                            </div>
+                        </div>
+                    </a>
+                    <!-- End Card -->
+
+                    <!-- Card -->
+                    <a href="/post/viewPost.html" class="text-decoration-none">
+                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
+                                        UBC</span>
+                                    <span class="text-body h6">3 mins ago</span>
+                                </div>
+                                <!-- post title  -->
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
                                 <!-- post image -->
                                 <img src="/img/5.5.png" alt="Post Image" class="card-image img-fluid">
                                 <!-- slider rating -->
-                                <div class="mt-2 text-start">
-                                    <label for="rating"></label>
-                                    <h4>Rating:</h4> </label>
-                                    <label for="rating" class="form-label">3.57<span
-                                            class="text-dark">/5.5</span></label>
-                                    <input type="range" class="form-range" id="rating" value="3.57" min="0" max="5.5"
-                                        step="0.1">
-                                </div>
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
                                 <!-- End slider rating -->
                             </div>
                         </div>
@@ -154,9 +348,110 @@
 
 
                 </div>
+                <!-- End Column 1 -->
+                <!-- Column 2 -->
+                <div class="col-md p-4">
+
+                    <!-- Card -->
+                    <a href="/post/viewPost.html" class="text-decoration-none">
+                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
+                                        UBC</span>
+                                    <span class="text-body h6">3 mins ago</span>
+                                </div>
+                                <!-- post title  -->
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
+                                <!-- post image -->
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
+                                <!-- slider rating -->
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
+                                <!-- End slider rating -->
+                            </div>
+                        </div>
+                    </a>
+                    <!-- End Card -->
+                    <!-- Card -->
+                    <a href="/post/viewPost.html" class="text-decoration-none">
+                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
+                                        UBC</span>
+                                    <span class="text-body h6">3 mins ago</span>
+                                </div>
+                                <!-- post title  -->
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
+                                <!-- post image -->
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
+                                <!-- slider rating -->
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
+                                <!-- End slider rating -->
+                            </div>
+                        </div>
+                    </a>
+                    <!-- End Card -->
+                    <!-- Card -->
+                    <a href="/post/viewPost.html" class="text-decoration-none">
+                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
+                                        HTML,
+                                        UBC</span>
+                                    <span class="text-body h6">3 mins ago</span>
+                                </div>
+                                <!-- post title  -->
+                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
+                                <!-- post image -->
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
+                                <!-- slider rating -->
+                                <a>
+                                    <div class="text-start">
+                                        <label for="rating">
+                                            <h4>Rating:</h4>
+                                        </label>
+                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
+                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
+                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
+                                            max="5.5" step="0.01" disabled>
+                                    </div>
+                                </a>
+                                <!-- End slider rating -->
+                            </div>
+                        </div>
+                    </a>
+                    <!-- End Card -->
+
+                </div>
+                <!-- END Column 2 -->
 
             </div>
         </div>
+
 
     </section>
 
