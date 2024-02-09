@@ -14,25 +14,26 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-body-secondary">
     <!--Navigation bar-->
     <div id="nav" style="height: 100px;"></div>
     <!--End of Navigation bar-->
-    <!--Briefing -->
-    <section class="bg-body-secondary text-center text-lg-start">
+    <!--Briefing Section -->
+    <section class=" text-center text-lg-start">
         <div class="container p-3">
             <div class="d-lg-flex align-items-center justify-content-between">
                 <h1>Your 5<span class="text-primary">.</span>5 Briefing</h1>
                 <p class="lead my-2">Catch up on recent posts with your favourite tags.</p>
                 <a href=""><button class="btn btn-primary">Edit Your Tags</button></a>
             </div>
+            <hr/>
         </div>
 
         <!-- Container for cards -->
         <div class="container pt-4">
             <div class="row text-center d-flex">
                 <!-- Column 1 -->
-                <div class="col-md p-4">
+                <div class="col-md m-md-3">
                     <!-- Card -->
                     <a href="/post/viewPost.html" class="text-decoration-none">
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
@@ -133,8 +134,7 @@
                 </div>
                 <!-- End Column 1 -->
                 <!-- Column 2 -->
-                <div class="col-md p-4">
-
+                <div class="col-md m-md-3">
                     <!-- Card -->
                     <a href="/post/viewPost.html" class="text-decoration-none">
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
@@ -237,19 +237,21 @@
     </section>
     <!-- END Briefing Section -->
 
-    <section class="text-sm-start text-center">
+    <!-- All posts section -->
+    <section class="text-start">
         <div class="container p-3">
-            <div class="d-lg-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center justify-content-between">
                 <h1>5<span class="text-primary">.</span>5 </h1>
                 <p class="lead my-2">All posts</p>
             </div>
+            <hr/>
         </div>
 
         <!-- Container for cards -->
         <div class="container pt-4">
             <div class="row text-center d-flex">
                 <!-- Column 1 -->
-                <div class="col-md p-4">
+                <div class="col-md m-md-3">
                     <!-- Card -->
                     <a href="/post/viewPost.html" class="text-decoration-none">
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
@@ -350,8 +352,7 @@
                 </div>
                 <!-- End Column 1 -->
                 <!-- Column 2 -->
-                <div class="col-md p-4">
-
+                <div class="col-md m-md-3">
                     <!-- Card -->
                     <a href="/post/viewPost.html" class="text-decoration-none">
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
@@ -451,9 +452,8 @@
 
             </div>
         </div>
-
-
     </section>
+
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Launch demo modal
     </button>
