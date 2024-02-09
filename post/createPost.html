@@ -52,8 +52,8 @@
                             <!-- Post Description -->
                             <div class="mb-3">
                                 <label for="postDescription" class="form-label">Description:</label>
-                                <textarea class="form-control" id="postDescription" rows="5"
-                                    placeholder="Enter the post description" required></textarea>
+                                <textarea class="form-control" id="postDescription" rows="5" placeholder="Enter the post description" required></textarea>
+                                <p id="wordCount"></p>
                             </div>
 
                             <!-- Submit Button -->
@@ -122,6 +122,24 @@
                     document.getElementById('tagsContainer').appendChild(chip);
                 }
             }
+        });
+    </script>
+    
+    <!-- Word Count Script -->
+    <script>
+        const textarea = document.getElementById('postDescription');
+        const wordCountDisplay = document.getElementById('wordCount');
+        const maxWords = 50;
+    
+        textarea.addEventListener('input', function () {
+            const words = this.value.split(/\s+/).filter(word => word.length > 0);
+            const wordCount = words.length;
+            
+            if (wordCount > maxWords) {
+                this.value = words.slice(0, maxWords).join(' ');
+            }
+    
+            wordCountDisplay.textContent = `Word count: ${wordCount}/${maxWords}`;
         });
     </script>
 
