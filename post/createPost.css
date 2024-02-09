@@ -1,0 +1,19 @@
+/* Tags */
+.badge-pill {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.badge-pill:hover {
+    opacity: 0.6;
+}
+
+/* Show an X in unicode beside to indicate you can delete a tag */
+.badge-pill::after {
+    content: " \2716";
+    display: none;
+}
+
+.badge-pill:hover::after {
+    display: inline;
+}

@@ -11,13 +11,14 @@
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!--Navigation bar-->
-    <div id="nav" style="height: 100px;"></div>
-    <!--End of Navigation bar-->
+    <link rel="stylesheet" href="/post/createPost.css">
 </head>
 
 <body class="bg-secondary">
     <!-- Create Post Form Container -->
+    <!--Navigation bar-->
+    <div id="nav" style="height: 100px;"></div>
+    <!--End of Navigation bar-->
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-8 mx-auto">
@@ -27,20 +28,31 @@
                             <!-- Post Title -->
                             <div class="mb-3">
                                 <label for="postTitle" class="form-label">Title:</label>
-                                <input type="text" class="form-control" id="postTitle" placeholder="Enter the post title" required>
+                                <input type="text" class="form-control" id="postTitle"
+                                    placeholder="Enter the post title" required>
                             </div>
-                            
+
                             <!-- Post Image -->
                             <div class="mb-3">
                                 <label for="postImage" class="form-label">Select an Image:</label>
-                                <input type="file" class="form-control" id="postImage" accept="image/*" onchange="displayImage(this.files)" required>
-                                <img id="previewImage" class="img-fluid mt-2" style="display: none;" alt="Preview Image">
+                                <input type="file" class="form-control" id="postImage" accept="image/*"
+                                    onchange="displayImage(this.files)" >
+                                <img id="previewImage" class="img-fluid mt-2" style="display: none;"
+                                    alt="Preview Image">
+                            </div>
+
+                            <!-- Post Tags -->
+                            <div class="mb-3">
+                                <label for="postTags" class="form-label">Tags:</label>
+                                <input type="text" class="form-control" id="postTags" placeholder="Enter a tag" required>
+                                <div id="tagsContainer" class="mt-2"></div>
                             </div>
 
                             <!-- Post Description -->
                             <div class="mb-3">
                                 <label for="postDescription" class="form-label">Description:</label>
-                                <textarea class="form-control" id="postDescription" rows="5" placeholder="Enter the post description" required></textarea>
+                                <textarea class="form-control" id="postDescription" rows="5"
+                                    placeholder="Enter the post description" required></textarea>
                             </div>
 
                             <!-- Submit Button -->
@@ -68,19 +80,50 @@
         function displayImage(files) {
             const previewImage = document.getElementById('previewImage');
             const file = files[0];
-    
+
             if (file) {
                 const reader = new FileReader();
-    
+
                 reader.onload = function (e) {
                     previewImage.src = e.target.result;
                     previewImage.style.display = 'block';
                 };
-    
+
                 reader.readAsDataURL(file);
             }
         }
     </script>
+    <script>
+        // Array to store tags
+        var tags = [];
+
+        //handle tag input and display as Bootstrap 5 chips
+        document.getElementById('postTags').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ',') {
+                event.preventDefault();
+                const tag = this.value.trim();
+                this.value = '';
+                if (tag.length > 0 && !$("#tagsContainer .badge:contains('" + tag + "')").length) {
+                    // Adding tag to array
+                    tags.push(tag);
+
+                    const chip = document.createElement('span');
+                    chip.textContent = tag;
+                    chip.classList.add('badge', 'bg-primary', 'badge-pill', 'me-2','p-3','mb-3');
+                    chip.addEventListener('click', function() {
+                        // Remove tag from array
+                        const index = tags.indexOf(tag);
+                        if (index > -1) {
+                            tags.splice(index, 1);
+                        }
+                        this.remove();
+                    });
+                    document.getElementById('tagsContainer').appendChild(chip);
+                }
+            }
+        });
+    </script>
+
 </body>
 
 </html>
