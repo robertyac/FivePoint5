@@ -4,35 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FivePoint5</title>
+    <title>FivePoint5 - Home</title>
+    <link rel="icon" type="image/x-icon" href="/img/5.5.ico">
+    <link rel="apple-touch-icon" href="/img/5.5-white.png">
     <!-- this stylesheet is for different breakpoints in browsers used with Bootstrap ***** remove after ***** -->
     <link rel="stylesheet" href="css/bootstrap-breakpoint.css">
+    <!-- Index stylesheet -->
     <link rel="stylesheet" href="css/index.css">
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+</head>
+
+<body class="bg-body-secondary">
     <!--Navigation bar-->
     <div id="nav" style="height: 100px;"></div>
     <!--End of Navigation bar-->
-</head>
-
-<body>
-    <!--Briefing -->
-    <section class="bg-body-secondary text-center text-sm-start">
+    <!--Briefing Section -->
+    <section class=" text-center text-lg-start">
         <div class="container p-3">
             <div class="d-lg-flex align-items-center justify-content-between">
                 <h1>Your 5<span class="text-primary">.</span>5 Briefing</h1>
                 <p class="lead my-2">Catch up on recent posts with your favourite tags.</p>
                 <a href=""><button class="btn btn-primary">Edit Your Tags</button></a>
             </div>
+            <hr/>
         </div>
 
         <!-- Container for cards -->
         <div class="container pt-4">
             <div class="row text-center d-flex">
                 <!-- Column 1 -->
-                <div class="col-md p-4">
+                <div class="col-md m-md-3">
                     <!-- Card -->
                     <a href="/post/viewPost.html" class="text-decoration-none">
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
@@ -133,8 +136,7 @@
                 </div>
                 <!-- End Column 1 -->
                 <!-- Column 2 -->
-                <div class="col-md p-4">
-
+                <div class="col-md m-md-3">
                     <!-- Card -->
                     <a href="/post/viewPost.html" class="text-decoration-none">
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
@@ -237,19 +239,21 @@
     </section>
     <!-- END Briefing Section -->
 
-    <section class="text-sm-start text-center">
+    <!-- All posts section -->
+    <section class="text-start">
         <div class="container p-3">
-            <div class="d-lg-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center justify-content-between">
                 <h1>5<span class="text-primary">.</span>5 </h1>
                 <p class="lead my-2">All posts</p>
             </div>
+            <hr/>
         </div>
 
-         <!-- Container for cards -->
-         <div class="container pt-4">
+        <!-- Container for cards -->
+        <div class="container pt-4">
             <div class="row text-center d-flex">
                 <!-- Column 1 -->
-                <div class="col-md p-4">
+                <div class="col-md m-md-3">
                     <!-- Card -->
                     <a href="/post/viewPost.html" class="text-decoration-none">
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
@@ -350,8 +354,7 @@
                 </div>
                 <!-- End Column 1 -->
                 <!-- Column 2 -->
-                <div class="col-md p-4">
-
+                <div class="col-md m-md-3">
                     <!-- Card -->
                     <a href="/post/viewPost.html" class="text-decoration-none">
                         <div class="card bg-secondary text-light mb-3 p-2 zoom">
@@ -451,9 +454,8 @@
 
             </div>
         </div>
-
-
     </section>
+
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Launch demo modal
     </button>
@@ -463,26 +465,20 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="container">
-                        <button type="button" class="btn-close float-start me-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close float-start me-5" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                         <h4 class="modal-title">Login or Signup:</h4>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <script src="https://accounts.google.com/gsi/client" async></script>
-                        <div id="g_id_onload"
-                             data-client_id="YOUR_GOOGLE_CLIENT_ID"
-                             data-login_uri="https://your.domain/your_login_endpoint"
-                             data-auto_prompt="false">
+                        <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                            data-login_uri="https://your.domain/your_login_endpoint" data-auto_prompt="false">
                         </div>
-                        <div class="g_id_signin"
-                             data-type="standard"
-                             data-size="large"
-                             data-theme="outline"
-                             data-text="sign_in_with"
-                             data-shape="rectangular"
-                             data-logo_alignment="left"
-                             style="width: 200px; margin: 2em 0 2em 8em; ">
+                        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+                            data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left"
+                            style="width: 200px; margin: 2em 0 2em 8em; ">
                         </div>
                     </div>
                 </div>
@@ -495,7 +491,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="container">
-                        <button type="button" class="btn-close  float-start me-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close  float-start me-5" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                         <h4 class="modal-title">Login or Signup:</h4>
                     </div>
                 </div>
@@ -546,22 +543,22 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Load nav -->
+    <script>
+        $(function () {
+            $("#nav").load("/nav.html");
+        });
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
 </body>
 
-<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-
-<!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<!-- Load nav -->
-<script>
-    $(function () {
-        $("#nav").load("/nav.html");
-    });
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus')
-    })
-</script>
 
 </html>
