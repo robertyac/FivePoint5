@@ -16,10 +16,11 @@
 </head>
 
 <body class="bg-secondary">
-    <!-- Create Post Form Container -->
     <!--Navigation bar-->
     <div id="nav" style="height: 100px;"></div>
     <!--End of Navigation bar-->
+
+    <!-- Create Post Form Container -->
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-8 mx-auto">
@@ -29,17 +30,14 @@
                             <!-- Post Title -->
                             <div class="mb-3">
                                 <label for="postTitle" class="form-label">Title:</label>
-                                <input type="text" class="form-control" id="postTitle"
-                                    placeholder="Enter the post title" required>
+                                <input type="text" class="form-control" id="postTitle" placeholder="Enter the post title" required>
                             </div>
 
                             <!-- Post Image -->
                             <div class="mb-3">
                                 <label for="postImage" class="form-label">Select an Image:</label>
-                                <input type="file" class="form-control" id="postImage" accept="image/*"
-                                    onchange="displayImage(this.files)" >
-                                <img id="previewImage" class="img-fluid mt-2" style="display: none;"
-                                    alt="Preview Image">
+                                <input type="file" class="form-control" id="postImage" accept="image/*" onchange="displayImage(this.files)" >
+                                <img id="previewImage" class="img-fluid mt-2" style="display: none;" alt="Preview Image">
                             </div>
 
                             <!-- Post Tags -->
