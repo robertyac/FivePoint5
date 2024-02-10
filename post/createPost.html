@@ -53,7 +53,7 @@
                             <div class="mb-3">
                                 <label for="postDescription" class="form-label">Description:</label>
                                 <textarea class="form-control" id="postDescription" rows="5" placeholder="Enter the post description" required></textarea>
-                                <p id="wordCount"></p>
+                                <p id="charCount"></p>
                             </div>
 
                             <!-- Submit Button -->
@@ -125,21 +125,20 @@
         });
     </script>
     
-    <!-- Word Count Script -->
+    <!-- Char Count Script -->
     <script>
         const textarea = document.getElementById('postDescription');
-        const wordCountDisplay = document.getElementById('wordCount');
-        const maxWords = 50;
+        const charCountDisplay = document.getElementById('charCount');
+        const maxChars = 1000;
     
         textarea.addEventListener('input', function () {
-            const words = this.value.split(/\s+/).filter(word => word.length > 0);
-            const wordCount = words.length;
-            
-            if (wordCount > maxWords) {
-                this.value = words.slice(0, maxWords).join(' ');
+            const charCount = this.value.length;
+    
+            if (charCount > maxChars) {
+                this.value = this.value.slice(0, maxChars);
             }
     
-            wordCountDisplay.textContent = `Word count: ${wordCount}/${maxWords}`;
+            charCountDisplay.textContent = `Character count: ${charCount}/${maxChars}`;
         });
     </script>
 
