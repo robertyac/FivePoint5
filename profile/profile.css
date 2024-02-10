@@ -18,3 +18,28 @@
 #username {
     width: 200px;
 }
+
+.profilePicContainer {
+    position: relative;
+}
+
+.pic2 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#editIcon{
+    opacity: 0;
+    max-width: 200px;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+#editIcon:hover{
+    opacity: 1;
+}
+
+.nav-item{
+    cursor: pointer;
+}
