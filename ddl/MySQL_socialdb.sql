@@ -56,7 +56,7 @@ CREATE TABLE PostTags (
 );
 
 --Admin Users
-INSERT INTO User (Username, Password, Email, IsAdmin) VALUES ('robert', 'admin@03', 'robertyacovelli@gmail.com',TRUE);
-INSERT INTO User (Username, Password, Email, IsAdmin) VALUES ('davis', 'admin@03', 'Davis_franklin@outlook.com',TRUE);
-INSERT INTO User (Username, Password, Email, IsAdmin) VALUES ('connor', 'admin@03', 'connor.cahoon@gmail.com',TRUE);
+INSERT INTO User (Username, Password, Email, IsAdmin) VALUES ('robert', 'admin@03', 'admin@5POINT5.com',TRUE);
+INSERT INTO User (Username, Password, Email, IsAdmin) VALUES ('davis', 'admin@03', 'admin@5POINT5.com',TRUE);
+INSERT INTO User (Username, Password, Email, IsAdmin) VALUES ('connor', 'admin@03', 'admin@5POINT5.com',TRUE);
 
