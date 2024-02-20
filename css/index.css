@@ -3,7 +3,9 @@
     transition: transform .30s;
 }
 .zoom:hover {
-    transform: scale(1.02);
+    transform: scale(1.01);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.04); 
 }
 /* Inactive slider read only */
 input[type=range]:disabled::-webkit-slider-thumb {
