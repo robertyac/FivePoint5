@@ -52,6 +52,6 @@ CREATE TABLE PostTags (
 INSERT INTO User (Username, Password, Email, IsAdmin)
 VALUES ('robert', 'admin@03', 'admin@5POINT5.com', TRUE);
 INSERT INTO User (Username, Password, Email, IsAdmin)
-VALUES ('davis', 'admin@03', 'admin@5POINT5.com', TRUE);
+VALUES ('davis', 'admin@03', 'admin1@5POINT5.com', TRUE);
 INSERT INTO User (Username, Password, Email, IsAdmin)
-VALUES ('connor', 'admin@03', 'admin@5POINT5.com', TRUE);
+VALUES ('connor', 'admin@03', 'admin2@5POINT5.com', TRUE);
