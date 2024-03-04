@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between">
                 <!-- Tags -->
                 <span class="text-start h6 text-body-emphasis opacity-75 rounded">
-                    <?php foreach(explode(',', $post['Tags']) as $tag): ?>
+                    <?php foreach (explode(',', $post['Tags']) as $tag) : ?>
                         <span class="badge bg-light text-dark m-1 rounded-pill"><?php echo $tag; ?></span>
                     <?php endforeach; ?>
                 </span>
@@ -14,7 +14,9 @@
             <!-- post title  -->
             <h3 class="card-title mt-lg-4 mb-4 text-light"><?php echo $post['PostTitle']; ?></h3>
             <!-- post image -->
-            <img src="data:image/jpeg;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="card-image img-fluid mb-3">
+            <?php if (!empty($post['PostImage'])) : ?>
+                <img src="data:image/jpeg;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="card-image img-fluid mb-3">
+            <?php endif; ?>
             <!-- slider rating -->
             <a>
                 <div class="text-start mt-3">
