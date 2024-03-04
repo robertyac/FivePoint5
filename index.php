@@ -7,8 +7,6 @@
     <title>FivePoint5 - Home</title>
     <link rel="icon" type="image/x-icon" href="/img/5.5.ico">
     <link rel="apple-touch-icon" href="/img/5.5-white.png">
-    <!-- this stylesheet is for different breakpoints in browsers used with Bootstrap ***** remove after ***** -->
-    <link rel="stylesheet" href="css/bootstrap-breakpoint.css">
     <!-- Index stylesheet -->
     <link rel="stylesheet" href="css/index.css">
     <!-- bootstrap -->
