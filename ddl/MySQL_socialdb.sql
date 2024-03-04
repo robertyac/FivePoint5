@@ -1,24 +1,27 @@
 CREATE DATABASE social;
 USE social;
+
 DROP TABLE IF EXISTS PostTags;
 DROP TABLE IF EXISTS Tag;
 DROP TABLE IF EXISTS Comment;
 DROP TABLE IF EXISTS Post;
 DROP TABLE IF EXISTS User;
+
 CREATE TABLE User (
     UserID INT AUTO_INCREMENT,
     Username VARCHAR(255) NOT NULL UNIQUE,
-    Password VARCHAR(255) NOT NULL,
+    PasswordHash CHAR(64) NOT NULL,
     Email VARCHAR(255) NOT NULL UNIQUE,
-    ProfilePicture BLOB,
+    ProfilePicture LONGBLOB,
     IsAdmin BOOLEAN DEFAULT FALSE,
     TimeCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(UserID)
 );
+
 CREATE TABLE Post (
     PostID INT AUTO_INCREMENT,
     PostTitle VARCHAR(255) NOT NULL,
-    PostImage BLOB,
+    PostImage LONGBLOB,
     Description VARCHAR(255) NOT NULL,
     PostDateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
     Rating DECIMAL(2, 1) CHECK (Rating <= 5.5),
@@ -26,6 +29,7 @@ CREATE TABLE Post (
     PRIMARY KEY(PostID),
     FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE Comment (
     CommentID INT AUTO_INCREMENT,
     PostID INT,
@@ -36,11 +40,13 @@ CREATE TABLE Comment (
     FOREIGN KEY (PostID) REFERENCES Post(PostID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE Tag (
     TagID INT AUTO_INCREMENT,
     Name VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY(TagID)
 );
+
 CREATE TABLE PostTags (
     PostID INT,
     TagID INT,
@@ -48,10 +54,10 @@ CREATE TABLE PostTags (
     FOREIGN KEY (PostID) REFERENCES Post(PostID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (TagID) REFERENCES Tag(TagID) ON DELETE CASCADE ON UPDATE CASCADE
 );
---Admin Users
-INSERT INTO User (Username, Password, Email, IsAdmin)
-VALUES ('robert', 'admin@03', 'admin@5POINT5.com', TRUE);
-INSERT INTO User (Username, Password, Email, IsAdmin)
-VALUES ('davis', 'admin@03', 'admin1@5POINT5.com', TRUE);
-INSERT INTO User (Username, Password, Email, IsAdmin)
-VALUES ('connor', 'admin@03', 'admin2@5POINT5.com', TRUE);
+-- Admin
+INSERT INTO User (Username, PasswordHash, Email, IsAdmin)
+VALUES ('robert', SHA2('admin@03', 256), 'admin@5POINT5.com', TRUE);
+INSERT INTO User (Username, PasswordHash, Email, IsAdmin)
+VALUES ('davis', SHA2('admin@03', 256), 'admin1@5POINT5.com', TRUE);
+INSERT INTO User (Username, PasswordHash, Email, IsAdmin)
+VALUES ('connor', SHA2('admin@03', 256), 'admin2@5POINT5.com', TRUE);
