@@ -35,46 +35,12 @@
             <div class="row text-center d-flex">
                 <!-- Column 1 -->
                 <div class="col-md m-md-3">
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-3 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <!-- Tags -->
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">
-                                        <span class="badge bg-light text-dark m-1 rounded-pill">HTML</span>
-                                        <span class="badge bg-light text-dark m-1 rounded-pill">CSS</span>
-                                        <span class="badge bg-light text-dark m-1 rounded-pill">Really long tag...</span>
-                                        <span class="badge bg-light text-dark m-1 rounded-pill">UBCO</span>
-                                    </span>
-                                    <!-- Time -->
-                                    <span class="badge">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-lg-4 mb-4 text-light">You wouldn't believe what happened yesterday...</h3>
-                                <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid mb-3">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start mt-3">
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <div class="d-flex justify-content-end">
-                                            <input type="range" class="form-range" id="rating" value="2.75" min="0" max="5.5" step="0.01" disabled>
-                                            <p class="mx-2" for="rating"><span id="aggregate-rate">2.75</span>/5.5</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
+                <?php include "commands/getPost.php"; ?>
                 </div>
                 <!-- End Column 1 -->
 
                 <!-- Column 2 -->
                 <div class="col-md m-md-3">
-                
                 </div>
                 <!-- END Column 2 -->
 
@@ -98,41 +64,7 @@
             <div class="row text-center d-flex">
                 <!-- Column 1 -->
                 <div class="col-md m-md-3">
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-3 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <!-- Tags -->
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">
-                                        <span class="badge bg-light text-dark m-1 rounded-pill">HTML</span>
-                                        <span class="badge bg-light text-dark m-1 rounded-pill">CSS</span>
-                                        <span class="badge bg-light text-dark m-1 rounded-pill">Really long tag...</span>
-                                        <span class="badge bg-light text-dark m-1 rounded-pill">UBCO</span>
-                                    </span>
-                                    <!-- Time -->
-                                    <span class="badge">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-lg-4 mb-4 text-light">You wouldn't believe what happened yesterday...</h3>
-                                <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid mb-3">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start mt-3">
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <div class="d-flex justify-content-end">
-                                            <input type="range" class="form-range" id="rating" value="2.75" min="0" max="5.5" step="0.01" disabled>
-                                            <p class="mx-2" for="rating"><span id="aggregate-rate">2.75</span>/5.5</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-
+                <?php include "commands/getPost.php"; ?>
                 </div>
                 <!-- End Column 1 -->
                 <!-- Column 2 -->
