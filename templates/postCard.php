@@ -16,6 +16,15 @@
             <!-- post image -->
             <?php if (!empty($post['PostImage'])) : ?>
                 <img src="data:image/jpeg;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="card-image img-fluid mb-3">
+            <?php else : ?>
+                <p class="text-light">
+                    <?php
+                    if (isset($post['Description'])) {
+                        $words = explode(' ', $post['Description'] . '  ...read more');
+                        echo implode(' ', array_slice($words, 0, 20)); // show first 20 words of the description if no image and description exists
+                    }
+                    ?>
+                </p>
             <?php endif; ?>
             <!-- slider rating -->
             <a>
