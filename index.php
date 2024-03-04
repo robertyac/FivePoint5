@@ -35,12 +35,13 @@
             <div class="row text-center d-flex">
                 <!-- Column 1 -->
                 <div class="col-md m-md-3">
-                <?php include "commands/getPost.php"; ?>
+                    <p>We will put a users top 6 most relevent posts here</p>
                 </div>
                 <!-- End Column 1 -->
 
                 <!-- Column 2 -->
                 <div class="col-md m-md-3">
+                    <p>We will put a users top 6 most relevent posts here</p>
                 </div>
                 <!-- END Column 2 -->
 
@@ -62,13 +63,27 @@
         <!-- Container for cards -->
         <div class="container pt-4">
             <div class="row text-center d-flex">
-                <!-- Column 1 -->
+                <!-- Column 1 (Odd Post IDs)-->
                 <div class="col-md m-md-3">
-                <?php include "commands/getPost.php"; ?>
+                    <?php
+                    $posts = include "commands/getPost.php";
+                    foreach ($posts as $post) {
+                        if ($post['PostID'] % 2 != 0) {
+                           include "templates/postCard.php";
+                        }
+                    }
+                    ?>
                 </div>
                 <!-- End Column 1 -->
-                <!-- Column 2 -->
+                <!-- Column 2 (Even Post IDs)-->
                 <div class="col-md m-md-3">
+                    <?php
+                    foreach ($posts as $post) {
+                        if ($post['PostID'] % 2 == 0) {
+                            include "templates/postCard.php";
+                        }
+                    }
+                    ?>
                 </div>
                 <!-- END Column 2 -->
             </div>

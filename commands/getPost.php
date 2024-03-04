@@ -18,13 +18,17 @@ $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Po
         GROUP BY Post.PostID";
 $result = $mysqli->query($sql);
 
+$posts = array();
+
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        // change the href to the correct path to post template
-        include '/Users/robertyacovelli/cosc360_proj/templates/post.php';
+        $posts[] = $row;
     }
 } else {
     echo "No posts found";
 }
 $mysqli->close();
+
+// return the posts array to be used in index.php 
+return $posts;
 ?>
