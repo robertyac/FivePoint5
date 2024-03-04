@@ -51,7 +51,7 @@
     <!-- End of Post Container -->
 
     <!-- Rating Slider -->
-    <div class="text-center card p-3 mx-auto mt-4 mb-0 w-75">
+    <div class="container card p-3 mx-auto mt-4 mb-0 w-75">
         <label for="rating">
             <h3>Rating: ?/5.5</h3>
         </label>
