@@ -12,8 +12,7 @@
     <!-- Index stylesheet -->
     <link rel="stylesheet" href="css/index.css">
     <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body class="bg-body-secondary">
@@ -38,31 +37,30 @@
                 <div class="col-md m-md-3">
                     <!-- Card -->
                     <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
+                        <div class="card bg-secondary text-light mb-3 p-3 zoom">
                             <div class="card-body text-center">
                                 <div class="d-flex justify-content-between">
                                     <!-- Tags -->
                                     <span class="text-start h6 text-body-emphasis opacity-75 rounded">
-                                        <span class="badge bg-primary m-1 rounded-pill">HTML</span>
-                                        <span class="badge bg-primary m-1 rounded-pill">CSS</span>
-                                        <span class="badge bg-primary m-1 rounded-pill">Really long tag...</span>
-                                        <span class="badge bg-primary m-1 rounded-pill">UBCO</span>
+                                        <span class="badge bg-light text-dark m-1 rounded-pill">HTML</span>
+                                        <span class="badge bg-light text-dark m-1 rounded-pill">CSS</span>
+                                        <span class="badge bg-light text-dark m-1 rounded-pill">Really long tag...</span>
+                                        <span class="badge bg-light text-dark m-1 rounded-pill">UBCO</span>
                                     </span>
                                     <!-- Time -->
                                     <span class="badge">3 mins ago</span>
                                 </div>
                                 <!-- post title  -->
-                                <h3 class="card-title mt-lg-4 mb-3 text-light">You wouldn't believe what happened yesterday...</h3>
+                                <h3 class="card-title mt-lg-4 mb-4 text-light">You wouldn't believe what happened yesterday...</h3>
                                 <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid mb-3">
                                 <!-- slider rating -->
                                 <a>
-                                    <div class="text-start mt-5">
+                                    <div class="text-start mt-3">
                                         <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
                                         <div class="d-flex justify-content-end">
-                                            <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                                max="5.5" step="0.01" disabled>
-                                            <p for="rating"><span id="aggregate-rate">2.75</span>/5.5</p>
+                                            <input type="range" class="form-range" id="rating" value="2.75" min="0" max="5.5" step="0.01" disabled>
+                                            <p class="mx-2" for="rating"><span id="aggregate-rate">2.75</span>/5.5</p>
                                         </div>
                                     </div>
                                 </a>
@@ -71,170 +69,12 @@
                         </div>
                     </a>
                     <!-- End Card -->
-
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                <!-- post image -->
-                                <img src="/img/5.5.png" alt="Post Image" class="card-image img-fluid">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-
-
                 </div>
                 <!-- End Column 1 -->
+
                 <!-- Column 2 -->
                 <div class="col-md m-md-3">
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-
+                
                 </div>
                 <!-- END Column 2 -->
 
@@ -260,28 +100,31 @@
                 <div class="col-md m-md-3">
                     <!-- Card -->
                     <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
+                        <div class="card bg-secondary text-light mb-3 p-3 zoom">
                             <div class="card-body text-center">
                                 <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
+                                    <!-- Tags -->
+                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">
+                                        <span class="badge bg-light text-dark m-1 rounded-pill">HTML</span>
+                                        <span class="badge bg-light text-dark m-1 rounded-pill">CSS</span>
+                                        <span class="badge bg-light text-dark m-1 rounded-pill">Really long tag...</span>
+                                        <span class="badge bg-light text-dark m-1 rounded-pill">UBCO</span>
+                                    </span>
+                                    <!-- Time -->
+                                    <span class="badge">3 mins ago</span>
                                 </div>
                                 <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
+                                <h3 class="card-title mt-lg-4 mb-4 text-light">You wouldn't believe what happened yesterday...</h3>
                                 <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
+                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid mb-3">
                                 <!-- slider rating -->
                                 <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
+                                    <div class="text-start mt-3">
                                         <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
+                                        <div class="d-flex justify-content-end">
+                                            <input type="range" class="form-range" id="rating" value="2.75" min="0" max="5.5" step="0.01" disabled>
+                                            <p class="mx-2" for="rating"><span id="aggregate-rate">2.75</span>/5.5</p>
+                                        </div>
                                     </div>
                                 </a>
                                 <!-- End slider rating -->
@@ -289,173 +132,13 @@
                         </div>
                     </a>
                     <!-- End Card -->
-
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                <!-- post image -->
-                                <img src="/img/5.5.png" alt="Post Image" class="card-image img-fluid">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-
 
                 </div>
                 <!-- End Column 1 -->
                 <!-- Column 2 -->
                 <div class="col-md m-md-3">
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-                    <!-- Card -->
-                    <a href="/post/viewPost.html" class="text-decoration-none">
-                        <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                            <div class="card-body text-center">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                        HTML,
-                                        UBC</span>
-                                    <span class="text-body h6">3 mins ago</span>
-                                </div>
-                                <!-- post title  -->
-                                <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                <!-- post image -->
-                                <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
-                                <!-- slider rating -->
-                                <a>
-                                    <div class="text-start">
-                                        <label for="rating">
-                                            <h4>Rating:</h4>
-                                        </label>
-                                        <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                        <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                        <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                            max="5.5" step="0.01" disabled>
-                                    </div>
-                                </a>
-                                <!-- End slider rating -->
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-
                 </div>
                 <!-- END Column 2 -->
-
             </div>
         </div>
     </section>
@@ -466,20 +149,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="container">
-                        <button type="button" class="btn-close float-start me-5" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close float-start me-5" data-bs-dismiss="modal" aria-label="Close"></button>
                         <h4 class="modal-title">Login or Signup:</h4>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <script src="https://accounts.google.com/gsi/client" async></script>
-                        <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID"
-                            data-login_uri="https://your.domain/your_login_endpoint" data-auto_prompt="false">
+                        <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-login_uri="https://your.domain/your_login_endpoint" data-auto_prompt="false">
                         </div>
-                        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
-                            data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left"
-                            style="width: 200px; margin: 2em 0 2em 8em; ">
+                        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left" style="width: 200px; margin: 2em 0 2em 8em; ">
                         </div>
                     </div>
                 </div>
@@ -492,8 +171,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="container">
-                        <button type="button" class="btn-close  float-start me-5" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close  float-start me-5" data-bs-dismiss="modal" aria-label="Close"></button>
                         <h4 class="modal-title">Login or Signup:</h4>
                     </div>
                 </div>
@@ -501,25 +179,20 @@
                     <form>
                         <div class="form-group mb-3">
                             <label for="InputName">Username</label>
-                            <input type="text" class="form-control" id="InputName" aria-describedby="nameHelp"
-                                placeholder="Enter username">
+                            <input type="text" class="form-control" id="InputName" aria-describedby="nameHelp" placeholder="Enter username">
                         </div>
                         <div class="form-group mb-3">
                             <label for="InputEmail">Email address</label>
-                            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"
-                                placeholder="Enter email">
+                            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email">
                         </div>
                         <div class="form-group mb-3">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                placeholder="Password">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
                         <div class="mb-3">
                             <label for="profilePicture" class="form-label">(Optional) Select a Profile Image:</label>
-                            <input type="file" class="form-control" id="profilePicture" accept="image/*"
-                                onchange="displayImage(this.files)" required>
-                            <img id="previewImage" class="img-fluid mt-2" style="display: none;"
-                                alt="Select profile Pic">
+                            <input type="file" class="form-control" id="profilePicture" accept="image/*" onchange="displayImage(this.files)" required>
+                            <img id="previewImage" class="img-fluid mt-2" style="display: none;" alt="Select profile Pic">
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary mx-auto">Login/Register</button>
@@ -529,12 +202,9 @@
                 <div class="modal-footer">
                     <div class="container mx-auto">
                         <script src="https://accounts.google.com/gsi/client" async></script>
-                        <div id="g_id_onload mx-auto" data-client_id="YOUR_GOOGLE_CLIENT_ID"
-                            data-login_uri="https://your.domain/your_login_endpoint" data-auto_prompt="false">
+                        <div id="g_id_onload mx-auto" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-login_uri="https://your.domain/your_login_endpoint" data-auto_prompt="false">
                         </div>
-                        <div class="g_id_signin mx-auto" data-type="standard" data-size="large" data-theme="outline"
-                            data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left"
-                            style="width: 200px; margin: 1em 0 1em 0; ">
+                        <div class="g_id_signin mx-auto" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left" style="width: 200px; margin: 1em 0 1em 0; ">
                         </div>
                     </div>
                 </div>
@@ -542,18 +212,16 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- Load nav -->
     <script>
-        $(function () {
+        $(function() {
             $("#nav").load("/nav.html");
         });
-        $('#myModal').on('shown.bs.modal', function () {
+        $('#myModal').on('shown.bs.modal', function() {
             $('#myInput').trigger('focus')
         })
     </script>
