@@ -43,9 +43,8 @@ if ($rating > 2.75) {
                 <!-- Time -->
                 <span class="badge">
                     <?php
-                    $postDateTime = new DateTime($post['PostDateTime']);
-                    $currentDateTime = new DateTime();
-
+                        $currentDateTime = new DateTime('', new DateTimeZone('America/Vancouver'));
+                        $postDateTime = new DateTime($post['PostDateTime'], new DateTimeZone('America/Vancouver'));                        
                     // Calculate time difference
                     $interval = $currentDateTime->diff($postDateTime);
                     if ($interval->y > 0) {
