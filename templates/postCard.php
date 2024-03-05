@@ -41,7 +41,28 @@ if ($rating > 2.75) {
                     <?php endforeach; ?>
                 </span>
                 <!-- Time -->
-                <span class="badge"><?php echo $post['PostDateTime']; ?> mins ago</span>
+                <span class="badge">
+                    <?php
+                    $postDateTime = new DateTime($post['PostDateTime']);
+                    $currentDateTime = new DateTime();
+
+                    // Calculate time difference
+                    $interval = $currentDateTime->diff($postDateTime);
+                    if ($interval->y > 0) {
+                        echo $interval->y . ($interval->y > 1 ? ' years' : ' year') . ' ago';
+                    } elseif ($interval->m > 0) {
+                        echo $interval->m . ($interval->m > 1 ? ' months' : ' month') . ' ago';
+                    } elseif ($interval->d > 0) {
+                        echo $interval->d . ($interval->d > 1 ? ' days' : ' day') . ' ago';
+                    } elseif ($interval->h > 0) {
+                        echo $interval->h . ($interval->h > 1 ? ' hours' : ' hour') . ' ago';
+                    } elseif ($interval->i > 0) {
+                        echo $interval->i . ($interval->i > 1 ? ' mins' : ' min') . ' ago';
+                    } else {
+                        echo 'Just now';
+                    }
+                    ?>
+                </span>
             </div>
             <!-- post title  -->
 
