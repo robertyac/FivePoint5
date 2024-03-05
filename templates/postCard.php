@@ -1,5 +1,5 @@
 <a href="/post/viewPost.html" class="text-decoration-none">
-    <div style="max-width:95%" class="mx-auto card bg-secondary text-light mb-3 p-2 zoom">
+    <div style="max-width:95%;" class="mx-auto card bg-secondary text-light mb-3 p-2 zoom">
         <div class="card-body text-center">
             <div class="d-flex justify-content-between">
                 <!-- Tags -->
@@ -16,7 +16,7 @@
             <h3 class="card-title mt-lg-4 mb-4 text-light"><?php echo $post['PostTitle']; ?></h3>
             <!-- post image -->
             <?php if (!empty($post['PostImage'])) : ?>
-                    <img src="data:image/jpeg;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="zoom rounded card-image img-fluid mb-3" style="max">
+                    <img src="data:image/jpeg;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="zoom rounded card-image img-fluid mb-3">
             <?php else : ?>
                 <p class="text-light">
                     <?php
