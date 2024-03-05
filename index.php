@@ -15,7 +15,7 @@
 
 <body class="bg-body-secondary">
     <!--Navigation bar-->
-    <div id="nav" style="height: 100px;"></div>
+    <div id="nav" style="height: 100px;"><?php include 'nav.php'; ?></div>
     <!--End of Navigation bar-->
     <!--Briefing Section -->
     <section class=" text-center text-lg-start">
@@ -65,6 +65,8 @@
                 <div class="col-md m-md-3">
                     <?php
                     $posts = include "commands/getPost.php";
+                    // reverse the array so the most recent posts are first
+                    $posts = array_reverse($posts);
                     foreach ($posts as $post) {
                         if ($post['PostID'] % 2 != 0) {
                            include "templates/postCard.php";
@@ -161,16 +163,5 @@
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Load nav -->
-    <script>
-        $(function() {
-            $("#nav").load("/nav.html");
-        });
-        $('#myModal').on('shown.bs.modal', function() {
-            $('#myInput').trigger('focus')
-        })
-    </script>
 </body>
-
-
 </html>
