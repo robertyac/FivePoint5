@@ -60,12 +60,12 @@ if ($rating > 2.75) {
                 </p>
             <?php endif; ?>
         </div>
-         <!-- slider rating -->
+        <!-- slider rating -->
         <div class="text-start mt-3">
             <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
             <div class="d-flex justify-content-end align-items-center">
                 <input type="range" class="form-range rating-range" id="rating-<?php echo $postId; ?>" value="<?php echo $post['Rating']; ?>" min="0" max="5.5" step="0.01" disabled style="--rating: <?php echo $post['Rating']; ?>;">
-                <p class="badge bg-light text-dark m-1" for="rating"><span id="aggregate-rate"><?php echo $post['Rating']; ?></span>/5.5</p>
+                <p class="zoom badge bg-light text-dark m-1" for="rating"><span id="aggregate-rate"><?php echo $post['Rating']; ?></span>/5.5</p>
             </div>
         </div>
         <!-- End slider rating -->
