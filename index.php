@@ -20,12 +20,16 @@
     <?php include 'display_elements/login_modal.php'; ?>
     <!--End of Navigation bar-->
     <!--Briefing Section -->
-    <section class=" text-center text-lg-start">
-        <div class="container p-3">
-            <div class="d-lg-flex align-items-center justify-content-between">
-                <h1>Your 5<span class="text-primary">.</span>5 Briefing</h1>
-                <p class="lead my-2">Catch up on recent posts with your favourite tags.</p>
-                <a href=""><button class="btn btn-primary">Edit Your Tags</button></a>
+    <section class="text-center text-lg-start">
+        <div class="container p-2">
+            <div class="row align-items-center d-flex justify-content-between">
+                <div class="col-sm-12 col-lg-10">
+                    <h1>Your 5<span class="text-primary">.</span>5 Briefing</h1>
+                    <p class="lead my-2">Catch up on recent posts with your favourite tags.</p>
+                </div>
+                <div class="col-sm-12 col-lg-2 text-right">
+                    <a href=""><button class="zoom btn btn-primary">Edit Your Tags</button></a>
+                </div>
             </div>
             <hr />
         </div>
@@ -52,10 +56,10 @@
 
     <!-- All posts section -->
     <section class="text-start">
-        <div class="container p-3">
+        <div class="container px-4">
             <div class="d-flex align-items-center justify-content-between">
                 <h1>5<span class="text-primary">.</span>5 </h1>
-                <p class="lead my-2">All posts</p>
+                <p class="lead my-0">All posts</p>
             </div>
             <hr />
         </div>
