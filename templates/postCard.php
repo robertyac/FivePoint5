@@ -68,7 +68,7 @@ if ($rating > 2.75) {
             <h3 class="card-title mt-lg-4 mb-4 text-light"><?php echo $post['PostTitle']; ?></h3>
             <!-- post image -->
             <?php if (!empty($post['PostImage'])) : ?>
-                <img src="data:image/jpeg;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="zoom rounded card-image img-fluid mb-3">
+                <img src="data:image/jpeg;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="zoom rounded card-image img-fluid mb-3 w-75">
             <?php else : ?>
                 <p class="text-light">
                     <?php
