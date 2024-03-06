@@ -68,7 +68,7 @@ if ($rating > 2.75) {
             <h3 class="card-title mt-lg-4 mb-4 text-light"><?php echo $post['PostTitle']; ?></h3>
             <!-- post image -->
             <?php if (!empty($post['PostImage'])) : ?>
-                <img src="data:image/jpeg;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="zoom rounded card-image img-fluid mb-3" style="max-height: 500px;">
+                <img src="data:image/jpeg;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="zoom rounded card-image img-fluid" style="max-height: 600px;">
             <?php else : ?>
                 <p class="text-light">
                     <?php
@@ -81,7 +81,7 @@ if ($rating > 2.75) {
             <?php endif; ?>
         </div>
         <!-- slider rating -->
-        <div class="text-start mt-3">
+        <div class="text-start mt-3 mb-3">
             <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
             <div class="d-flex justify-content-end align-items-center">
                 <input type="range" class="form-range rating-range" id="rating-<?php echo $postId; ?>" value="<?php echo $post['Rating']; ?>" min="0" max="5.5" step="0.01" disabled style="--rating: <?php echo $post['Rating']; ?>;">

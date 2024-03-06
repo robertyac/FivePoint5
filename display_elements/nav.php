@@ -1,5 +1,5 @@
 <!-- NavBar -->
-<nav class="navbar bg-body-tertiary fixed-top p-0" style="height: 4em;">
+<nav class="navbar bg-dark-subtle fixed-top p-0" style="height: 4em;">
     <div class="container-fluid d-flex flex-row justify-content-center flex-nowrap navbar-expand-lg">
 
         <!-- LOGO -->
@@ -18,7 +18,7 @@
 
         <!-- Tags Dropdown Menu -->
         <div class="dropdown m-auto">
-            <button class="btn btn-secondary dropdown-toggle mx-1 mx-sm-2" type="button" data-bs-toggle="dropdown"
+            <button class="btn-outline-success btn dropdown-toggle mx-1 mx-sm-2" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Tags
             </button>
