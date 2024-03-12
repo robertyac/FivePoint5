@@ -1,8 +1,10 @@
 <?php
-$host = 'localhost';
-$db = 'social';
-$user = 'root';
-$pass = '';
+$config = require '../config.php';
+
+$host = $config['database']['host'];
+$db = $config['database']['name'];
+$user = $config['database']['user'];
+$pass = $config['database']['password'];
 $charset = 'utf8mb4';
 
 $mysqli = new mysqli($host, $user, $pass, $db);
