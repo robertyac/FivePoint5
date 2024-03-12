@@ -23,7 +23,7 @@ CREATE TABLE Post (
     PostTitle VARCHAR(255) NOT NULL,
     PostImage LONGBLOB,
     Description VARCHAR(255) NOT NULL,
-    PostDateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PostDateTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Rating DECIMAL(2, 1) CHECK (Rating <= 5.5),
     UserID INT,
     PRIMARY KEY(PostID),
