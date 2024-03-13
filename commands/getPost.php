@@ -7,31 +7,32 @@ $user = $config['database']['user'];
 $pass = $config['database']['password'];
 $charset = 'utf8mb4';
 
-$mysqli = new mysqli($host, $user, $pass, $db);
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$opt = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
 
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error . ". Error code: " . $mysqli->connect_errno);
-    echo "Connection failed" . $mysqli->connect_error;
-}
+try {
+    $pdo = new PDO($dsn, $user, $pass, $opt);
 
-$sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, Post.Rating, GROUP_CONCAT(Tag.Name) AS Tags
-        FROM Post
-        LEFT JOIN PostTags ON Post.PostID = PostTags.PostID
-        LEFT JOIN Tag ON PostTags.TagID = Tag.TagID
-        GROUP BY Post.PostID";
-$result = $mysqli->query($sql);
+    $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, Post.Rating, GROUP_CONCAT(Tag.Name) AS Tags
+            FROM Post
+            LEFT JOIN PostTags ON Post.PostID = PostTags.PostID
+            LEFT JOIN Tag ON PostTags.TagID = Tag.TagID
+            GROUP BY Post.PostID";
+    $stmt = $pdo->query($sql);
 
-$posts = array();
+    $posts = $stmt->fetchAll();
 
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $posts[] = $row;
+    if (!$posts) {
+        echo "No posts found";
     }
-} else {
-    echo "No posts found";
-}
-$mysqli->close();
 
-// return the posts array to be used in index.php 
-return $posts;
+    // return the posts array to be used in index.php 
+    return $posts;
+} catch (PDOException $e) {
+    die("PDO error: " . $e->getMessage());
+}
 ?>
