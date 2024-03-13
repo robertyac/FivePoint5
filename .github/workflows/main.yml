@@ -1,0 +1,16 @@
+name: Secrets and Environment Variables
+
+on: 
+  workflow_dispatch
+
+jobs:
+  top-secret:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Execute config
+        env:
+          USER: ${{ secrets.DB_USER }}
+          PASSWORD: ${{ secrets.DB_PW }}
+          DB: ${{ secrets.DB_NAME }}
+        run: php configTEMPLATE.php
