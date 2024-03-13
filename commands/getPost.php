@@ -10,7 +10,7 @@ $charset = 'utf8mb4';
 $mysqli = new mysqli($host, $user, $pass, $db);
 
 if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
+    die("Connection failed: " . $mysqli->connect_error . ". Error code: " . $mysqli->connect_errno);
 }
 
 $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, Post.Rating, GROUP_CONCAT(Tag.Name) AS Tags
