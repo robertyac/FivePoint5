@@ -13,4 +13,4 @@ jobs:
           USER: ${{ secrets.DB_USER }}
           PASSWORD: ${{ secrets.DB_PW }}
           DB: ${{ secrets.DB_NAME }}
-        run: php configTEMPLATE.php
+        run: php commands/configTEMPLATE.php
