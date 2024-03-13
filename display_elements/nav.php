@@ -6,20 +6,19 @@
         <!-- First Div (5.5) - Visible on smaller screens -->
         <div class="d-flex align-items-center d-block d-lg-none mx-1">
             <a class="navbar-brand" href="/index.php">
-                <img src="/img/5.5.png" alt="Logo" width="45" class="d-inline-block align-text-top">
+                <?php echo '<img src="display_elements/5.5.png" alt="Logo" width="45" class="d-inline-block align-text-top">' ?>
             </a>
         </div>
         <!-- Second Div (word logo)- Visible on lg screens and up -->
         <div class="d-none d-lg-block">
             <a class="navbar-brand" href="/index.php">
-                <img src="/img/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
+                <?php echo '<img src="display_elements/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">' ?>
             </a>
         </div>
 
         <!-- Tags Dropdown Menu -->
         <div class="dropdown m-auto">
-            <button class="btn-outline-success btn dropdown-toggle mx-1 mx-sm-2" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+            <button class="btn-outline-success btn dropdown-toggle mx-1 mx-sm-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Tags
             </button>
             <!-- Search for a tag dropdown-->
@@ -42,13 +41,10 @@
         <!-- Search button (smaller displays)-->
         <div class="d-flex d-sm-none m-auto">
             <div class="dropdown d-grid">
-                <button class="btn btn-outline-dark mx-1 px-4" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <button class="btn btn-outline-dark mx-1 px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <!--Search Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-search" viewBox="0 0 16 16">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
                 </button>
                 <!-- Search dropdown-->
@@ -70,13 +66,11 @@
         </div>
 
 
-         <!-- Profile Button -->
-         <!-- have to use order-last but code before create post because of some bug with live server -->
-         <div class="dropdown d-flex justify-content-center mx-1 order-last">
-            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://xsgames.co/randomusers/assets/images/favicon.png" class="rounded-circle" height="45"
-                    alt="Profile Picture" />
+        <!-- Profile Button -->
+        <!-- have to use order-last but code before create post because of some bug with live server -->
+        <div class="dropdown d-flex justify-content-center mx-1 order-last">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://xsgames.co/randomusers/assets/images/favicon.png" class="rounded-circle" height="45" alt="Profile Picture" />
             </a>
             <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href="/cosc360_proj/profile/profile.html">My profile</a></li>
@@ -89,10 +83,8 @@
             <a href="/post/createPost.html">
                 <button class="btn btn-outline-dark mx-1 mx-sm-2 px-4" type="button">
                     <!--Plus Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-plus-lg" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
                     </svg>
                 </button>
             </a>
