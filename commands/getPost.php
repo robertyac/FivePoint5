@@ -9,6 +9,7 @@ $charset = 'utf8mb4';
 
 $mysqli = new mysqli($host, $user, $pass, $db);
 
+echo "Before Connection";
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error . ". Error code: " . $mysqli->connect_errno);
     echo "Connection failed" . $mysqli->connect_error;
