@@ -1,5 +1,5 @@
 <?php
-$config = require '../config.php';
+$config = require 'config.php';
 
 $host = $config['database']['host'];
 $db = $config['database']['name'];
