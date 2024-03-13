@@ -70,6 +70,7 @@
                 <!-- Column 1 (Odd Post IDs)-->
                 <div class="col-md m-md-3">
                     <?php
+                    echo __DIR__; 
                     $posts = include "commands/getPost.php";
                     // reverse the array so the most recent posts are first
                     $posts = array_reverse($posts);
