@@ -11,6 +11,7 @@ $mysqli = new mysqli($host, $user, $pass, $db);
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error . ". Error code: " . $mysqli->connect_errno);
+    echo "Connection failed" . $mysqli->connect_error;
 }
 
 $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, Post.Rating, GROUP_CONCAT(Tag.Name) AS Tags
