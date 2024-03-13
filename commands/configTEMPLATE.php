@@ -3,9 +3,9 @@
 return [
     'database' => [
         'host' => 'localhost',
-        'user' => '',
-        'password' => '',
-        'name' => 'social',
+        'user' => getenv("USER"),
+        'password' => getenv("PASSWORD"),
+        'name' => getenv("DB"),
     ],
     'server' => [
         'host' => 'localhost',
