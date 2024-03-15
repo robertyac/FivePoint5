@@ -1,3 +1,33 @@
+<?php
+// Include your database configuration file
+$config = include '../commands/config.php';
+
+// Check if PostID is set in the URL parameters
+if (!isset($_GET['PostID'])) {
+    die('PostID is not set');
+}
+
+$postID = $_GET['PostID'];
+
+// Create a new PDO instance
+try {
+    $pdo = new PDO('mysql:host=' . $config['database']['host'] . ';dbname=' . $config['database']['name'], $config['database']['user'], $config['database']['password']);
+} catch (PDOException $e) {
+    die('Could not connect to the database');
+}
+
+// Prepare a SQL statement to fetch the post details
+$stmt = $pdo->prepare('SELECT * FROM Post WHERE PostID = :postID');
+$stmt->execute(['postID' => $postID]);
+
+// Fetch the post details
+$post = $stmt->fetch();
+
+if (!$post) {
+    die('Post not found');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +37,6 @@
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="post.css" />
     <title>View Post</title>
-    <link rel="icon" type="image/x-icon" href="/img/5.5.ico">
-    <link rel="apple-touch-icon" href="/img/5.5-white.png">
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -19,7 +47,7 @@
 
 <body class="bg-secondary">
     <!-- Close button -->
-    <a href="../index.html" class="btn-close m-3 fs-2 position-absolute" style="top: 60px; left: -5px;" aria-label="Close"></a>
+    <a href="../index.php" class="btn-close m-3 fs-2 position-absolute" style="top: 60px; left: -5px;" aria-label="Close"></a>
 
     <!-- Post Container -->
     <div class="container card mt-5 mx-auto w-75">
@@ -27,16 +55,25 @@
             <div class="col-md-12">
                 <div class="card-body d-flex flex-column">
                     <!-- Post Title -->
-                    <h2 class="card-title text-center text-decoration-underline">Title Here</h2>
+                    <h2 class="card-title text-center text-decoration-underline">
+                        <?php echo $post['PostTitle']; ?>
+                    </h2>
                     <!-- Post Image -->
-                    <img src="/img/placeholder_img.webp" alt="Post Image" class="img-fluid mx-auto d-block pb-5">
+                    <?php if (!empty($post['PostImage'])) : ?>
+                        <img src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid mx-auto d-block p-5">
+                    <?php else : ?>
+                        <p class="text-light">
+                            <?php
+                            if (isset($post['Description'])) {
+                                $words = explode(' ', $post['Description'] . '  ...read more');
+                                echo implode(' ', array_slice($words, 0, 20)); // show first 20 words of the description if no image and description exists
+                            }
+                            ?>
+                        </p>
+                    <?php endif; ?>
                     <!-- Post Description -->
                     <p class="card-text text-justify mt-auto">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
-                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-                        sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <?php echo $post['Description']; ?>
                     </p>
                     <!-- Tags -->
                     <div class="card-body d-flex flex-wrap justify-content-center align-items-center">
@@ -113,7 +150,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(function () {
-            $("#nav").load("/nav.html");
+            $("#nav").load("../display_elements/nav.php");
         });
     </script>
 </body>

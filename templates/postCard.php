@@ -30,7 +30,7 @@ if ($rating > 2.75) {
 ?>
 
 <!-- Actual card -->
-<a href="/post/viewPost.html" class="text-decoration-none">
+<a href="post/viewpost.php?PostID=<?php echo $post['PostID']; ?>" class="text-decoration-none">
     <div style="max-width:95%;" class="mx-auto card bg-secondary text-light mb-3 p-2 zoom">
         <div class="card-body text-center">
             <div class="d-flex justify-content-between">
