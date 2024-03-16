@@ -5,14 +5,14 @@
         <!-- LOGO -->
         <!-- First Div (5.5) - Visible on smaller screens -->
         <div class="d-flex align-items-center d-block d-lg-none mx-1">
-            <a class="navbar-brand" href="/index.php">
-                <img src="/cosc360_proj/display_elements/5.5.png" alt="Logo" width="45" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="/FivePoint5/index.php">
+                <img src="/FivePoint5/display_elements/5.5.png" alt="Logo" width="45" class="d-inline-block align-text-top">
             </a>
         </div>
         <!-- Second Div (word logo)- Visible on lg screens and up -->
         <div class="d-none d-lg-block">
-            <a class="navbar-brand" href="/index.php">
-               <img src="/cosc360_proj/display_elements/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="/FivePoint5/index.php">
+               <img src="/FivePoint5/display_elements/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
             </a>
         </div>
 
@@ -49,9 +49,9 @@
                 </button>
                 <!-- Search dropdown-->
                 <div class="dropdown-menu mt-3" style="width: 250px; left:50%; margin-left:-125px;">
-                    <form class="navbar-form d-flex mx-2" action="">
+                    <form class="navbar-form d-flex mx-2" action="index.php" method="get">
                         <div class="form-group w-100">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" name="search" class="form-control" placeholder="Search">
                         </div>
                     </form>
                 </div>
@@ -60,11 +60,10 @@
 
         <!-- Search Form (larger Displays) -->
         <div class="flex-grow-1 mx-2 d-none d-sm-block">
-            <form class="d-flex align-items-center" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search FivePoint5" aria-label="Search">
+            <form class="d-flex align-items-center" action="index.php" method="get" role="search">
+                <input class="form-control me-2" type="search" name="search" placeholder="Search FivePoint5" aria-label="Search">
             </form>
         </div>
-
 
         <!-- Profile Button -->
         <!-- have to use order-last but code before create post because of some bug with live server -->

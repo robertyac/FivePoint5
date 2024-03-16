@@ -67,27 +67,31 @@
         <!-- Container for cards -->
         <div class="container pt-4">
             <div class="row text-center d-flex">
-                <!-- Column 1 (Odd Post IDs)-->
+                <!-- Column 1 -->
                 <div class="col-md m-md-3">
                     <?php
                     $posts = include "commands/getPost.php";
                     // reverse the array so the most recent posts are first
                     $posts = array_reverse($posts);
+                    $counter = 0;
                     foreach ($posts as $post) {
-                        if ($post['PostID'] % 2 != 0) {
-                           include "templates/postCard.php";
+                        if ($counter % 2 == 0) {
+                            include "templates/postCard.php";
                         }
+                        $counter++;
                     }
                     ?>
                 </div>
                 <!-- End Column 1 -->
-                <!-- Column 2 (Even Post IDs)-->
+                <!-- Column 2 -->
                 <div class="col-md m-md-3">
                     <?php
+                    $counter = 0;
                     foreach ($posts as $post) {
-                        if ($post['PostID'] % 2 == 0) {
+                        if ($counter % 2 != 0) {
                             include "templates/postCard.php";
                         }
+                        $counter++;
                     }
                     ?>
                 </div>
