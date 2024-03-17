@@ -32,8 +32,8 @@ $posts = include "getPost.php";
 
         <!-- Tags Dropdown Menu -->
         <div class="dropdown m-auto">
-            <button class="btn-outline-success btn dropdown-toggle mx-1 mx-sm-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Tags
+            <button class="btn-outline-success btn dropdown-toggle mx-1 mx-sm-2 px-md-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Search by Tag
             </button>
             <!-- Search for a tag dropdown-->
             <ul class="dropdown-menu end-0 mt-2" style="min-width: 250px;">
