@@ -1,3 +1,17 @@
+<?php
+session_start();
+$tag = $_GET['tag'] ?? '';
+if ($tag) {
+    $_SESSION['recent_tags'] = $_SESSION['recent_tags'] ?? [];
+    if (($key = array_search($tag, $_SESSION['recent_tags'])) !== false) {
+        unset($_SESSION['recent_tags'][$key]);
+    }
+    array_unshift($_SESSION['recent_tags'], $tag);
+    $_SESSION['recent_tags'] = array_slice($_SESSION['recent_tags'], 0, 5); // Keep only the 5 most recent tags
+}
+$posts = include "getPost.php";
+?>
+
 <!-- NavBar -->
 <nav class="navbar bg-dark-subtle fixed-top p-0" style="height: 4em;">
     <div class="container-fluid d-flex flex-row justify-content-center flex-nowrap navbar-expand-lg">
@@ -12,7 +26,7 @@
         <!-- Second Div (word logo)- Visible on lg screens and up -->
         <div class="d-none d-lg-block">
             <a class="navbar-brand" href="/FivePoint5/index.php">
-               <img src="/FivePoint5/display_elements/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
+                <img src="/FivePoint5/display_elements/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
             </a>
         </div>
 
@@ -23,20 +37,23 @@
             </button>
             <!-- Search for a tag dropdown-->
             <ul class="dropdown-menu end-0 mt-2" style="min-width: 250px;">
-                <form class="navbar-form d-flex mx-2" action="">
+                <form class="navbar-form d-flex mx-2" id="tagSearchForm" action="index.php" method="get">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Tag">
+                        <input type="text" class="form-control" id="tagInput" name="tag" placeholder="Tag">
                     </div>
                     <button class="btn btn-outline-success ml-2" type="submit">Find
                     </button>
                 </form>
                 <!-- Recent Tags -->
-                <li><a class="dropdown-item" href="#">Recent Tag</a></li>
-                <li><a class="dropdown-item" href="#">Recent Tag</a></li>
-                <li><a class="dropdown-item" href="#">Recent Tag</a></li>
+                <?php
+                session_start();
+                $recent_tags = $_SESSION['recent_tags'] ?? [];
+                foreach ($recent_tags as $recent_tag) {
+                    echo '<li><a class="dropdown-item" href="index.php?tag=' . urlencode($recent_tag) . '">' . htmlspecialchars($recent_tag) . '</a></li>';
+                }
+                ?>
             </ul>
         </div>
-
         <!-- Search -->
         <!-- Search button (smaller displays)-->
         <div class="d-flex d-sm-none m-auto">

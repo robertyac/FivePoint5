@@ -8,17 +8,28 @@ $charset = 'utf8mb4';
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 $searchTerm = $_GET['search'] ?? ''; // Get the search term from the query parameters
+$tag = $_GET['tag'] ?? ''; // Get the tag from the query parameters
 
 try {
     $pdo = new PDO($dsn, $user, $pass);
-    $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, Post.Rating, GROUP_CONCAT(Tag.Name) AS Tags
-            FROM Post
-            LEFT JOIN PostTags ON Post.PostID = PostTags.PostID
-            LEFT JOIN Tag ON PostTags.TagID = Tag.TagID
-            WHERE Post.PostTitle LIKE :searchTerm OR Post.Description LIKE :searchTerm
-            GROUP BY Post.PostID";
+    
+    // SQL query to get the posts with the given search term and tag
+    $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, Post.Rating, GROUP_CONCAT(DISTINCT Tag.Name) AS Tags
+    FROM (
+        SELECT Post.PostID
+        FROM Post
+        LEFT JOIN PostTags ON Post.PostID = PostTags.PostID
+        LEFT JOIN Tag ON PostTags.TagID = Tag.TagID
+        WHERE (Post.PostTitle LIKE :searchTerm OR Post.Description LIKE :searchTerm) AND (Tag.Name = :tag OR :tag = '')
+        GROUP BY Post.PostID
+    ) AS FilteredPosts
+    LEFT JOIN Post ON FilteredPosts.PostID = Post.PostID
+    LEFT JOIN PostTags ON Post.PostID = PostTags.PostID
+    LEFT JOIN Tag ON PostTags.TagID = Tag.TagID
+    GROUP BY Post.PostID";
+
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['searchTerm' => "%$searchTerm%"]);
+    $stmt->execute(['searchTerm' => "%$searchTerm%", 'tag' => $tag]);
     $posts = $stmt->fetchAll();
     if (!$posts) {
         echo "No posts found";
@@ -28,4 +39,3 @@ try {
 } catch (PDOException $e) {
     die("PDO error: " . $e->getMessage());
 }
-?>
