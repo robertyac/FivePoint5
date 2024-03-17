@@ -32,7 +32,9 @@ try {
     $stmt->execute(['searchTerm' => "%$searchTerm%", 'tag' => $tag]);
     $posts = $stmt->fetchAll();
     if (!$posts) {
-        echo "No posts found";
+        echo "<h1>Sorry, no posts found :(</h1>";
+        echo "<button class='btn btn-warning'><a href='index.php' style='color: inherit; text-decoration: none;'>Go back</a></button>";
+        die();
     }
     // return the posts array used in index.php 
     return $posts;
