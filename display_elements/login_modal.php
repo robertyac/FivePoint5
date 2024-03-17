@@ -1,68 +1,77 @@
-   <!-- Modal -->
-   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="container">
-                        <button type="button" class="btn-close float-start me-5" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <h4 class="modal-title">Login or Signup:</h4>
-                    </div>
+<!-- Login Popup-->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container">
+                    <button type="button" class="btn-close float-start me-5 mt-1" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    <h4 class="modal-title">Login</h4>
                 </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <script src="https://accounts.google.com/gsi/client" async></script>
-                        <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-login_uri="https://your.domain/your_login_endpoint" data-auto_prompt="false">
-                        </div>
-                        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left" style="width: 200px; margin: 2em 0 2em 8em; ">
-                        </div>
+            </div>
+            <div class="modal-body">
+                <form action="commands/login.php" method="post">
+                    <div class="form-group mb-3">
+                        <label for="usernameInputLogin">Username</label>
+                        <input type="text" class="form-control" id="usernameInputLogin" aria-describedby="nameHelp"
+                               placeholder="Enter username" name="usernameInputLogin">
                     </div>
-                </div>
+                    <div class="form-group mb-3">
+                        <label for="passwordInputLogin">Password</label>
+                        <input type="password" class="form-control" id="passwordInputLogin" placeholder="Password"
+                               name="passwordInputLogin"> <!-- this may send the raw password over the net without https -->
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mx-auto">Login</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <!-- Login Popup (will be moved into separate file) -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="container">
-                        <button type="button" class="btn-close  float-start me-5" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <h4 class="modal-title">Login or Signup:</h4>
+</div>
+
+
+<!-- Register Popup-->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container">
+                    <button type="button" class="btn-close float-start me-5 mt-1" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    <h4 class="modal-title ml-5">Signup:</h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form action="commands/register.php" method="post" enctype="multipart/form-data">
+                    <div class="form-group mb-3">
+                        <label for="usernameInput">Username</label>
+                        <input type="text" class="form-control" id="usernameInput" name="usernameInput"
+                               aria-describedby="nameHelp"
+                               placeholder="Enter username">
                     </div>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group mb-3">
-                            <label for="InputName">Username</label>
-                            <input type="text" class="form-control" id="InputName" aria-describedby="nameHelp" placeholder="Enter username">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="InputEmail">Email address</label>
-                            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </div>
-                        <div class="mb-3">
-                            <label for="profilePicture" class="form-label">(Optional) Select a Profile Image:</label>
-                            <input type="file" class="form-control" id="profilePicture" accept="image/*" onchange="displayImage(this.files)" required>
-                            <img id="previewImage" class="img-fluid mt-2" style="display: none;" alt="Select profile Pic">
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary mx-auto">Login/Register</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <div class="container mx-auto">
-                        <script src="https://accounts.google.com/gsi/client" async></script>
-                        <div id="g_id_onload mx-auto" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-login_uri="https://your.domain/your_login_endpoint" data-auto_prompt="false">
-                        </div>
-                        <div class="g_id_signin mx-auto" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left" style="width: 200px; margin: 1em 0 1em 0; ">
-                        </div>
+                    <div class="form-group mb-3">
+                        <label for="emailInput">Email address</label>
+                        <input type="email" class="form-control" id="emailInput" name="emailInput"
+                               aria-describedby="emailHelp"
+                               placeholder="Enter email">
                     </div>
-                </div>
+                    <div class="form-group mb-3">
+                        <label for="passwordInput">Password</label>
+                        <input type="password" class="form-control" id="passwordInput" name="passwordInput"
+                               placeholder="Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="profilePictureInput" class="form-label">(Optional) Select a Profile Image:</label>
+                        <input type="file" class="form-control" id="profilePictureInput" accept="image/*"
+                               onchange="displayImage(this.files)" name="profilePicInput">
+                        <img id="previewImage" class="img-fluid mt-2" style="display: none;" alt="Select profile Pic">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mx-auto">Register</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
