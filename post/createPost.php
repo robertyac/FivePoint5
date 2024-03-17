@@ -26,31 +26,31 @@
             <div class="col-md-8 mx-auto">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form method="post" action="submitPost.php" enctype="multipart/form-data">
                             <!-- Post Title -->
                             <div class="mb-3">
                                 <label for="postTitle" class="form-label">Title:</label>
-                                <input type="text" class="form-control" id="postTitle" placeholder="Enter the post title" required>
+                                <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="Enter the post title">
                             </div>
 
                             <!-- Post Image -->
                             <div class="mb-3">
                                 <label for="postImage" class="form-label">Select an Image:</label>
-                                <input type="file" class="form-control" id="postImage" accept="image/*" onchange="displayImage(this.files)" >
+                                <input type="file" class="form-control" id="postImage" name="postImage" accept=".jpg, .jpeg, .png" onchange="displayImage(this.files)" >
                                 <img id="previewImage" class="img-fluid mt-2" style="display: none;" alt="Preview Image">
                             </div>
 
                             <!-- Post Tags -->
                             <div class="mb-3">
                                 <label for="postTags" class="form-label">Tags:</label>
-                                <input type="text" class="form-control" id="postTags" placeholder="Enter a tag" required>
+                                <input type="text" class="form-control" id="postTags" name="postTags" placeholder="Enter a tag">
                                 <div id="tagsContainer" class="mt-2"></div>
                             </div>
 
                             <!-- Post Description -->
                             <div class="mb-3">
                                 <label for="postDescription" class="form-label">Description:</label>
-                                <textarea class="form-control" id="postDescription" rows="5" placeholder="Enter the post description" required></textarea>
+                                <textarea class="form-control" id="postDescription" name="postDescription" rows="5" placeholder="Enter the post description"></textarea>
                                 <p id="charCount"></p>
                             </div>
 

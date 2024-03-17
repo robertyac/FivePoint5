@@ -80,7 +80,7 @@
 
         <!-- Create Post Button -->
         <div class="d-flex m-auto">
-            <a href="/post/createPost.html">
+            <a href="/cosc360_proj/post/createPost.php">
                 <button class="btn btn-outline-dark mx-1 mx-sm-2 px-4" type="button">
                     <!--Plus Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
