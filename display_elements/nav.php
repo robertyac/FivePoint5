@@ -104,7 +104,6 @@ if ($tag) {
                     $image_blob = getProfilePic($user);
                     $encoded = base64_encode($image_blob);
                     echo '<img src="data:image/png;base64,' . $encoded . '" height="45" alt="Profile Picture"/>';
-
 //                    echo '<img src="display_elements/5.5.png" height="45" alt="Profile Picture"/>';
                 } else {
                     echo '<img src="https://xsgames.co/randomusers/assets/images/favicon.png" height="45" alt="Not logged in pic"/>';
@@ -127,7 +126,7 @@ if ($tag) {
 
         <!-- Create Post Button -->
         <div class="d-flex m-auto">
-            <a href="/post/createPost.html">
+            <a href="/FivePoint5/post/createPost.html">
                 <button class="btn btn-outline-dark mx-1 mx-sm-2 px-4" type="button">
                     <!--Plus Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
