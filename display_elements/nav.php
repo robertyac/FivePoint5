@@ -34,7 +34,6 @@ if ($tag) {
             <a class="navbar-brand" href="/FivePoint5/index.php">
                 <img src="display_elements/FivePoint5.png" alt="Logo" width="225"
                      class="d-inline-block align-text-top">
-                <
             </a>
         </div>
 
