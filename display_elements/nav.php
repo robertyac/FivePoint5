@@ -6,13 +6,13 @@
         <!-- First Div (5.5) - Visible on smaller screens -->
         <div class="d-flex align-items-center d-block d-lg-none mx-1">
             <a class="navbar-brand" href="/index.php">
-                <img src="/cosc360_proj/display_elements/5.5.png" alt="Logo" width="45" class="d-inline-block align-text-top">
+                <img src="/FivePoint5/display_elements/5.5.png" alt="Logo" width="45" class="d-inline-block align-text-top">
             </a>
         </div>
         <!-- Second Div (word logo)- Visible on lg screens and up -->
         <div class="d-none d-lg-block">
             <a class="navbar-brand" href="/index.php">
-               <img src="/cosc360_proj/display_elements/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
+               <img src="/FivePoint5/display_elements/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
             </a>
         </div>
 
@@ -80,7 +80,7 @@
 
         <!-- Create Post Button -->
         <div class="d-flex m-auto">
-            <a href="/cosc360_proj/post/createPost.php">
+            <a href="/FivePoint5/post/createPost.php">
                 <button class="btn btn-outline-dark mx-1 mx-sm-2 px-4" type="button">
                     <!--Plus Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
