@@ -24,16 +24,14 @@ if ($tag) {
         <!-- LOGO -->
         <!-- First Div (5.5) - Visible on smaller screens -->
         <div class="d-flex align-items-center d-block d-lg-none mx-1">
-            <a class="navbar-brand" href="/FivePoint5/index.php">
-                <img src="/FivePoint5/display_elements/5.5.png" alt="Logo" width="45"
-                     class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="/index.php">
+                <img src="/FivePoint5/display_elements/5.5.png" alt="Logo" width="45" class="d-inline-block align-text-top">
             </a>
         </div>
         <!-- Second Div (word logo)- Visible on lg screens and up -->
         <div class="d-none d-lg-block">
-            <a class="navbar-brand" href="/FivePoint5/index.php">
-                <img src="/FivePoint5/display_elements/FivePoint5.png" alt="Logo" width="225"
-                     class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="/index.php">
+               <img src="/FivePoint5/display_elements/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
             </a>
         </div>
 
