@@ -73,7 +73,7 @@ if ($rating > 2.75) {
                 <p class="text-light">
                     <?php
                     if (isset($post['Description'])) {
-                        $words = explode(' ', $post['Description'] . '  ...read more');
+                        $words = explode(' ', $post['Description']);
                         echo implode(' ', array_slice($words, 0, 20)); // show first 20 words of the description if no image and description exists
                     }
                     ?>
