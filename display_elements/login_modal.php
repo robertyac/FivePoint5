@@ -59,7 +59,7 @@
                     <div class="form-group mb-3">
                         <label for="passwordInput">Password</label>
                         <input type="password" class="form-control" id="passwordInput" name="passwordInput"
-                               placeholder="Password">
+                               placeholder="Password" minlength="6">
                     </div>
                     <div class="mb-3">
                         <label for="profilePictureInput" class="form-label">(Optional) Select a Profile Image:</label>

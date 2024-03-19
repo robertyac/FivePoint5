@@ -23,6 +23,9 @@ $result = $mysqli->query($sql);
 
 if ($result->num_rows == 0) {
     echo "user not found";
+    session_start();
+    $_SESSION['alert'] = "User not found";
+    header('Location: ../index.php');
 } else if ($result->num_rows > 1) {
     echo "multiple users found somehow";
 } else {

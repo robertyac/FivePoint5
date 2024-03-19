@@ -7,46 +7,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="css/profile.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js"></script>
     <style>
-        .navbar {
+        #sidebar {
             height: 100vh; /* Set height to fill the viewport */
             flex-direction: column;
         }
     </style>
     <script> // should be moved to a separate file
-    function openPage(pageName) {
-        // Hide all elements with class="tabcontent" by default */
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
+        function openPage(pageName) {
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // // Remove the background color of all tablinks/buttons
+            // tablinks = document.getElementsByClassName("tablink");
+            // for (i = 0; i < tablinks.length; i++) {
+            //     tablinks[i].style.backgroundColor = "";
+            // }
+
+            // Show the specific tab content
+            document.getElementById(pageName).style.display = "block";
         }
 
-        // // Remove the background color of all tablinks/buttons
-        // tablinks = document.getElementsByClassName("tablink");
-        // for (i = 0; i < tablinks.length; i++) {
-        //     tablinks[i].style.backgroundColor = "";
-        // }
-
-        // Show the specific tab content
-        document.getElementById(pageName).style.display = "block";
-    }
-
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
     </script>
 </head>
-<body>
-<div id="nav" style="height: 100px;"></div>
+<body class="bg-body-secondary">
+<div id="nav" style="height: 4em;"><?php include 'display_elements/nav.php'; ?></div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col bg-secondary d-flex p-2 content" >
+        <div class="col-11 bg-secondary d-flex p-2 content">
             <div class="bg-light mx-auto w-50 card mt-5 h-auto" style="min-width: 400px">
                 <div class="card-body mx-auto">
-                    <div class="tabcontent " id="settings" >
+                    <div class="tabcontent " id="settings">
                         <div class="container">
                             <h1>Your settings:</h1>
                         </div>
@@ -55,9 +55,10 @@
                         </div>
                         <div class="container profilePicContainer">
                             <div class="row">
-                                <div class="col-md-6"><img src="../img/defaultProfilePic.png" alt="Profile Picture"
+                                <div class="col-md-6"><img src="img/defaultProfilePic.png" alt="Profile Picture"
                                                            style="max-width:300px;"></div>
-                                <div class="col-md-6 pic2"><img src="../img/editIcon.svg" alt="Edit" id="editIcon"></div>
+                                <div class="col-md-6 pic2"><img src="img/editIcon.svg" alt="Edit" id="editIcon">
+                                </div>
                             </div>
 
                         </div>
@@ -159,11 +160,12 @@
             </div>
         </div>
 
-        <div class="col sidebar bg-dark">
-            <nav class="navbar">
+        <div class="col-1 sidebar bg-dark">
+            <nav class="navbar" id="sidebar">
                 <ul class="nav navbar-nav">
                     <li class="nav-item mt-3">
-                        <a class="nav-link tablink text-light" onclick="openPage('settings')" id="defaultOpen"> Settings </a>
+                        <a class="nav-link tablink text-light" onclick="openPage('settings')" id="defaultOpen">
+                            Settings </a>
                         <hr style="color:white;"/>
                     </li>
                     <li class="nav-item">

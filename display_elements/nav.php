@@ -1,11 +1,11 @@
 <?php
 include 'commands/getProfilePic.php';
+session_start();
 $loggedIn = false;
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
     $loggedIn = true;
 }
-session_start();
 $tag = isset($_GET['tag']) ? $_GET['tag'] : '';
 if ($tag) {
     $_SESSION['recent_tags'] = $_SESSION['recent_tags'] ?? [];
@@ -113,8 +113,9 @@ if ($tag) {
             </a>
             <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
                 <?php
+                echo "<script>console.log(" . json_encode($loggedIn) . ")</script>";
                 if ($loggedIn) {
-                    echo "<li><a class='dropdown-item' href='/cosc360_proj/profile/profile.html'>My profile</a></li>";
+                    echo "<li><a class='dropdown-item' href='profile.php'>My profile</a></li>";
                     echo "<li><a class='dropdown-item btn btn-primary' href='commands/logout.php'>Logout</a></li>";
                 } else {
                     echo "<li><a class='dropdown-item btn btn-primary' href='#loginModal' role='button' data-bs-toggle='modal' data-bs-target='#loginModal'>Login</a></li>";
