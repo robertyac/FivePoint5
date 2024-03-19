@@ -14,12 +14,13 @@
                     <div class="form-group mb-3">
                         <label for="usernameInputLogin">Username</label>
                         <input type="text" class="form-control" id="usernameInputLogin" aria-describedby="nameHelp"
-                               placeholder="Enter username" name="usernameInputLogin">
+                               placeholder="Enter username" name="usernameInputLogin" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="passwordInputLogin">Password</label>
                         <input type="password" class="form-control" id="passwordInputLogin" placeholder="Password"
-                               name="passwordInputLogin"> <!-- this may send the raw password over the net without https -->
+                               name="passwordInputLogin" required>
+                        <!-- this may send the raw password over the net without https -->
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary mx-auto">Login</button>
@@ -47,19 +48,17 @@
                     <div class="form-group mb-3">
                         <label for="usernameInput">Username</label>
                         <input type="text" class="form-control" id="usernameInput" name="usernameInput"
-                               aria-describedby="nameHelp"
-                               placeholder="Enter username">
+                               aria-describedby="nameHelp" placeholder="Enter username" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="emailInput">Email address</label>
                         <input type="email" class="form-control" id="emailInput" name="emailInput"
-                               aria-describedby="emailHelp"
-                               placeholder="Enter email">
+                               aria-describedby="emailHelp" placeholder="Enter email" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="passwordInput">Password</label>
                         <input type="password" class="form-control" id="passwordInput" name="passwordInput"
-                               placeholder="Password" minlength="6">
+                               placeholder="Password" minlength="6"  required>
                     </div>
                     <div class="mb-3">
                         <label for="profilePictureInput" class="form-label">(Optional) Select a Profile Image:</label>
