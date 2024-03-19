@@ -34,6 +34,7 @@ if ($result->num_rows == 0) {
         echo "Login successful";
         session_start();
         $_SESSION['user'] = $username;
+        $_SESSION['user_id'] = $row['UserID'];
         header('Location: ../index.php');
     } else {
         echo "Incorrect password";;
