@@ -43,7 +43,7 @@ if (isset($_SESSION['alert'])) {
                         <p class="lead my-2">Catch up on recent posts with your favourite tags.</p>
                     </div>
                     <div class="col-sm-12 col-lg-2 text-right">
-                        <a href=""><button class="zoom btn btn-primary">Edit Your Tags</button></a>
+                        <a href="profile.php" onclick="openPage('favouriteTags'); return false;"><button class="zoom btn btn-primary">Edit Your Tags</button></a>
                     </div>
                 </div>
                 <hr />
