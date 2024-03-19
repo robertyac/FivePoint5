@@ -32,7 +32,7 @@ if (isset($_SESSION['alert'])) {
     <!-- Login modal -->
     <?php include 'display_elements/login_modal.php'; ?>
     <!--End of Navigation bar-->
-    
+
     <!--Briefing Section -->
     <?php if (isset($user_id)) : ?>
         <section class="text-center text-lg-start">
@@ -57,12 +57,14 @@ if (isset($_SESSION['alert'])) {
                         <?php
                         //reverse the array so the most recent posts are first
                         $favoritePosts = array_reverse(include "commands/getFavoritePosts.php");
-                        $counter = 0;
-                        foreach ($favoritePosts as $post) {
-                            if ($counter % 2 == 0) {
-                                include "templates/postCard.php";
+                        if (!empty($favoritePosts)) {
+                            $counter = 0;
+                            foreach ($favoritePosts as $post) {
+                                if ($counter % 2 == 0) {
+                                    include "templates/postCard.php";
+                                }
+                                $counter++;
                             }
-                            $counter++;
                         }
                         ?>
                     </div>
@@ -71,12 +73,14 @@ if (isset($_SESSION['alert'])) {
                     <!-- Column 2 -->
                     <div class="col-md m-md-3">
                         <?php
-                        $counter = 0;
-                        foreach ($favoritePosts as $post) {
-                            if ($counter % 2 != 0) {
-                                include "templates/postCard.php";
+                        if (!empty($favoritePosts)) {
+                            $counter = 0;
+                            foreach ($favoritePosts as $post) {
+                                if ($counter % 2 != 0) {
+                                    include "templates/postCard.php";
+                                }
+                                $counter++;
                             }
-                            $counter++;
                         }
                         ?>
                     </div>
@@ -85,8 +89,8 @@ if (isset($_SESSION['alert'])) {
                 </div>
             </div>
         </section>
-        <?php endif; ?>
-        <!-- END Briefing Section -->
+    <?php endif; ?>
+    <!-- END Briefing Section -->
 
     <!-- All posts section -->
     <section class="text-start">
