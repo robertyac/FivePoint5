@@ -38,9 +38,8 @@ try {
     $stmt->execute(['userId' => $userId]);
     $posts = $stmt->fetchAll();
     if (!$posts) {
-        echo "<h1>Sorry, no posts found :(</h1>";
-        echo "User ID: $userId";
-        die();
+        echo "<h1>Sorry, no posts that you like with your favourite tags:(</h1>";
+        return []; // Return an empty array if there are no posts
     }
     // return the posts array used in index.php 
     return $posts;
