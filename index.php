@@ -32,59 +32,61 @@ if (isset($_SESSION['alert'])) {
     <!-- Login modal -->
     <?php include 'display_elements/login_modal.php'; ?>
     <!--End of Navigation bar-->
-<?php if (isset($user_id)): ?>
+    
     <!--Briefing Section -->
-    <section class="text-center text-lg-start">
-        <div class="container p-2">
-            <div class="row align-items-center d-flex justify-content-between">
-                <div class="col-sm-12 col-lg-10">
-                    <h1>Your 5<span class="text-primary">.</span>5 Briefing</h1>
-                    <p class="lead my-2">Catch up on recent posts with your favourite tags.</p>
+    <?php if (isset($user_id)) : ?>
+        <section class="text-center text-lg-start">
+            <div class="container p-2">
+                <div class="row align-items-center d-flex justify-content-between">
+                    <div class="col-sm-12 col-lg-10">
+                        <h1>Your 5<span class="text-primary">.</span>5 Briefing</h1>
+                        <p class="lead my-2">Catch up on recent posts with your favourite tags.</p>
+                    </div>
+                    <div class="col-sm-12 col-lg-2 text-right">
+                        <a href=""><button class="zoom btn btn-primary">Edit Your Tags</button></a>
+                    </div>
                 </div>
-                <div class="col-sm-12 col-lg-2 text-right">
-                    <a href=""><button class="zoom btn btn-primary">Edit Your Tags</button></a>
+                <hr />
+            </div>
+
+            <!-- Container for cards -->
+            <div class="container pt-4">
+                <div class="row text-center d-flex">
+                    <!-- Column 1 -->
+                    <div class="col-md m-md-3">
+                        <?php
+                        //reverse the array so the most recent posts are first
+                        $favoritePosts = array_reverse(include "commands/getFavoritePosts.php");
+                        $counter = 0;
+                        foreach ($favoritePosts as $post) {
+                            if ($counter % 2 == 0) {
+                                include "templates/postCard.php";
+                            }
+                            $counter++;
+                        }
+                        ?>
+                    </div>
+                    <!-- End Column 1 -->
+
+                    <!-- Column 2 -->
+                    <div class="col-md m-md-3">
+                        <?php
+                        $counter = 0;
+                        foreach ($favoritePosts as $post) {
+                            if ($counter % 2 != 0) {
+                                include "templates/postCard.php";
+                            }
+                            $counter++;
+                        }
+                        ?>
+                    </div>
+                    <!-- END Column 2 -->
+
                 </div>
             </div>
-            <hr />
-        </div>
-
-           <!-- Container for cards -->
-    <div class="container pt-4">
-        <div class="row text-center d-flex">
-            <!-- Column 1 -->
-            <div class="col-md m-md-3">
-                <?php
-                $favoritePosts = include "commands/getFavoritePosts.php";
-                $counter = 0;
-                foreach ($favoritePosts as $post) {
-                    if ($counter % 2 == 0) {
-                        include "templates/postCard.php";
-                    }
-                    $counter++;
-                }
-                ?>
-            </div>
-            <!-- End Column 1 -->
-
-            <!-- Column 2 -->
-            <div class="col-md m-md-3">
-                <?php
-                $counter = 0;
-                foreach ($favoritePosts as $post) {
-                    if ($counter % 2 != 0) {
-                        include "templates/postCard.php";
-                    }
-                    $counter++;
-                }
-                ?>
-            </div>
-            <!-- END Column 2 -->
-
-            </div>
-        </div>
-    </section>
-    <!-- END Briefing Section -->
-    <?php endif; ?>
+        </section>
+        <?php endif; ?>
+        <!-- END Briefing Section -->
 
     <!-- All posts section -->
     <section class="text-start">
@@ -139,4 +141,5 @@ if (isset($_SESSION['alert'])) {
     <!-- Tags Ajax -->
     <script src="commands/ajaxTags.js"></script>
 </body>
+
 </html>
