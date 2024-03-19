@@ -40,17 +40,16 @@ if ($tag) {
         <!-- Tags Dropdown Menu -->
         <div class="dropdown m-auto">
 
-            <button class="btn-outline-success btn dropdown-toggle mx-1 mx-sm-2 px-md-4" type="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                Search by Tag
+            <button class="btn-outline-success btn dropdown-toggle mx-1 mx-sm-2 px-lg-4" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false"> Tag
             </button>
             <!-- Search for a tag dropdown-->
-            <ul class="dropdown-menu end-0 mt-2" style="min-width: 250px;">
+            <ul class="dropdown-menu end-0 mt-2" style="min-width: 270px;">
                 <form class="navbar-form d-flex mx-2" id="tagSearchForm" action="index.php" method="get">
                     <div class="form-group">
                         <input type="text" class="form-control" id="tagInput" name="tag" placeholder="Tag">
                     </div>
-                    <button class="btn btn-outline-success ml-2" type="submit">Find
+                    <button class="btn btn-outline-success" type="submit" style="white-space: nowrap;">Search By Tag</button>
                     </button>
                 </form>
                 <!-- Recent Tags -->
