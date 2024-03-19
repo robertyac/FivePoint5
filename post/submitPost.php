@@ -35,16 +35,6 @@ if (isset($_FILES['postImage'])) {
     echo "File type: $file_type\n";
     echo "File ext: $file_ext\n";
 
-    $extensions = array("jpeg", "jpg", "png");
-
-    if (in_array($file_ext, $extensions) === false) {
-        $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
-    }
-
-    if ($file_size > 2097152) {
-        $errors[] = 'File size must not be larger than 2 MB';
-    }
-
     if (empty($errors) == true) {
         $target_file = $dir . basename($_FILES["postImage"]["name"]);
         echo "Target file: $target_file\n";
