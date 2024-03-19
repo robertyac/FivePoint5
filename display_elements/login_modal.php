@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                <form action="commands/login.php" method="post">
+                <form action="commands/login.php" method="post" novalidate>
                     <div class="form-group mb-3">
                         <label for="usernameInputLogin">Username</label>
                         <input type="text" class="form-control" id="usernameInputLogin" aria-describedby="nameHelp"
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                <form action="commands/register.php" method="post" enctype="multipart/form-data">
+                <form action="commands/register.php" method="post" enctype="multipart/form-data" novalidate>
                     <div class="form-group mb-3">
                         <label for="usernameInput">Username</label>
                         <input type="text" class="form-control" id="usernameInput" name="usernameInput"
@@ -74,3 +74,111 @@
         </div>
     </div>
 </div>
+
+<!-- JavaScript form Validation -->
+<script>
+function removeInvalid(input, tooltip) {
+    input.classList.remove("is-invalid");
+    tooltip.dispose();
+}
+
+document.getElementById("loginModal").addEventListener("submit", function(event){
+    var username = document.getElementById("usernameInputLogin");
+    var password = document.getElementById("passwordInputLogin");
+    var usernameTooltip, passwordTooltip;
+
+    if(username.value === "" || password.value === ""){
+        event.preventDefault();
+        if(username.value === "") {
+            username.classList.add("is-invalid");
+            usernameTooltip = new bootstrap.Tooltip(username, {
+                title: "Username cannot be empty",
+                placement: "right"
+            });
+        }
+        if(password.value === "") {
+            password.classList.add("is-invalid");
+            passwordTooltip = new bootstrap.Tooltip(password, {
+                title: "Password cannot be empty",
+                placement: "right"
+            });
+        }
+    }
+
+    username.addEventListener("input", function() {
+        if(username.value !== "" && usernameTooltip) {
+            removeInvalid(username, usernameTooltip);
+        }
+    });
+
+    password.addEventListener("input", function() {
+        if(password.value !== "" && passwordTooltip) {
+            removeInvalid(password, passwordTooltip);
+        }
+    });
+});
+
+document.getElementById("registerModal").addEventListener("submit", function(event){
+    var username = document.getElementById("usernameInput");
+    var email = document.getElementById("emailInput");
+    var password = document.getElementById("passwordInput");
+    var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    var usernameTooltip, emailTooltip, passwordTooltip;
+
+    if(username.value === "" || email.value === "" || password.value === "" || !email.value.match(emailPattern) || !password.value.match(passwordPattern)){
+        event.preventDefault();
+        if(username.value === "") {
+            username.classList.add("is-invalid");
+            usernameTooltip = new bootstrap.Tooltip(username, {
+                title: "Username cannot be empty",
+                placement: "right"
+            });
+        }
+        if(email.value === "") {
+            email.classList.add("is-invalid");
+            emailTooltip = new bootstrap.Tooltip(email, {
+                title: "Email cannot be empty",
+                placement: "right"
+            });
+        } else if(!email.value.match(emailPattern)){
+            email.classList.add("is-invalid");
+            emailTooltip = new bootstrap.Tooltip(email, {
+                title: "Please enter a valid email address",
+                placement: "right"
+            });
+        }
+        if(password.value === "") {
+            password.classList.add("is-invalid");
+            passwordTooltip = new bootstrap.Tooltip(password, {
+                title: "Password cannot be empty",
+                placement: "right"
+            });
+        } else if(!password.value.match(passwordPattern)){
+            password.classList.add("is-invalid");
+            passwordTooltip = new bootstrap.Tooltip(password, {
+                title: "Password must be at least 6 characters long, contain at least one digit, one lowercase and one uppercase letter",
+                placement: "right"
+            });
+        }
+    }
+
+    username.addEventListener("input", function() {
+        if(username.value !== "" && usernameTooltip) {
+            removeInvalid(username, usernameTooltip);
+        }
+    });
+
+    email.addEventListener("input", function() {
+        if(email.value !== "" && email.value.match(emailPattern) && emailTooltip) {
+            removeInvalid(email, emailTooltip);
+        }
+    });
+
+    password.addEventListener("input", function() {
+        if(password.value !== "" && password.value.match(passwordPattern) && passwordTooltip) {
+            removeInvalid(password, passwordTooltip);
+        }
+    });
+});
+</script>
