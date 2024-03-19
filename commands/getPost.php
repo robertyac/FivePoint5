@@ -14,7 +14,7 @@ try {
     $pdo = new PDO($dsn, $user, $pass);
     
     // SQL query to get the posts with the given search term and tag
-    $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, GROUP_CONCAT(DISTINCT Tag.Name) AS Tags, ROUND(AVG(UserRatings.Rating), 1) AS AverageRating
+    $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, GROUP_CONCAT(DISTINCT Tag.Name) AS Tags, IFNULL(ROUND(AVG(UserRatings.Rating), 1), 0) AS AverageRating
     FROM (
         SELECT Post.PostID
         FROM Post
