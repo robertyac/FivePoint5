@@ -16,6 +16,9 @@
 
 <?php
 session_start();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+}
 if (isset($_SESSION['alert'])) {
     $alert = $_SESSION['alert'];
     echo "<script type='text/javascript'>alert('$alert');</script>";
@@ -29,6 +32,7 @@ if (isset($_SESSION['alert'])) {
     <!-- Login modal -->
     <?php include 'display_elements/login_modal.php'; ?>
     <!--End of Navigation bar-->
+<?php if (isset($user_id)): ?>
     <!--Briefing Section -->
     <section class="text-center text-lg-start">
         <div class="container p-2">
@@ -44,25 +48,43 @@ if (isset($_SESSION['alert'])) {
             <hr />
         </div>
 
-        <!-- Container for cards -->
-        <div class="container pt-4">
-            <div class="row text-center d-flex">
-                <!-- Column 1 -->
-                <div class="col-md m-md-3">
-                    <p>We will put a users top 6 most relevent posts here</p>
-                </div>
-                <!-- End Column 1 -->
+           <!-- Container for cards -->
+    <div class="container pt-4">
+        <div class="row text-center d-flex">
+            <!-- Column 1 -->
+            <div class="col-md m-md-3">
+                <?php
+                $favoritePosts = include "commands/getFavoritePosts.php";
+                $counter = 0;
+                foreach ($favoritePosts as $post) {
+                    if ($counter % 2 == 0) {
+                        include "templates/postCard.php";
+                    }
+                    $counter++;
+                }
+                ?>
+            </div>
+            <!-- End Column 1 -->
 
-                <!-- Column 2 -->
-                <div class="col-md m-md-3">
-                    <p>We will put a users top 6 most relevent posts here</p>
-                </div>
-                <!-- END Column 2 -->
+            <!-- Column 2 -->
+            <div class="col-md m-md-3">
+                <?php
+                $counter = 0;
+                foreach ($favoritePosts as $post) {
+                    if ($counter % 2 != 0) {
+                        include "templates/postCard.php";
+                    }
+                    $counter++;
+                }
+                ?>
+            </div>
+            <!-- END Column 2 -->
 
             </div>
         </div>
     </section>
     <!-- END Briefing Section -->
+    <?php endif; ?>
 
     <!-- All posts section -->
     <section class="text-start">
