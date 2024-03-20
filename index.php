@@ -93,7 +93,7 @@ if (isset($_SESSION['alert'])) {
     <!-- END Briefing Section -->
 
     <!-- All posts section -->
-    <section class="text-start">
+    <section id="allPosts" class="text-start">
         <div class="container px-4">
             <div class="d-flex align-items-center justify-content-between">
                 <h1>5<span class="text-primary">.</span>5 </h1>

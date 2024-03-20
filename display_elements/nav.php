@@ -44,12 +44,11 @@ if ($tag) {
             </button>
             <!-- Search for a tag dropdown-->
             <ul class="dropdown-menu end-0 mt-2" style="min-width: 270px;">
-                <form class="navbar-form d-flex mx-2" id="tagSearchForm" action="index.php" method="get">
+                <form class="navbar-form d-flex mx-2" action="index.php#allPosts" method="get">
                     <div class="form-group">
                         <input type="text" class="form-control" id="tagInput" name="tag" placeholder="Tag">
                     </div>
                     <button class="btn btn-outline-success" type="submit" style="white-space: nowrap;">Search By Tag</button>
-                    </button>
                 </form>
                 <!-- Recent Tags -->
                 <?php
@@ -75,7 +74,7 @@ if ($tag) {
                 </button>
                 <!-- Search dropdown-->
                 <div class="dropdown-menu mt-3" style="width: 250px; left:50%; margin-left:-125px;">
-                    <form class="navbar-form d-flex mx-2" action="index.php" method="get">
+                    <form class="navbar-form d-flex mx-2" action="index.php#allPosts" method="get">
                         <div class="form-group w-100">
                             <input type="text" name="search" class="form-control" placeholder="Search">
                         </div>
@@ -86,7 +85,7 @@ if ($tag) {
 
         <!-- Search Form (larger Displays) -->
         <div class="flex-grow-1 mx-2 d-none d-sm-block">
-            <form class="d-flex align-items-center" action="index.php" method="get" role="search">
+            <form class="d-flex align-items-center" action="index.php#allPosts" method="get" role="search">
                 <input class="form-control me-2" type="search" name="search" placeholder="Search FivePoint5"
                        aria-label="Search">
             </form>
