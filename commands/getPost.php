@@ -12,7 +12,7 @@ $tag = $_GET['tag'] ?? ''; // Get the tag from the query parameters
 
 try {
     $pdo = new PDO($dsn, $user, $pass);
-    
+
     // SQL query to get the posts with the given search term and tag
     $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, GROUP_CONCAT(DISTINCT Tag.Name) AS Tags, IFNULL(ROUND(AVG(UserRatings.Rating), 1), 0) AS AverageRating
     FROM (
@@ -36,14 +36,14 @@ try {
 ?>
         <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN' crossorigin='anonymous'>
 
-        <div class='modal' tabindex='-1' role='dialog' id='myModal' style='display: block;'>
+        <div class='modal' tabindex='-1' role='dialog' id='modalAlert'>
             <div class='modal-dialog' role='document'>
                 <div class='modal-content'>
                     <div class='modal-header'>
                         <h5 class='modal-title'>Sorry about that!</h5>
                     </div>
                     <div class='modal-body'>
-                        <p>No posts were found for that search :( <br/> You will now be redirected.</p>
+                        <p>No posts were found for that search :( <br /> You will now be redirected.</p>
                     </div>
                     <div class='modal-footer'>
                         <button type='button' class='btn btn-primary' onclick='redirect()'>OK</button>
@@ -51,16 +51,18 @@ try {
                 </div>
             </div>
         </div>
-        
-        <!-- Bootstrap -->
-        <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL' crossorigin='anonymous'></script>
-        <!-- jquery -->
-        <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+
+        <script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
+        <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
 
         <script type='text/javascript'>
             function redirect() {
                 window.location.href = 'index.php';
             }
+
+            $(document).ready(function() {
+                $('#modalAlert').modal('show');
+            });
         </script>
 <?php
         die();
