@@ -39,7 +39,6 @@ if ($tag) {
 
         <!-- Tags Dropdown Menu -->
         <div class="dropdown m-auto">
-
             <button class="btn-outline-success btn dropdown-toggle mx-1 mx-sm-2 px-lg-4" type="button"
                     data-bs-toggle="dropdown" aria-expanded="false"> Tag
             </button>
@@ -126,7 +125,7 @@ if ($tag) {
 
         <!-- Create Post Button -->
         <div class="d-flex m-auto">
-            <a href="/FivePoint5/post/createPost.html">
+            <a href="/FivePoint5/post/createPost.php">
                 <button class="btn btn-outline-dark mx-1 mx-sm-2 px-4" type="button">
                     <!--Plus Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

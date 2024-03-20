@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title> Profile </title>
     <link rel="icon" type="image/x-icon" href="img/5.5.ico">
@@ -41,7 +40,6 @@
         document.getElementById("defaultOpen").click();
     </script>
 </head>
-
 <body class="bg-body-secondary">
     <div id="nav" style="height: 4em;"><?php include 'display_elements/nav.php'; ?></div>
     <div class="container-fluid">
@@ -208,5 +206,4 @@
         });
     </script>
 </body>
-
 </html>

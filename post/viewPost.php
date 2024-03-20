@@ -1,6 +1,10 @@
 <?php
-// Include your database configuration file
-$config = include '../commands/config.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Include getPost.php
+include 'getPostByID.php';
 
 // Check if PostID is set in the URL parameters
 if (!isset($_GET['PostID'])) {
@@ -9,19 +13,8 @@ if (!isset($_GET['PostID'])) {
 
 $postID = $_GET['PostID'];
 
-// Create a new PDO instance
-try {
-    $pdo = new PDO('mysql:host=' . $config['database']['host'] . ';dbname=' . $config['database']['name'], $config['database']['user'], $config['database']['password']);
-} catch (PDOException $e) {
-    die('Could not connect to the database');
-}
-
-// Prepare a SQL statement to fetch the post details
-$stmt = $pdo->prepare('SELECT * FROM Post WHERE PostID = :postID');
-$stmt->execute(['postID' => $postID]);
-
-// Fetch the post details
-$post = $stmt->fetch();
+// Fetch the post details using getPost.php
+$post = getPost($postID);
 
 if (!$post) {
     die('Post not found');
@@ -90,20 +83,16 @@ if (!$post) {
     <!-- Rating Slider -->
     <div class="container card p-3 mx-auto mt-4 mb-0 w-75">
         <label for="rating">
-            <h3>Rating: ?/5.5</h3>
+            <h3 id="ratingDisplay">Rating: /5.5</h3>
         </label>
-        <input type="range" class="form-range" id="rating" value="2.75" min="0" max="5.5" step="0.5" disabled>
-        <div class="row">
-            <div class="col">
-                <div class="d-flex justify-content-between">
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                    <div>5</div>
-                    <div>5.5</div>
-                </div>
-            </div>
+        <input type="range" class="form-range" id="rating" value="3" min="1" max="6" step="1">
+        <div class="d-flex justify-content-between">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>5.5</div>
         </div>
     </div>
     <!-- End of Rating Slider -->
@@ -151,6 +140,29 @@ if (!$post) {
     <script>
         $(function () {
             $("#nav").load("../display_elements/nav.php");
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Get the slider and rating display elements
+            var slider = $("#rating");
+            var ratingDisplay = $("#ratingDisplay");
+
+            // Define the mapping from slider values to ratings
+            var ratingValues = {
+                1: '1',
+                2: '2',
+                3: '3',
+                4: '4',
+                5: '5',
+                6: '5.5'
+            };
+
+            // Update the rating display when the slider value changes
+            slider.on('input', function() {
+                var rating = ratingValues[this.value];
+                ratingDisplay.text("Rating: " + rating + "/5.5");
+            });
         });
     </script>
 </body>
