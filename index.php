@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FivePoint5 - Home</title>
-    <link rel="icon" type="image/x-icon" href="/img/5.5.ico">
-    <link rel="apple-touch-icon" href="/img/5.5-white.png">
+    <link rel="icon" type="image/x-icon" href="img/5.5.ico">
+    <link rel="apple-touch-icon" href="img/5.5-white.png">
     <!-- Index stylesheet -->
     <link rel="stylesheet" href="css/index.css">
     <!-- bootstrap -->
@@ -16,6 +16,9 @@
 
 <?php
 session_start();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+}
 if (isset($_SESSION['alert'])) {
     $alert = $_SESSION['alert'];
     echo "<script type='text/javascript'>alert('$alert');</script>";
@@ -29,39 +32,64 @@ if (isset($_SESSION['alert'])) {
     <!-- Login modal -->
     <?php include 'display_elements/login_modal.php'; ?>
     <!--End of Navigation bar-->
+
     <!--Briefing Section -->
-    <section class="text-center text-lg-start">
-        <div class="container p-2">
-            <div class="row align-items-center d-flex justify-content-between">
-                <div class="col-sm-12 col-lg-10">
-                    <h1>Your 5<span class="text-primary">.</span>5 Briefing</h1>
-                    <p class="lead my-2">Catch up on recent posts with your favourite tags.</p>
+    <?php if (isset($user_id)) : ?>
+        <section class="text-center text-lg-start">
+            <div class="container p-2">
+                <div class="row align-items-center d-flex justify-content-between">
+                    <div class="col-sm-12 col-lg-10">
+                        <h1>Your 5<span class="text-primary">.</span>5 Briefing</h1>
+                        <p class="lead my-2">Catch up on recent posts with your favourite tags.</p>
+                    </div>
+                    <div class="col-sm-12 col-lg-2 text-right">
+                        <a href="profile.php" onclick="openPage('favouriteTags'); return false;"><button class="zoom btn btn-primary">Edit Your Tags</button></a>
+                    </div>
                 </div>
-                <div class="col-sm-12 col-lg-2 text-right">
-                    <a href=""><button class="zoom btn btn-primary">Edit Your Tags</button></a>
+                <hr />
+            </div>
+
+            <!-- Container for cards -->
+            <div class="container pt-4">
+                <div class="row text-center d-flex">
+                    <!-- Column 1 -->
+                    <div class="col-md m-md-3">
+                        <?php
+                        //reverse the array so the most recent posts are first
+                        $favoritePosts = array_reverse(include "commands/getFavoritePosts.php");
+                        if (!empty($favoritePosts)) {
+                            $counter = 0;
+                            foreach ($favoritePosts as $post) {
+                                if ($counter % 2 == 0) {
+                                    include "templates/postCard.php";
+                                }
+                                $counter++;
+                            }
+                        }
+                        ?>
+                    </div>
+                    <!-- End Column 1 -->
+
+                    <!-- Column 2 -->
+                    <div class="col-md m-md-3">
+                        <?php
+                        if (!empty($favoritePosts)) {
+                            $counter = 0;
+                            foreach ($favoritePosts as $post) {
+                                if ($counter % 2 != 0) {
+                                    include "templates/postCard.php";
+                                }
+                                $counter++;
+                            }
+                        }
+                        ?>
+                    </div>
+                    <!-- END Column 2 -->
+
                 </div>
             </div>
-            <hr />
-        </div>
-
-        <!-- Container for cards -->
-        <div class="container pt-4">
-            <div class="row text-center d-flex">
-                <!-- Column 1 -->
-                <div class="col-md m-md-3">
-                    <p>We will put a users top 6 most relevent posts here</p>
-                </div>
-                <!-- End Column 1 -->
-
-                <!-- Column 2 -->
-                <div class="col-md m-md-3">
-                    <p>We will put a users top 6 most relevent posts here</p>
-                </div>
-                <!-- END Column 2 -->
-
-            </div>
-        </div>
-    </section>
+        </section>
+    <?php endif; ?>
     <!-- END Briefing Section -->
 
     <!-- All posts section -->
@@ -117,4 +145,5 @@ if (isset($_SESSION['alert'])) {
     <!-- Tags Ajax -->
     <script src="commands/ajaxTags.js"></script>
 </body>
+
 </html>

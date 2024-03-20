@@ -24,31 +24,31 @@ if ($tag) {
         <!-- LOGO -->
         <!-- First Div (5.5) - Visible on smaller screens -->
         <div class="d-flex align-items-center d-block d-lg-none mx-1">
-            <a class="navbar-brand" href="/index.php">
-                <img src="/FivePoint5/display_elements/5.5.png" alt="Logo" width="45" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="/FivePoint5/index.php">
+                <img src="display_elements/5.5.png" alt="Logo" width="45"
+                     class="d-inline-block align-text-top">
             </a>
         </div>
         <!-- Second Div (word logo)- Visible on lg screens and up -->
         <div class="d-none d-lg-block">
-            <a class="navbar-brand" href="/index.php">
-               <img src="/FivePoint5/display_elements/FivePoint5.png" alt="Logo" width="225" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="/FivePoint5/index.php">
+                <img src="display_elements/FivePoint5.png" alt="Logo" width="225"
+                     class="d-inline-block align-text-top">
             </a>
         </div>
 
         <!-- Tags Dropdown Menu -->
         <div class="dropdown m-auto">
-
-            <button class="btn-outline-success btn dropdown-toggle mx-1 mx-sm-2 px-md-4" type="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                Search by Tag
+            <button class="btn-outline-success btn dropdown-toggle mx-1 mx-sm-2 px-lg-4" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false"> Tag
             </button>
             <!-- Search for a tag dropdown-->
-            <ul class="dropdown-menu end-0 mt-2" style="min-width: 250px;">
+            <ul class="dropdown-menu end-0 mt-2" style="min-width: 270px;">
                 <form class="navbar-form d-flex mx-2" id="tagSearchForm" action="index.php" method="get">
                     <div class="form-group">
                         <input type="text" class="form-control" id="tagInput" name="tag" placeholder="Tag">
                     </div>
-                    <button class="btn btn-outline-success ml-2" type="submit">Find
+                    <button class="btn btn-outline-success" type="submit" style="white-space: nowrap;">Search By Tag</button>
                     </button>
                 </form>
                 <!-- Recent Tags -->
