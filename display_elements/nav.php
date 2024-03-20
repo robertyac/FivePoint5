@@ -15,6 +15,7 @@ if ($tag) {
     array_unshift($_SESSION['recent_tags'], $tag);
     $_SESSION['recent_tags'] = array_slice($_SESSION['recent_tags'], 0, 5); // Keep only the 5 most recent tags
 }
+$recent_tags = $_SESSION['recent_tags'] ?? [];
 ?>
 
 <!-- NavBar -->
@@ -44,7 +45,7 @@ if ($tag) {
             </button>
             <!-- Search for a tag dropdown-->
             <ul class="dropdown-menu end-0 mt-2" style="min-width: 270px;">
-                <form class="navbar-form d-flex mx-2" action="index.php#allPosts" method="get">
+            <form class="navbar-form d-flex mx-2" action="index.php#allPosts" method="get">
                     <div class="form-group">
                         <input type="text" class="form-control" id="tagInput" name="tag" placeholder="Tag">
                     </div>
@@ -52,8 +53,6 @@ if ($tag) {
                 </form>
                 <!-- Recent Tags -->
                 <?php
-                session_start();
-                $recent_tags = $_SESSION['recent_tags'] ?? [];
                 foreach ($recent_tags as $recent_tag) {
                     echo '<li><a class="dropdown-item" href="index.php?tag=' . urlencode($recent_tag) . '">' . htmlspecialchars($recent_tag) . '</a></li>';
                 }
