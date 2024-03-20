@@ -13,7 +13,7 @@ function getPost($postID) {
     try {
         $pdo = new PDO($dsn, $user, $pass);
 
-        $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, Post.Rating, GROUP_CONCAT(Tag.Name) AS Tags
+        $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, GROUP_CONCAT(Tag.Name) AS Tags
                 FROM Post
                 LEFT JOIN PostTags ON Post.PostID = PostTags.PostID
                 LEFT JOIN Tag ON PostTags.TagID = Tag.TagID
