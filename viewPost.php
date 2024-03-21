@@ -82,10 +82,15 @@ if (!$post) {
 
     <!-- Rating Slider -->
     <div class="container card p-3 mx-auto mt-4 mb-0 w-75">
-        <label for="rating">
+        <label for="rating" class="mb-3">
             <h3 id="ratingDisplay">Rating: 3.0/5.5</h3>
         </label>
-        <input type="range" class="form-range" id="rating" value="30" min="10" max="55" step="1" oninput="updateRatingDisplay(this.value)">
+        <form method="post" action="commands/addRating.php">
+            <input type="range" class="form-range" id="rating" name="rating" value="30" min="10" max="55" step="1" oninput="updateRatingDisplay(this.value)">
+            <div class="d-flex justify-content-end mt-3">
+                <button type="submit" class="btn btn-primary">Submit Rating</button>
+            </div>
+        </form>
     </div>
     <!-- End of Rating Slider -->
     
@@ -164,7 +169,9 @@ if (!$post) {
                         <label for="comment">Leave a Comment:</label>
                         <textarea class="form-control" id="comment" name="content" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Comment</button>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="submit" class="btn btn-primary">Submit Comment</button>
+                    </div>
                 </form>
             </div>
         </div>
