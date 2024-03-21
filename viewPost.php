@@ -83,17 +83,9 @@ if (!$post) {
     <!-- Rating Slider -->
     <div class="container card p-3 mx-auto mt-4 mb-0 w-75">
         <label for="rating">
-            <h3 id="ratingDisplay">Rating: /5.5</h3>
+            <h3 id="ratingDisplay">Rating: 3.0/5.5</h3>
         </label>
-        <input type="range" class="form-range" id="rating" value="3" min="1" max="6" step="1">
-        <div class="d-flex justify-content-between">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            <div>5</div>
-            <div>5.5</div>
-        </div>
+        <input type="range" class="form-range" id="rating" value="30" min="10" max="55" step="1" oninput="updateRatingDisplay(this.value)">
     </div>
     <!-- End of Rating Slider -->
     
@@ -190,27 +182,11 @@ if (!$post) {
         });
     </script>
     <script>
-        $(document).ready(function() {
-            // Get the slider and rating display elements
-            var slider = $("#rating");
-            var ratingDisplay = $("#ratingDisplay");
-
-            // Define the mapping from slider values to ratings
-            var ratingValues = {
-                1: '1',
-                2: '2',
-                3: '3',
-                4: '4',
-                5: '5',
-                6: '5.5'
-            };
-
-            // Update the rating display when the slider value changes
-            slider.on('input', function() {
-                var rating = ratingValues[this.value];
-                ratingDisplay.text("Rating: " + rating + "/5.5");
-            });
-        });
+        function updateRatingDisplay(value) {
+            const ratingDisplay = document.getElementById('ratingDisplay');
+            const rating = value / 10;
+            ratingDisplay.textContent = `Rating: ${rating.toFixed(1)}/5.5`;
+        }
     </script>
 </body>
 
