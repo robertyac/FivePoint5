@@ -99,10 +99,9 @@ $recent_tags = $_SESSION['recent_tags'] ?? [];
                 if ($loggedIn) {
                     $image_blob = getProfilePic($user);
                     $encoded = base64_encode($image_blob);
-                    echo '<img src="data:image/png;base64,' . $encoded . '" height="45" alt="Profile Picture"/>';
-//                    echo '<img src="display_elements/5.5.png" height="45" alt="Profile Picture"/>';
+                    echo '<img src="data:image/png;base64,' . $encoded . '" height="45" alt="Profile Picture" style="border-radius: 50%;"/>';
                 } else {
-                    echo '<img src="https://xsgames.co/randomusers/assets/images/favicon.png" height="45" alt="Not logged in pic"/>';
+                    echo '<img src="https://xsgames.co/randomusers/assets/images/favicon.png" height="45" alt="Not logged in pic" style="border-radius: 50%;"/>';
                 }
                 ?>
 
