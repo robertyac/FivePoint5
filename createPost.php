@@ -17,10 +17,13 @@
 
 <body class="bg-secondary">
     <!--Navigation bar-->
-    <div id="nav" style="height: 100px;"></div>
+    <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
     <!--End of Navigation bar-->
 
-    <!-- Create Post Form Container -->
+    <!-- Close button -->
+    <a href="index.php" class="btn-close m-3 fs-2 position-absolute" style="top: 60px; left: -5px;" aria-label="Close"></a>
+
+    <!-- Post Form Container -->
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-8 mx-auto">
