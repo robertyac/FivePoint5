@@ -13,8 +13,8 @@ try {
     $pdo = new PDO($dsn, $user, $pass);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $rating = $_POST["rating"] / 10;
-        $userID = $_SESSION["userID"];
+        $rating = round($_POST["rating"] / 10, 1);
+        $userID = $_SESSION["user_id"];
         $postID = $_SESSION["postID"];
 
         echo "Rating: ";

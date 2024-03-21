@@ -51,7 +51,7 @@ if (!$post) {
                     <h2 class="card-title text-center text-decoration-underline">
                         <?php echo $post['PostTitle']; ?>
                     </h2>
-                    <!-- Post Image -->
+                    <!-- Post Imagre -->
                     <?php if (!empty($post['PostImage'])) : ?>
                         <img src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid mx-auto d-block p-5">
                     <?php else : ?>
@@ -83,7 +83,7 @@ if (!$post) {
     <!-- Rating Slider -->
     <div class="container card p-3 mx-auto mt-4 mb-0 w-75">
         <label for="rating" class="mb-3">
-            <h3 id="ratingDisplay">Rating: 3.0/5.5</h3>
+            <h3 id="ratingDisplay">Rating: ?/5.5</h3>
         </label>
         <form method="post" action="commands/addRating.php">
             <input type="range" class="form-range" id="rating" name="rating" value="30" min="10" max="55" step="1" oninput="updateRatingDisplay(this.value)">
