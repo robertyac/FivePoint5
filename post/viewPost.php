@@ -14,7 +14,7 @@ if (!isset($_GET['PostID'])) {
 $postID = $_GET['PostID'];
 
 // Fetch the post details using getPost.php
-$post = getPost($postID);
+$post = getPostByID($postID);
 
 if (!$post) {
     die('Post not found');
@@ -105,25 +105,71 @@ if (!$post) {
 
                 <!-- Comments -->
                 <div class="mt-3">
-                    <!-- Single Comment -->
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Name of Commenter</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
-                                esse cillum dolore eu fugiat nulla pariatur.</p>
-                        </div>
-                    </div>
+                    <?php
+                    ini_set('display_errors', 1);
+                    ini_set('display_startup_errors', 1);
+                    error_reporting(E_ALL);
 
-                    <!-- Repeat the above structure for additional comments -->
+                    // Check if PostID is set in the URL parameters
+                    if (!isset($_GET['PostID'])) {
+                        die('PostID is not set');
+                    }
+
+                    $postID = $_GET['PostID'];
+
+                    // Get the database configuration
+                    $config = require '../commands/config.php';
+
+                    $host = $config['database']['host'];
+                    $db = $config['database']['name'];
+                    $user = $config['database']['user'];
+                    $pass = $config['database']['password'];
+                    $charset = 'utf8mb4';
+
+                    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+                    
+                    $pdo = new PDO($dsn, $user, $pass);
+
+                    // Fetch the comments
+                    function getComments($pdo, $postID) {
+                        try {
+                            $sql = "SELECT * FROM Comment WHERE PostID = ?";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->execute([$postID]);
+
+                            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        } catch (PDOException $e) {
+                            die("PDO error: " . $e->getMessage());
+                        }
+                    }
+
+                    $comments = getComments($pdo, $postID);
+                    print_r($comments);
+
+                    // Loop through the comments
+                    foreach ($comments as $comment) {
+                        // Check if the UserID and Content keys exist in the $comment array
+                        if (isset($comment['UserID']) && isset($comment['Content'])) {
+                            // Display a card for each comment
+                            echo '
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">' . htmlspecialchars($comment['UserID']) . '</h5>
+                                    <p class="card-text">' . htmlspecialchars($comment['Content']) . '</p>
+                                </div>
+                            </div>
+                            ';
+                        }
+                    }
+                    ?>
                 </div>
 
                 <!-- Comment Form -->
-                <form>
+                <form action="submitComment.php" method="POST" id="commentForm">
+                    <input type="hidden" name="postID" value="<?php echo $postID; ?>">
                     <div class="mb-3 mt-5">
                         <label for="comment">Leave a Comment:</label>
-                        <textarea class="form-control" id="comment" rows="3"></textarea>
+                        <textarea class="form-control" id="comment" name="content" rows="3"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit Comment</button>
                 </form>

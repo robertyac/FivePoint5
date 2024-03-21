@@ -1,5 +1,7 @@
 <?php
-function getPost($postID) {
+session_start(); // Start the session
+
+function getPostByID($postID) {
     $config = require '../commands/config.php';
 
     $host = $config['database']['host'];
@@ -28,6 +30,8 @@ function getPost($postID) {
             echo "No post found";
             return null;
         }
+
+        $_SESSION['postID'] = $post['PostID']; // Set the post ID in the session
 
         return $post;
     } catch (PDOException $e) {
