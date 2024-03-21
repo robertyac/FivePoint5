@@ -33,7 +33,7 @@ $recent_tags = $_SESSION['recent_tags'] ?? [];
         <!-- Second Div (word logo)- Visible on lg screens and up -->
         <div class="d-none d-lg-block">
             <a class="navbar-brand" href="/FivePoint5/index.php">
-                <img src="/FivePoint5/display_elements/FivePoint5.png" alt="Logo" width="225"
+                <img src="display_elements/FivePoint5.png" alt="Logo" width="225"
                      class="d-inline-block align-text-top">
             </a>
         </div>
