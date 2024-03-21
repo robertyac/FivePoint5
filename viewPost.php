@@ -48,26 +48,18 @@ if (!$post) {
             <div class="col-md-12">
                 <div class="card-body d-flex flex-column">
                     <!-- Post Title -->
-                    <h2 class="card-title text-center text-decoration-underline">
+                    <h2 class="card-title text-center">
                         <?php echo $post['PostTitle']; ?>
                     </h2>
-                    <!-- Post Imagre -->
-                    <?php if (!empty($post['PostImage'])) : ?>
-                        <img src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid mx-auto d-block p-5">
-                    <?php else : ?>
-                        <p class="text-light">
-                            <?php
-                            if (isset($post['Description'])) {
-                                $words = explode(' ', $post['Description'] . '  ...read more');
-                                echo implode(' ', array_slice($words, 0, 20)); // show first 20 words of the description if no image and description exists
-                            }
-                            ?>
-                        </p>
-                    <?php endif; ?>
+                    <hr>
+                    <!-- Post Image -->
+                    <img src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid mx-auto d-block w-75 p-3">
+                    <hr>
                     <!-- Post Description -->
-                    <p class="card-text text-justify mt-auto">
+                    <p class="card-text text-justify mt-auto p-3">
                         <?php echo $post['Description']; ?>
                     </p>
+                    <hr>
                     <!-- Tags -->
                     <div class="card-body d-flex flex-wrap justify-content-center align-items-center">
                         <span class="badge bg-primary m-2 px-5 py-2 rounded-pill">Tag1</span>

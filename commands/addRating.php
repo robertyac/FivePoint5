@@ -42,6 +42,10 @@ try {
         $stmt->execute([$rating, $userID, $postID]);
 
         echo "Rating updated successfully";
+
+        // Redirect back to viewPost.php
+        header("Location: ../viewPost.php?PostID=$postID");
+        exit();
     } else {
         echo "Invalid request";
     }
