@@ -17,20 +17,25 @@
 
 <body class="bg-secondary">
     <!--Navigation bar-->
-    <div id="nav" style="height: 100px;"></div>
+    <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
     <!--End of Navigation bar-->
 
-    <!-- Create Post Form Container -->
+    <!-- Close button -->
+    <a href="index.php" class="btn-close m-3 fs-2 position-absolute" style="top: 60px; left: -5px;" aria-label="Close"></a>
+
+    <!-- Post Form Container -->
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" action="submitPost.php" enctype="multipart/form-data">
+                        <form method="post" action="commands/submitPost.php" enctype="multipart/form-data" onsubmit="return validateForm();">
                             <!-- Post Title -->
                             <div class="mb-3">
                                 <label for="postTitle" class="form-label">Title:</label>
                                 <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="Enter the post title">
+                                <div id="titleCharCount"></div>
+                                <div id="titleError"></div>
                             </div>
 
                             <!-- Post Image -->
@@ -52,6 +57,7 @@
                                 <label for="postDescription" class="form-label">Description:</label>
                                 <textarea class="form-control" id="postDescription" name="postDescription" rows="5" placeholder="Enter the post description"></textarea>
                                 <p id="charCount"></p>
+                                <div id="descriptionError"></div>
                             </div>
 
                             <!-- Submit Button -->
@@ -93,6 +99,46 @@
         }
     </script>
     <script>
+        // Function to validate the form
+        function validateForm() {
+            const title = document.getElementById('postTitle').value;
+            const description = document.getElementById('postDescription').value;
+            const image = document.getElementById('postImage').files.length;
+
+            // Clear previous error messages
+            clearError('titleError');
+            clearError('descriptionError');
+
+            let isValid = true;
+
+            // Validate title
+            if (title.trim().length === 0) {
+                displayError('titleError', 'Title is required.');
+                isValid = false;
+            }
+
+            // Validate description or image
+            if (description.length === 0 && image === 0) {
+                displayError('descriptionError', 'Either a description or an image must be provided.');
+                isValid = false;
+            }
+
+            // If validation passes, allow form to be submitted
+            return isValid;
+        }
+
+        function displayError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.color = 'red';
+        }
+
+        function clearError(elementId) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = '';
+        }
+    </script>
+    <script>
         // Array to store tags
         var tags = [];
 
@@ -122,9 +168,8 @@
             }
         });
     </script>
-    
-    <!-- Char Count Script -->
     <script>
+        // Description Char Count Script
         const textarea = document.getElementById('postDescription');
         const charCountDisplay = document.getElementById('charCount');
         const maxChars = 1000;
@@ -137,6 +182,23 @@
             }
     
             charCountDisplay.textContent = `Character count: ${charCount}/${maxChars}`;
+        });
+    </script>
+    <script>
+        // Title Char Count Script
+        const titleInput = document.getElementById('postTitle');
+        const titleCharCountDisplay = document.getElementById('titleCharCount');
+        const maxTitleChars = 75;
+
+        titleInput.addEventListener('input', function () {
+            let charCount = this.value.length;
+
+            if (charCount > maxTitleChars) {
+                this.value = this.value.slice(0, maxTitleChars);
+                charCount = maxTitleChars;
+            }
+
+            titleCharCountDisplay.textContent = `Character count: ${charCount}/${maxTitleChars}`;
         });
     </script>
 

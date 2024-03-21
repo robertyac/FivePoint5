@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Include getPost.php
-include 'getPostByID.php';
+include 'commands/getPostByID.php';
 
 // Check if PostID is set in the URL parameters
 if (!isset($_GET['PostID'])) {
@@ -34,13 +34,13 @@ if (!$post) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!--Navigation bar-->
-    <div id="nav" style="height: 100px;"></div>
+    <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
     <!--End of Navigation bar-->
 </head>
 
 <body class="bg-secondary">
     <!-- Close button -->
-    <a href="../index.php" class="btn-close m-3 fs-2 position-absolute" style="top: 60px; left: -5px;" aria-label="Close"></a>
+    <a href="index.php" class="btn-close m-3 fs-2 position-absolute" style="top: 60px; left: -5px;" aria-label="Close"></a>
 
     <!-- Post Container -->
     <div class="container card mt-5 mx-auto w-75">
@@ -116,9 +116,10 @@ if (!$post) {
                     }
 
                     $postID = $_GET['PostID'];
+                    $userID = $_SESSION['user_id'];
 
                     // Get the database configuration
-                    $config = require '../commands/config.php';
+                    $config = require 'commands/config.php';
 
                     $host = $config['database']['host'];
                     $db = $config['database']['name'];
@@ -131,30 +132,30 @@ if (!$post) {
                     $pdo = new PDO($dsn, $user, $pass);
 
                     // Fetch the comments
-                    function getComments($pdo, $postID) {
+                    function getComments($pdo, $postID, $userID) {
                         try {
-                            $sql = "SELECT * FROM Comment WHERE PostID = ?";
+                            // SQL query to select the comments and the username of the user who made the comment
+                            $sql = "SELECT Comment.*, User.Username FROM Comment INNER JOIN User ON Comment.UserID = User.UserID WHERE PostID = ? AND Comment.UserID = ?";
                             $stmt = $pdo->prepare($sql);
-                            $stmt->execute([$postID]);
-
+                            $stmt->execute([$postID, $userID]);
+                    
                             return $stmt->fetchAll(PDO::FETCH_ASSOC);
                         } catch (PDOException $e) {
                             die("PDO error: " . $e->getMessage());
                         }
                     }
-
-                    $comments = getComments($pdo, $postID);
-                    print_r($comments);
+                    
+                    $comments = getComments($pdo, $postID, $userID);
 
                     // Loop through the comments
                     foreach ($comments as $comment) {
-                        // Check if the UserID and Content keys exist in the $comment array
-                        if (isset($comment['UserID']) && isset($comment['Content'])) {
+                        // Check if the Username and Content keys exist in the $comment array
+                        if (isset($comment['Username']) && isset($comment['Content'])) {
                             // Display a card for each comment
                             echo '
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">' . htmlspecialchars($comment['UserID']) . '</h5>
+                                    <h5 class="card-title">' . htmlspecialchars($comment['Username']) . '</h5>
                                     <p class="card-text">' . htmlspecialchars($comment['Content']) . '</p>
                                 </div>
                             </div>
@@ -165,7 +166,7 @@ if (!$post) {
                 </div>
 
                 <!-- Comment Form -->
-                <form action="submitComment.php" method="POST" id="commentForm">
+                <form action="commands/submitComment.php" method="POST" id="commentForm">
                     <input type="hidden" name="postID" value="<?php echo $postID; ?>">
                     <div class="mb-3 mt-5">
                         <label for="comment">Leave a Comment:</label>

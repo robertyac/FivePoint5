@@ -2,7 +2,7 @@
 session_start(); // Start the session
 
 function getPostByID($postID) {
-    $config = require '../commands/config.php';
+    $config = require 'config.php';
 
     $host = $config['database']['host'];
     $db = $config['database']['name'];
