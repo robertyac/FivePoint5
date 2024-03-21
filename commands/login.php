@@ -5,12 +5,29 @@ $host = $config['database']['host'];
 $db = $config['database']['name'];
 $user = $config['database']['user'];
 $pass = $config['database']['password'];
+$secretKey = $config['recaptcha']['secret_key'];
 $charset = 'utf8mb4';
 
 $mysqli = new mysqli($host, $user, $pass, $db);
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error . ". Error code: " . $mysqli->connect_errno);
+}
+
+// reCAPTCHA server side validation
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $recaptchaResponse = $_POST['g-recaptcha-response'];
+
+    $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $recaptchaResponse);
+    $responseData = json_decode($verifyResponse);
+
+    if (!$responseData->success) {
+        // reCAPTCHA validation failed, handle accordingly
+        session_start();
+        $_SESSION['alert'] = "reCAPTCHA validation failed, please try again.";
+        header('Location: ../index.php');
+        exit;
+    }
 }
 
 $username = $_POST['usernameInputLogin'];
