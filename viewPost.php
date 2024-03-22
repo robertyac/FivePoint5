@@ -3,8 +3,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Include getPost.php
+// Include getPostByID.php and getTags.php
 include 'commands/getPostByID.php';
+include 'commands/getTags.php';
 
 // Check if PostID is set in the URL parameters
 if (!isset($_GET['PostID'])) {
@@ -13,11 +14,18 @@ if (!isset($_GET['PostID'])) {
 
 $postID = $_GET['PostID'];
 
-// Fetch the post details using getPost.php
+// Fetch the post details using getPostByID.php
 $post = getPostByID($postID);
 
 if (!$post) {
     die('Post not found');
+}
+
+// Fetch the tags for the post using getTags.php
+$tags = getTags($postID);
+
+if (!$tags) {
+    die('No tags found for this post');
 }
 ?>
 
@@ -48,9 +56,15 @@ if (!$post) {
             <div class="col-md-12">
                 <div class="card-body d-flex flex-column">
                     <!-- Post Title -->
-                    <h2 class="card-title text-center">
-                        <?php echo $post['PostTitle']; ?>
-                    </h2>
+                    <div class="row">
+                        <div class="col text-left">
+                            <h4 class="mb-0">Rated: 5.5/5.5</h4>
+                        </div>
+                        <div class="col text-center">
+                            <h4 class="mb-0"><?php echo $post['PostTitle']; ?></h4>
+                        </div>
+                        <div class="col"></div>
+                    </div>
                     <hr>
                     <!-- Post Image -->
                     <div class="col-12 col-md-8 mx-auto">
@@ -73,6 +87,8 @@ if (!$post) {
                             <?php endforeach; ?>
                         </span>
                     </div>
+                    <hr>
+                    <h4 class="text-center">Rated: 5.5/5.5</h4>
                 </div>
             </div>
         </div>
