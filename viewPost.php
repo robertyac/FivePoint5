@@ -53,18 +53,25 @@ if (!$post) {
                     </h2>
                     <hr>
                     <!-- Post Image -->
-                    <img src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid mx-auto d-block w-75 p-3">
+                    <div class="col-12 col-md-8 mx-auto">
+                        <img src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid p-3">
+                    </div>
                     <hr>
                     <!-- Post Description -->
-                    <p class="card-text text-justify mt-auto p-3">
+                    <p class="card-text text-justify mt-auto p-3 bg-light border rounded">
                         <?php echo $post['Description']; ?>
                     </p>
                     <hr>
                     <!-- Tags -->
-                    <div class="card-body d-flex flex-wrap justify-content-center align-items-center">
-                        <span class="badge bg-primary m-2 px-5 py-2 rounded-pill">Tag1</span>
-                        <span class="badge bg-primary m-2 px-5 py-2 rounded-pill">Tag2</span>
-                        <span class="badge bg-primary m-2 px-5 py-2 rounded-pill">Tag3</span>
+                    <h5 class="mb-0">Tags</h5>
+                    <div class="card-body d-flex flex-wrap  align-items-center">
+                        <span class="text-start h6 text-body-emphasis opacity-75 rounded">
+                            <?php 
+                            $tags = isset($post['Tags']) ? $post['Tags'] : '';
+                            foreach (explode(',', $tags) as $tag) : ?>
+                                <span class="badge bg-primary text-white m-1 rounded-pill"><?php echo $tag; ?></span>
+                            <?php endforeach; ?>
+                        </span>
                     </div>
                 </div>
             </div>
