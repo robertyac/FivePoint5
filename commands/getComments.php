@@ -14,7 +14,6 @@ $pdo = new PDO($dsn, $user, $pass);
 $postID = $_GET['postID'];
 
 $comments = getComments($pdo, $postID);
-
 foreach ($comments as $comment) {
     if (isset($comment['Username']) && isset($comment['Content']) && isset($comment['CreatedAt'])) {
         $date = DateTime::createFromFormat('Y-m-d H:i:s', $comment['CreatedAt']);
@@ -23,7 +22,7 @@ foreach ($comments as $comment) {
         echo '
         <div class="card">
             <div class="card-body">
-            <h5 class="card-title">' . htmlspecialchars($comment['Username']) . ' <span class="badge text-dark float-end">' . htmlspecialchars($formattedDate) . '</span></h5>
+            <h5 class="card-title">' . htmlspecialchars($comment['Username']) . ' <small class="badge bg-secondary text-white float-end text-wrap" style="max-width: 200px; font-size: 0.5rem;">' . htmlspecialchars($formattedDate) . '</small></h5>
             <p class="card-text">' . htmlspecialchars($comment['Content']) . '</p>
         </div>
         </div>
