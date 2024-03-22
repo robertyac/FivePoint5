@@ -1,40 +1,72 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include '../commands/getPost.php';
 
-$postTitle = $_POST['postTitle'];
-$postDescription = $_POST['postDescription'];
+$postTitle = $_POST['postTitle'] ?? null;
+$postDescription = $_POST['postDescription'] ?? null;
+
+// Check if title is provided
+if ($postTitle === null || trim($postTitle) === '') {
+    // Redirect to index.php with error message
+    header("Location: ../index.php?error=Title is required.");
+    exit();
+}
+
+// Check if either image or description is provided
+if ((!isset($_FILES['postImage']) || $_FILES['postImage']['tmp_name'] === '') && 
+    ($postDescription === null || trim($postDescription) === '')) {
+    // Redirect to index.php with error message
+    header("Location: ../index.php?error=Either image or description is required.");
+    exit();
+}
 
 // Handle the file upload
-if (isset($_FILES['postImage'])) {
-    echo "File upload detected.\n";
-
+if (isset($_FILES['postImage']) && $_FILES['postImage']['tmp_name'] != '') {
     // Read the file
     $postImage = fopen($_FILES['postImage']['tmp_name'], 'rb');
+} else {
+    $postImage = null;
+}
 
-    try {
-        echo "Attempting to insert into database.\n";
+try {
+    if ($postImage !== null) {
         $sql = "INSERT INTO Post (PostTitle, PostImage, Description) VALUES (?, ?, ?)";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(1, $postTitle);
-        $stmt->bindParam(2, $postImage, PDO::PARAM_LOB);
-        $stmt->bindParam(3, $postDescription);
-
-        $result = $stmt->execute();
-
-        if ($result === false) {
-            echo "Database insert failed.\n";
-            print_r($stmt->errorInfo());
-            return;
-        }
-        echo "New post created successfully\n";
-    } catch (PDOException $e) {
-        echo "Database error: " . $e->getMessage() . "\n";
+    } else {
+        $sql = "INSERT INTO Post (PostTitle, Description) VALUES (?, ?)";
     }
 
-    // Close the file
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(1, $postTitle);
+
+    if ($postImage !== null) {
+        $stmt->bindParam(2, $postImage, PDO::PARAM_LOB);
+        $stmt->bindParam(3, $postDescription);
+    } else {
+        $stmt->bindParam(2, $postDescription);
+    }
+
+    $result = $stmt->execute();
+
+    if ($result === false) {
+        // Redirect to index.php with error message
+        header("Location: ../index.php?error=Database insert failed.");
+        exit();
+    }
+
+    // Redirect to index.php with success message
+    header("Location: ../index.php?success=New post created successfully.");
+    exit();
+
+} catch (PDOException $e) {
+    // Redirect to index.php with error message
+    header("Location: ../index.php?error=Database error: " . urlencode($e->getMessage()));
+    exit();
+}
+
+// Close the file
+if ($postImage !== null) {
     fclose($postImage);
-} else {
-    echo "No file uploaded.\n";
 }
 ?>

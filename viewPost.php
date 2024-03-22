@@ -93,66 +93,8 @@ if (!$post) {
                 <h3 class="mb-3">Discussion</h3>
 
                 <!-- Comments -->
-                <div class="mt-3">
-                    <?php
-                    ini_set('display_errors', 1);
-                    ini_set('display_startup_errors', 1);
-                    error_reporting(E_ALL);
-
-                    // Check if PostID is set in the URL parameters
-                    if (!isset($_GET['PostID'])) {
-                        die('PostID is not set');
-                    }
-
-                    $postID = $_GET['PostID'];
-                    $userID = $_SESSION['user_id'];
-
-                    // Get the database configuration
-                    $config = require 'commands/config.php';
-
-                    $host = $config['database']['host'];
-                    $db = $config['database']['name'];
-                    $user = $config['database']['user'];
-                    $pass = $config['database']['password'];
-                    $charset = 'utf8mb4';
-
-                    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-                    
-                    $pdo = new PDO($dsn, $user, $pass);
-
-                    // Fetch the comments
-                    function getComments($pdo, $postID, $userID) {
-                        try {
-                            // SQL query to select the comments and the username of the user who made the comment
-                            $sql = "SELECT Comment.*, User.Username FROM Comment INNER JOIN User ON Comment.UserID = User.UserID WHERE PostID = ? AND Comment.UserID = ?";
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->execute([$postID, $userID]);
-                    
-                            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        } catch (PDOException $e) {
-                            die("PDO error: " . $e->getMessage());
-                        }
-                    }
-                    
-                    $comments = getComments($pdo, $postID, $userID);
-
-                    // Loop through the comments
-                    foreach ($comments as $comment) {
-                        // Check if the Username and Content keys exist in the $comment array
-                        if (isset($comment['Username']) && isset($comment['Content'])) {
-                            // Display a card for each comment
-                            echo '
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">' . htmlspecialchars($comment['Username']) . '</h5>
-                                    <p class="card-text">' . htmlspecialchars($comment['Content']) . '</p>
-                                </div>
-                            </div>
-                            ';
-                        }
-                    }
-                    ?>
-                </div>
+                <div id="comments" class="mt-3"></div>
+                    <!-- Comments will be loaded here using Ajax -->
 
                 <!-- Comment Form -->
                 <form action="commands/submitComment.php" method="POST" id="commentForm">
@@ -170,7 +112,10 @@ if (!$post) {
     </div>
     <!-- End of Discussion Area -->
 
-    <!-- Script Tags - Place at End of Body -->
+    <!-- Ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
@@ -186,6 +131,38 @@ if (!$post) {
             const rating = value / 10;
             ratingDisplay.textContent = `Rating: ${rating.toFixed(1)}/5.5`;
         }
+    </script>
+    <!-- Ajax for comments -->
+    <script>
+    $(document).ready(function() {
+        function loadComments() {
+            $.ajax({
+                url: 'commands/getComments.php',
+                type: 'GET',
+                data: { postID: <?php echo json_encode($_GET['PostID']); ?>, userID: <?php echo json_encode($_SESSION['user_id']); ?> },
+                success: function(data) {
+                    $('#comments').html(data);
+                }
+            });
+        }
+
+        loadComments(); // Load comments on page load
+
+        setInterval(loadComments, 5000); // Reload comments every 5 seconds
+
+        $('#commentForm').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: 'commands/submitComment.php',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function() {
+                    loadComments(); // Reload comments after submitting a new one
+                }
+            });
+        });
+    });
     </script>
 </body>
 
