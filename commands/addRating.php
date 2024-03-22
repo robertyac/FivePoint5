@@ -14,8 +14,15 @@ try {
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $rating = round($_POST["rating"] / 10, 1);
-        $userID = $_SESSION["user_id"];
-        $postID = $_SESSION["postID"];
+        $userID = $_SESSION["user_id"] ?? null;
+        $postID = $_SESSION["postID"] ?? null;
+
+        // Check if the user is logged in
+        if ($userID === null) {
+            // Redirect to viewPost.php with error message
+            header("Location: ../viewPost.php?PostID=$postID&error=You must be logged in to rate a post.");
+            exit();
+        }
 
         echo "Rating: ";
         var_dump($rating);

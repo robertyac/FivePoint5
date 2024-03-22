@@ -4,8 +4,16 @@ ini_set('display_errors', 1);
 
 include '../commands/getPost.php';
 
+$userID = $_SESSION['user_id'] ?? null;
 $postTitle = $_POST['postTitle'] ?? null;
 $postDescription = $_POST['postDescription'] ?? null;
+
+// Check if the user is logged in
+if ($userID === null) {
+    // Redirect to createPost.php with error message
+    header("Location: ../createPost.php?error=You must be logged in to create a post.");
+    exit();
+}
 
 // Check if title is provided and its length is between 1 and 75 characters
 if ($postTitle === null || trim($postTitle) === '' || strlen($postTitle) < 1 || strlen($postTitle) > 75) {
