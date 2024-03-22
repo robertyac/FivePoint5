@@ -3,9 +3,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Include getPostByID.php and getTags.php
+// Include getPostByID.php, getTags.php, and getAverageRating.php
 include 'commands/getPostByID.php';
 include 'commands/getTags.php';
+include 'commands/getRating.php';
 
 // Check if PostID is set in the URL parameters
 if (!isset($_GET['PostID'])) {
@@ -26,6 +27,13 @@ $tags = getTags($postID);
 
 if (!$tags) {
     die('No tags found for this post');
+}
+
+// Fetch the average rating for the post using getAverageRating.php
+$averageRating = getAverageRating($postID);
+
+if (!$averageRating) {
+    die('No ratings found for this post');
 }
 ?>
 
@@ -82,7 +90,7 @@ if (!$tags) {
                         </span>
                     </div>
                     <hr>
-                    <h4 class="text-center">Rated: 5.5/5.5</h4>
+                    <h4 class="text-center">Rated: <?php echo $averageRating; ?>/5.5</h4>
                 </div>
             </div>
         </div>
