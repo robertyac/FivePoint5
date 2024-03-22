@@ -47,8 +47,7 @@ if (!$averageRating) {
     <link rel="stylesheet" href="post.css" />
     <title>View Post</title>
     <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!--Navigation bar-->
     <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
     <!--End of Navigation bar-->
@@ -70,9 +69,11 @@ if (!$averageRating) {
                     <hr>
                     <!-- Post Image -->
                     <div class="col-12 col-md-8 mx-auto d-flex justify-content-center">
-                        <img src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid p-3">
+                        <?php if (!empty($post['PostImage'])) : ?>
+                            <img src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid p-3">
+                            <hr>
+                        <?php endif; ?>
                     </div>
-                    <hr>
                     <!-- Post Description -->
                     <p class="card-text text-justify mt-auto p-3 bg-light border rounded">
                         <?php echo $post['Description']; ?>
@@ -82,7 +83,7 @@ if (!$averageRating) {
                     <h5 class="mb-0">Tags</h5>
                     <div class="card-body d-flex flex-wrap  align-items-center">
                         <span class="text-start h6 text-body-emphasis opacity-75 rounded">
-                            <?php 
+                            <?php
                             $tags = isset($post['Tags']) ? $post['Tags'] : '';
                             foreach (explode(',', $tags) as $tag) : ?>
                                 <span class="badge bg-primary text-white m-1 rounded-pill"><?php echo $tag; ?></span>
@@ -110,7 +111,7 @@ if (!$averageRating) {
         </form>
     </div>
     <!-- End of Rating Slider -->
-    
+
     <!-- Discussion Area -->
     <div class="container card w-75 p-3 mt-4 mb-5 mx-auto">
         <div class="row">
@@ -119,7 +120,7 @@ if (!$averageRating) {
 
                 <!-- Comments -->
                 <div id="comments" class="mt-3"></div>
-                    <!-- Comments will be loaded here using Ajax -->
+                <!-- Comments will be loaded here using Ajax -->
 
                 <!-- Comment Form -->
                 <form action="commands/submitComment.php" method="POST" id="commentForm">
@@ -142,12 +143,10 @@ if (!$averageRating) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-        $(function () {
+        $(function() {
             $("#nav").load("../display_elements/nav.php");
         });
     </script>
@@ -161,8 +160,10 @@ if (!$averageRating) {
     <script>
         $(document).ready(function() {
             function loadComments() {
-                var data = { postID: <?php echo json_encode($_GET['PostID']); ?> };
-                <?php if (isset($_SESSION['user_id'])): ?>
+                var data = {
+                    postID: <?php echo json_encode($_GET['PostID']); ?>
+                };
+                <?php if (isset($_SESSION['user_id'])) : ?>
                     data.userID = <?php echo json_encode($_SESSION['user_id']); ?>;
                 <?php endif; ?>
 
@@ -199,14 +200,14 @@ if (!$averageRating) {
         const textarea = document.getElementById('comment');
         const charCountDisplay = document.getElementById('charCount');
         const maxChars = 1000;
-    
-        textarea.addEventListener('input', function () {
+
+        textarea.addEventListener('input', function() {
             const charCount = this.value.length;
-    
+
             if (charCount > maxChars) {
                 this.value = this.value.slice(0, maxChars);
             }
-    
+
             charCountDisplay.textContent = `Character Count: ${charCount}/${maxChars}`;
         });
     </script>
@@ -214,7 +215,7 @@ if (!$averageRating) {
         // Checks if user is signed in before submitting a rating
         $(document).ready(function() {
             $('#ratingForm').on('submit', function(e) {
-                <?php if (!isset($_SESSION['user_id'])): ?>
+                <?php if (!isset($_SESSION['user_id'])) : ?>
                     e.preventDefault();
                     alert('Sign in to submit a rating.');
                 <?php endif; ?>
@@ -227,9 +228,9 @@ if (!$averageRating) {
                 var comment = $.trim($('#comment').val());
 
                 // Check if the user is logged in
-                <?php if (!isset($_SESSION['user_id'])): ?>
+                <?php if (!isset($_SESSION['user_id'])) : ?>
                     var isLoggedIn = false;
-                <?php else: ?>
+                <?php else : ?>
                     var isLoggedIn = true;
                 <?php endif; ?>
 
