@@ -14,7 +14,7 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error . ". Error code: " . $mysqli->connect_errno);
 }
 
-// Add reCAPTCHA validation here
+// erCAPTCHA validation 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $recaptchaResponse = $_POST['g-recaptcha-response'];
     
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $responseData = json_decode($verifyResponse);
 
     if (!$responseData->success) {
-        // reCAPTCHA validation failed, handle accordingly
+        // reCAPTCHA validation failed
         session_start();
         $_SESSION['alert'] = "reCAPTCHA validation failed, please try again.";
         header('Location: ../index.php');

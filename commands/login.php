@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $responseData = json_decode($verifyResponse);
 
     if (!$responseData->success) {
-        // reCAPTCHA validation failed, handle accordingly
+        // reCAPTCHA validation failed
         session_start();
         $_SESSION['alert'] = "reCAPTCHA validation failed, please try again.";
         header('Location: ../index.php');
