@@ -103,6 +103,7 @@ if (!$post) {
                         <label for="comment">Leave a Comment:</label>
                         <textarea class="form-control" id="comment" name="content" rows="3"></textarea>
                     </div>
+                    <p id="charCount"></p>
                     <div class="d-flex justify-content-end mt-3">
                         <button type="submit" class="btn btn-primary">Submit Comment</button>
                     </div>
@@ -163,6 +164,22 @@ if (!$post) {
             });
         });
     });
+    </script>
+    <script>
+        // Comments Char Count Script
+        const textarea = document.getElementById('comment');
+        const charCountDisplay = document.getElementById('charCount');
+        const maxChars = 1000;
+    
+        textarea.addEventListener('input', function () {
+            const charCount = this.value.length;
+    
+            if (charCount > maxChars) {
+                this.value = this.value.slice(0, maxChars);
+            }
+    
+            charCountDisplay.textContent = `Character Count: ${charCount}/${maxChars}`;
+        });
     </script>
 </body>
 

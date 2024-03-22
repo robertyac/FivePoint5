@@ -181,7 +181,7 @@
                 this.value = this.value.slice(0, maxChars);
             }
     
-            charCountDisplay.textContent = `Character count: ${charCount}/${maxChars}`;
+            charCountDisplay.textContent = `Character Count: ${charCount}/${maxChars}`;
         });
     </script>
     <script>
@@ -198,7 +198,7 @@
                 charCount = maxTitleChars;
             }
 
-            titleCharCountDisplay.textContent = `Character count: ${charCount}/${maxTitleChars}`;
+            titleCharCountDisplay.textContent = `Character Count: ${charCount}/${maxTitleChars}`;
         });
     </script>
 
