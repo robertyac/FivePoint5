@@ -161,10 +161,15 @@ if (!$averageRating) {
     <script>
         $(document).ready(function() {
             function loadComments() {
+                var data = { postID: <?php echo json_encode($_GET['PostID']); ?> };
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    data.userID = <?php echo json_encode($_SESSION['user_id']); ?>;
+                <?php endif; ?>
+
                 $.ajax({
                     url: 'commands/getComments.php',
                     type: 'GET',
-                    data: { postID: <?php echo json_encode($_GET['PostID']); ?>, userID: <?php echo json_encode($_SESSION['user_id']); ?> },
+                    data: data,
                     success: function(data) {
                         $('#comments').html(data);
                     }
