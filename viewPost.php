@@ -78,7 +78,7 @@ if (!$post) {
             <h3 id="ratingDisplay">Rating: ?/5.5</h3>
         </label>
         <form method="post" action="commands/addRating.php" id="ratingForm">
-            <input type="range" class="form-range" id="rating" name="rating" value="30" min="10" max="55" step="1" oninput="updateRatingDisplay(this.value)">
+            <input type="range" class="form-range" id="rating" name="rating" value="30" min="0" max="55" step="1" oninput="updateRatingDisplay(this.value)">
             <div class="d-flex justify-content-end mt-3">
                 <button type="submit" class="btn btn-primary">Submit Rating</button>
             </div>
