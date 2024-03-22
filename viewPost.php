@@ -56,14 +56,8 @@ if (!$tags) {
             <div class="col-md-12">
                 <div class="card-body d-flex flex-column">
                     <!-- Post Title -->
-                    <div class="row">
-                        <div class="col text-left">
-                            <h4 class="mb-0">Rated: 5.5/5.5</h4>
-                        </div>
-                        <div class="col text-center">
-                            <h4 class="mb-0"><?php echo $post['PostTitle']; ?></h4>
-                        </div>
-                        <div class="col"></div>
+                    <div class="col text-center">
+                        <h4 class="mb-0"><?php echo $post['PostTitle']; ?></h4>
                     </div>
                     <hr>
                     <!-- Post Image -->
