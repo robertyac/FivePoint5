@@ -16,6 +16,14 @@
 </head>
 
 <body class="bg-secondary">
+    <!-- Display Errors -->
+    <?php
+        // Check if the 'error' parameter is set in the URL
+        if (isset($_GET['error'])) {
+            // Display the error message
+            echo '<script>alert("' . htmlspecialchars($_GET['error']) . '");</script>';
+        }
+    ?>
     <!--Navigation bar-->
     <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
     <!--End of Navigation bar-->

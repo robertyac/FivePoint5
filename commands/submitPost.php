@@ -7,10 +7,10 @@ include '../commands/getPost.php';
 $postTitle = $_POST['postTitle'] ?? null;
 $postDescription = $_POST['postDescription'] ?? null;
 
-// Check if title is provided
-if ($postTitle === null || trim($postTitle) === '') {
+// Check if title is provided and its length is between 1 and 75 characters
+if ($postTitle === null || trim($postTitle) === '' || strlen($postTitle) < 1 || strlen($postTitle) > 75) {
     // Redirect to index.php with error message
-    header("Location: ../index.php?error=Title is required.");
+    header("Location: ../createPost.php?error=Title is required and must be between 1 and 75 characters.");
     exit();
 }
 
@@ -18,12 +18,27 @@ if ($postTitle === null || trim($postTitle) === '') {
 if ((!isset($_FILES['postImage']) || $_FILES['postImage']['tmp_name'] === '') && 
     ($postDescription === null || trim($postDescription) === '')) {
     // Redirect to index.php with error message
-    header("Location: ../index.php?error=Either image or description is required.");
+    header("Location: ../createPost.php?error=Either image or description is required.");
+    exit();
+} else
+
+// If description is provided, check its length is between 1 and 1000 characters
+if ($postDescription !== null && trim($postDescription) !== '' && (strlen($postDescription) < 1 || strlen($postDescription) > 1000)) {
+    // Redirect to createPost.php with error message
+    header("Location: ../createPost.php?error=Description must be between 1 and 1000 characters.");
     exit();
 }
 
 // Handle the file upload
 if (isset($_FILES['postImage']) && $_FILES['postImage']['tmp_name'] != '') {
+    // Check if the file is an image
+    $check = getimagesize($_FILES["postImage"]["tmp_name"]);
+    if($check === false) {
+        // Redirect to index.php with error message
+        header("Location: ../createPost.php?error=File is not an image.");
+        exit();
+    }
+
     // Read the file
     $postImage = fopen($_FILES['postImage']['tmp_name'], 'rb');
 } else {
@@ -51,7 +66,7 @@ try {
 
     if ($result === false) {
         // Redirect to index.php with error message
-        header("Location: ../index.php?error=Database insert failed.");
+        header("Location: ../createPost.php?error=Database insert failed.");
         exit();
     }
 
@@ -61,7 +76,7 @@ try {
 
 } catch (PDOException $e) {
     // Redirect to index.php with error message
-    header("Location: ../index.php?error=Database error: " . urlencode($e->getMessage()));
+    header("Location: ../createPost.php?error=Database error: " . urlencode($e->getMessage()));
     exit();
 }
 
