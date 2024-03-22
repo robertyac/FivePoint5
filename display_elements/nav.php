@@ -1,6 +1,8 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include 'commands/getProfilePic.php';
-session_start();
 $loggedIn = false;
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
