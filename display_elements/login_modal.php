@@ -62,6 +62,10 @@ $siteKey = $config['recaptcha']['site_key'];
                         <label for="passwordInput">Password</label>
                         <input type="password" class="form-control" id="passwordInput" name="passwordInput" placeholder="Password" minlength="6" required>
                     </div>
+                    <div class="form-group mb-3">
+                        <label for="passwordConfirmInput">Confirm Password</label>
+                        <input type="password" class="form-control" id="passwordConfirmInput" name="passwordConfirmInput" placeholder="Confirm Password" minlength="6" required>
+                    </div>
                     <div class="mb-3">
                         <label for="profilePictureInput" class="form-label">(Optional) Select a Profile Image:</label>
                         <input type="file" class="form-control" id="profilePictureInput" accept="image/*" onchange="displayImage(this.files)" name="profilePicInput">
@@ -130,12 +134,25 @@ $siteKey = $config['recaptcha']['site_key'];
         var username = document.getElementById("usernameInput");
         var email = document.getElementById("emailInput");
         var password = document.getElementById("passwordInput");
+        var passwordConfirm = document.getElementById("passwordConfirmInput");
         var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
         var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-        var usernameTooltip, emailTooltip, passwordTooltip;
+        var usernameTooltip, emailTooltip, passwordTooltip, passwordConfirmTooltip;
 
-        if (username.value === "" || email.value === "" || password.value === "" || !email.value.match(emailPattern) || !password.value.match(passwordPattern)) {
+        if (username.value === "" || email.value === "" || password.value === "" || password.value !== passwordConfirm.value || !email.value.match(emailPattern) || !password.value.match(passwordPattern)) {
             event.preventDefault();
+            if (password.value !== passwordConfirm.value) {
+                password.classList.add("is-invalid");
+                passwordConfirm.classList.add("is-invalid");
+                passwordTooltip = new bootstrap.Tooltip(password, {
+                    title: "Passwords do not match",
+                    placement: "right"
+                });
+                passwordConfirmTooltip = new bootstrap.Tooltip(passwordConfirm, {
+                    title: "Passwords do not match",
+                    placement: "right"
+                });
+            }
             if (username.value === "") {
                 username.classList.add("is-invalid");
                 usernameTooltip = new bootstrap.Tooltip(username, {
@@ -184,8 +201,24 @@ $siteKey = $config['recaptcha']['site_key'];
         });
 
         password.addEventListener("input", function() {
-            if (password.value !== "" && password.value.match(passwordPattern) && passwordTooltip) {
-                removeInvalid(password, passwordTooltip);
+            if (password.value !== "" && password.value.match(passwordPattern)) {
+                if (passwordTooltip) {
+                    passwordTooltip.hide();
+                    password.classList.remove("is-invalid");
+                }
+            }
+        });
+
+        passwordConfirm.addEventListener("input", function() {
+            if (password.value === passwordConfirm.value) {
+                if (passwordTooltip) {
+                    passwordTooltip.hide();
+                    password.classList.remove("is-invalid");
+                }
+                if (passwordConfirmTooltip) {
+                    passwordConfirmTooltip.hide();
+                    passwordConfirm.classList.remove("is-invalid");
+                }
             }
         });
     });
