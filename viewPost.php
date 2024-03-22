@@ -61,7 +61,7 @@ if (!$tags) {
                     </div>
                     <hr>
                     <!-- Post Image -->
-                    <div class="col-12 col-md-8 mx-auto">
+                    <div class="col-12 col-md-8 mx-auto d-flex justify-content-center">
                         <img src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid p-3">
                     </div>
                     <hr>
