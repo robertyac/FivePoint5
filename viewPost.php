@@ -77,7 +77,7 @@ if (!$post) {
         <label for="rating" class="mb-3">
             <h3 id="ratingDisplay">Rating: ?/5.5</h3>
         </label>
-        <form method="post" action="commands/addRating.php">
+        <form method="post" action="commands/addRating.php" id="ratingForm">
             <input type="range" class="form-range" id="rating" name="rating" value="30" min="10" max="55" step="1" oninput="updateRatingDisplay(this.value)">
             <div class="d-flex justify-content-end mt-3">
                 <button type="submit" class="btn btn-primary">Submit Rating</button>
@@ -133,37 +133,36 @@ if (!$post) {
             ratingDisplay.textContent = `Rating: ${rating.toFixed(1)}/5.5`;
         }
     </script>
-    <!-- Ajax for comments -->
     <script>
-    $(document).ready(function() {
-        function loadComments() {
-            $.ajax({
-                url: 'commands/getComments.php',
-                type: 'GET',
-                data: { postID: <?php echo json_encode($_GET['PostID']); ?>, userID: <?php echo json_encode($_SESSION['user_id']); ?> },
-                success: function(data) {
-                    $('#comments').html(data);
-                }
-            });
-        }
+        $(document).ready(function() {
+            function loadComments() {
+                $.ajax({
+                    url: 'commands/getComments.php',
+                    type: 'GET',
+                    data: { postID: <?php echo json_encode($_GET['PostID']); ?>, userID: <?php echo json_encode($_SESSION['user_id']); ?> },
+                    success: function(data) {
+                        $('#comments').html(data);
+                    }
+                });
+            }
 
-        loadComments(); // Load comments on page load
+            loadComments(); // Load comments on page load
 
-        setInterval(loadComments, 5000); // Reload comments every 5 seconds
+            setInterval(loadComments, 5000); // Reload comments every 5 seconds
 
-        $('#commentForm').on('submit', function(e) {
-            e.preventDefault();
+            $('#commentForm').on('submit', function(e) {
+                e.preventDefault();
 
-            $.ajax({
-                url: 'commands/submitComment.php',
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function() {
-                    loadComments(); // Reload comments after submitting a new one
-                }
+                $.ajax({
+                    url: 'commands/submitComment.php',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function() {
+                        loadComments(); // Reload comments after submitting a new one
+                    }
+                });
             });
         });
-    });
     </script>
     <script>
         // Comments Char Count Script
@@ -179,6 +178,28 @@ if (!$post) {
             }
     
             charCountDisplay.textContent = `Character Count: ${charCount}/${maxChars}`;
+        });
+    </script>
+    <script>
+        // Checks if user is signed in before submitting a rating
+        $(document).ready(function() {
+            $('#ratingForm').on('submit', function(e) {
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                    e.preventDefault();
+                    alert('Sign in to submit a rating.');
+                <?php endif; ?>
+            });
+        });
+    </script>
+    <script>
+        // Checks if user is signed in before submitting a comment
+        $(document).ready(function() {
+            $('#commentForm').on('submit', function(e) {
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                    e.preventDefault();
+                    alert('Sign in to submit a comment.');
+                <?php endif; ?>
+            });
         });
     </script>
 </body>
