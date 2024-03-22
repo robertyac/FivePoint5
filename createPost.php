@@ -201,6 +201,17 @@
             titleCharCountDisplay.textContent = `Character Count: ${charCount}/${maxTitleChars}`;
         });
     </script>
+    <script>
+        // Checks if user is signed in before submitting a post
+        $(document).ready(function() {
+            $('form[action="commands/submitPost.php"]').on('submit', function(e) {
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                    e.preventDefault();
+                    alert('Sign in to create a post.');
+                <?php endif; ?>
+            });
+        });
+    </script>
 
 </body>
 
