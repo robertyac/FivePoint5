@@ -1,5 +1,4 @@
 <?php
-// Get the database configuration
 $config = require 'config.php';
 
 $host = $config['database']['host'];
@@ -13,37 +12,36 @@ $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $pdo = new PDO($dsn, $user, $pass);
 
 $postID = $_GET['postID'];
-$userID = $_GET['userID'];
 
-$comments = getComments($pdo, $postID, $userID);
+$comments = getComments($pdo, $postID);
 
-// Loop through the comments
 foreach ($comments as $comment) {
-    // Check if the Username and Content keys exist in the $comment array
-    if (isset($comment['Username']) && isset($comment['Content'])) {
-        // Display a card for each comment
+    if (isset($comment['Username']) && isset($comment['Content']) && isset($comment['CreatedAt'])) {
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $comment['CreatedAt']);
+        $formattedDate = $date->format('F j, Y, g:i A');
+
         echo '
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">' . htmlspecialchars($comment['Username']) . '</h5>
-                <p class="card-text">' . htmlspecialchars($comment['Content']) . '</p>
-            </div>
+            <h5 class="card-title">' . htmlspecialchars($comment['Username']) . ' <span class="badge text-dark float-end">' . htmlspecialchars($formattedDate) . '</span></h5>
+            <p class="card-text">' . htmlspecialchars($comment['Content']) . '</p>
+        </div>
         </div>
         ';
     }
 }
 
-function getComments($pdo, $postID, $userID) {
+function getComments($pdo, $postID)
+{
     try {
-        // SQL query to select the comments and the username of the user who made the comment
-        $sql = "SELECT Comment.*, User.Username FROM Comment INNER JOIN User ON Comment.UserID = User.UserID WHERE PostID = ? AND Comment.UserID = ?";
+        // SQL query to select the comments, the username of the user who made the comment, and the timestamp
+        $sql = "SELECT Comment.*, User.Username, Comment.CreatedAt FROM Comment INNER JOIN User ON Comment.UserID = User.UserID WHERE PostID = ?";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$postID, $userID]);
+        $stmt->execute([$postID]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         die("PDO error: " . $e->getMessage());
     }
 }
-?>
