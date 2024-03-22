@@ -192,12 +192,16 @@ if (!$post) {
         });
     </script>
     <script>
-        // Checks if user is signed in before submitting a comment
+        // Checks if user is signed in and comment is not empty before submitting a comment
         $(document).ready(function() {
             $('#commentForm').on('submit', function(e) {
+                var comment = $.trim($('#comment').val());
                 <?php if (!isset($_SESSION['user_id'])): ?>
                     e.preventDefault();
                     alert('Sign in to submit a comment.');
+                <?php elseif (empty($_POST['comment'])): ?>
+                    e.preventDefault();
+                    alert('Comment cannot be empty.');
                 <?php endif; ?>
             });
         });
