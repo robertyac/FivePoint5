@@ -18,6 +18,9 @@
 <body class="bg-secondary">
     <!-- Display Errors -->
     <?php
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         // Check if the 'error' parameter is set in the URL
         if (isset($_GET['error'])) {
             // Display the error message

@@ -1,6 +1,8 @@
 <!-- Styling for the slider -->
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $rating = $post['AverageRating'];
 $postId = $post['PostID'];
 if ($rating > 2.75) {

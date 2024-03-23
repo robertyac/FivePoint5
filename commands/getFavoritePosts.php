@@ -1,5 +1,7 @@
 <?php
-session_start(); // Start the session
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $config = require 'config.php';
 $host = $config['database']['host'];
@@ -38,7 +40,7 @@ try {
     $stmt->execute(['userId' => $userId]);
     $posts = $stmt->fetchAll();
     if (!$posts) {
-        echo "<h5>Sorry, no posts found with your favourite tags. Go add some more tags to your favourites!</h5>";
+        echo "<h5 style='text-align: left;'>Sorry, no posts found with your favourite tags. <br> Go add some more tags to your favourites!<br><br></h5>";
         return []; // Return an empty array if there are no posts
     }
     // return the posts array used in index.php 
