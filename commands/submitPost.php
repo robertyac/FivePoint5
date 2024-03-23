@@ -54,19 +54,20 @@ if (isset($_FILES['postImage']) && $_FILES['postImage']['tmp_name'] != '') {
 
 try {
     if ($postImage !== null) {
-        $sql = "INSERT INTO Post (PostTitle, PostImage, Description) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO Post (UserID, PostTitle, PostImage, Description) VALUES (?, ?, ?, ?)";
     } else {
-        $sql = "INSERT INTO Post (PostTitle, Description) VALUES (?, ?)";
+        $sql = "INSERT INTO Post (UserID, PostTitle, Description) VALUES (?, ?, ?)";
     }
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(1, $postTitle);
+    $stmt->bindParam(1, $userID);
+    $stmt->bindParam(2, $postTitle);
 
     if ($postImage !== null) {
-        $stmt->bindParam(2, $postImage, PDO::PARAM_LOB);
-        $stmt->bindParam(3, $postDescription);
+        $stmt->bindParam(3, $postImage, PDO::PARAM_LOB);
+        $stmt->bindParam(4, $postDescription);
     } else {
-        $stmt->bindParam(2, $postDescription);
+        $stmt->bindParam(3, $postDescription);
     }
 
     $result = $stmt->execute();

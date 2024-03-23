@@ -1,6 +1,5 @@
 <?php
-session_start(); // Start the session
-
+session_start(); 
 function getPostByID($postID) {
     $config = require 'config.php';
 
@@ -15,12 +14,12 @@ function getPostByID($postID) {
     try {
         $pdo = new PDO($dsn, $user, $pass);
 
-        $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, GROUP_CONCAT(Tag.Name) AS Tags
-                FROM Post
-                LEFT JOIN PostTags ON Post.PostID = PostTags.PostID
-                LEFT JOIN Tag ON PostTags.TagID = Tag.TagID
-                WHERE Post.PostID = ?
-                GROUP BY Post.PostID";
+        $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, Post.UserID, GROUP_CONCAT(Tag.Name) AS Tags
+            FROM Post
+            LEFT JOIN PostTags ON Post.PostID = PostTags.PostID
+            LEFT JOIN Tag ON PostTags.TagID = Tag.TagID
+            WHERE Post.PostID = ?
+            GROUP BY Post.PostID";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$postID]);
 

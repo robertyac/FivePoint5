@@ -18,6 +18,7 @@ $postID = $_GET['PostID'];
 // Fetch the post details using getPostByID.php
 $post = getPostByID($postID);
 
+
 if (!$post) {
     die('Post not found');
 }
@@ -65,8 +66,8 @@ if (!$averageRating) {
                     <!-- Post Title -->
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0"><?php echo $post['PostTitle']; ?></h4>
-                        <!-- Delete button for admins -->
-                        <?php if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin']) : ?>
+                        <!-- Delete button for admins and post author -->
+                        <?php if ((isset($_SESSION['user_id']) && $_SESSION['user_id'] == $post['UserID']) || (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'])) : ?>
                             <form action="commands/deletePost.php" method="post">
                                 <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
                                 <button type="submit" class="btn btn-danger">Delete Post</button>
