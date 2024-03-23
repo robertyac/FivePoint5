@@ -14,19 +14,27 @@ $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 $pdo = new PDO($dsn, $user, $pass);
 
-if (!isset($_POST['CommentID'])) {
-    die('CommentID is not set');
-}
-
 $commentID = $_POST['CommentID'];
 
-$query = "DELETE FROM Comment WHERE CommentID = ?";
+// Fetch the comment from the database
+$query = "SELECT * FROM Comment WHERE CommentID = ?";
 $stmt = $pdo->prepare($query);
 $stmt->bindValue(1, $commentID, PDO::PARAM_INT);
+$stmt->execute();
+$comment = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($stmt->execute()) {
-    header('Location: ../viewPost.php?PostID=' . $_POST['PostID']);
+// Check if the comment exists and if the user is the author or an admin
+if ($comment && ($_SESSION['Username'] == $comment['Username'] || $_SESSION['IsAdmin'])) {
+    $query = "DELETE FROM Comment WHERE CommentID = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindValue(1, $commentID, PDO::PARAM_INT);
+
+    if ($stmt->execute()) {
+        header('Location: ../viewPost.php?PostID=' . $_POST['PostID']);
+    } else {
+        die('Failed to delete comment');
+    }
 } else {
-    die('Failed to delete comment');
+    die('You do not have permission to delete this comment');
 }
 ?>
