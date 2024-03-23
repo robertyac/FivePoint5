@@ -29,7 +29,7 @@ try {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$postID]);
 
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    header('Location: ../index.php');
     exit;
 } catch (PDOException $e) {
     die("PDO error: " . $e->getMessage());

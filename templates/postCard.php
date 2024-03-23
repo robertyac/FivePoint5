@@ -46,7 +46,7 @@ if ($rating > 2.75) {
                     <div class="d-flex justify-content-center">
                         <form action="commands/deletePost.php" method="post">
                             <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger">Delete Post</button>
                         </form>
                     </div>
                 <?php endif; ?>
@@ -83,8 +83,10 @@ if ($rating > 2.75) {
                 <p class="text-light">
                     <?php
                     if (isset($post['Description'])) {
-                        $words = explode(' ', $post['Description']);
-                        echo implode(' ', array_slice($words, 0, 20)); // show first 20 words of the description if no image and description exists
+                        echo substr($post['Description'], 0, 50); // first 50 characters of description
+                        if (strlen($post['Description']) > 50) {
+                            echo '...'; 
+                        }
                     }
                     ?>
                 </p>

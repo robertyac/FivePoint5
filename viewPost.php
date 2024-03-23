@@ -63,8 +63,15 @@ if (!$averageRating) {
             <div class="col-md-12">
                 <div class="card-body d-flex flex-column">
                     <!-- Post Title -->
-                    <div class="col text-center">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0"><?php echo $post['PostTitle']; ?></h4>
+                        <!-- Delete button for admins -->
+                        <?php if ($_SESSION['IsAdmin']) : ?>
+                            <form action="commands/deletePost.php" method="post">
+                                <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
+                                <button type="submit" class="btn btn-danger">Delete Post</button>
+                            </form>
+                        <?php endif; ?>
                     </div>
                     <hr>
                     <!-- Post Image -->
