@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-if (!$_SESSION['IsAdmin']) {
-    die("Unauthorized access");
-}
-
 if (!isset($_POST['PostID'])) {
     die("No PostID provided");
 }
@@ -24,6 +20,17 @@ try {
 
     // ensures it is a number and not a string or SQL injection
     $postID = filter_var($_POST['PostID'], FILTER_SANITIZE_NUMBER_INT);
+
+    // Fetch the post from the database
+    $sql = "SELECT UserID FROM Post WHERE PostID = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$postID]);
+    $post = $stmt->fetch();
+
+    // Check if the user is an admin or the author of the post
+    if (!$_SESSION['IsAdmin'] && $_SESSION['user_id'] != $post['UserID']) {
+        die("Unauthorized access");
+    }
 
     $sql = "DELETE FROM Post WHERE PostID = ?";
     $stmt = $pdo->prepare($sql);
