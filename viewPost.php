@@ -66,7 +66,7 @@ if (!$averageRating) {
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0"><?php echo $post['PostTitle']; ?></h4>
                         <!-- Delete button for admins -->
-                        <?php if ($_SESSION['IsAdmin']) : ?>
+                        <?php if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin']) : ?>
                             <form action="commands/deletePost.php" method="post">
                                 <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
                                 <button type="submit" class="btn btn-danger">Delete Post</button>

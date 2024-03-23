@@ -1,4 +1,5 @@
 <?php
+session_start();
 $config = require 'config.php';
 
 $host = $config['database']['host'];
@@ -23,13 +24,23 @@ foreach ($comments as $comment) {
         <div class="card">
             <div class="card-body">
             <h5 class="card-title">' . htmlspecialchars($comment['Username']) . ' <small class="badge bg-secondary text-white float-end text-wrap" style="max-width: 200px; font-size: 0.5rem;">' . htmlspecialchars($formattedDate) . '</small></h5>
-            <p class="card-text">' . htmlspecialchars($comment['Content']) . '</p>
-        </div>
+            <p class="card-text">' . htmlspecialchars($comment['Content']) . '</p>';
+
+        if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin']) {
+            echo '
+            <form action="commands/deleteComment.php" method="post">
+                <input type="hidden" name="CommentID" value="' . $comment['CommentID'] . '">
+                <input type="hidden" name="PostID" value="' . $postID . '">
+                <button type="submit" class="btn btn-danger">Delete Comment</button>
+            </form>';
+        }
+
+        echo '
+            </div>
         </div>
         ';
     }
 }
-
 function getComments($pdo, $postID)
 {
     try {
