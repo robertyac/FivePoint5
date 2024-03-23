@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+session_start();
 
 // Include getPostByID.php, getTags.php, and getAverageRating.php
 include 'commands/getPostByID.php';
@@ -64,15 +62,26 @@ if (!$averageRating) {
             <div class="col-md-12">
                 <div class="card-body d-flex flex-column">
                     <!-- Post Title -->
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between">
                         <h4 class="mb-0"><?php echo $post['PostTitle']; ?></h4>
-                        <!-- Delete button for admins and post author -->
-                        <?php if ((isset($_SESSION['user_id']) && $_SESSION['user_id'] == $post['UserID']) || (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'])) : ?>
-                            <form action="commands/deletePost.php" method="post">
-                                <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
-                                <button type="submit" class="btn btn-danger">Delete Post</button>
-                            </form>
-                        <?php endif; ?>
+                        <div class="d-flex">
+                            <!-- Edit button for post authors -->
+                            <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $post['UserID']) : ?>
+                                <div style="margin-right: 5px;">
+                                    <form action="commands/editPost.php" method="get">
+                                        <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
+                                        <button type="submit" class="btn btn-warning">Edit Post</button>
+                                    </form>
+                                </div>
+                            <?php endif; ?>
+                            <!-- Delete button for admins and post author -->
+                            <?php if ((isset($_SESSION['user_id']) && $_SESSION['user_id'] == $post['UserID']) || (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'])) : ?>
+                                <form action="commands/deletePost.php" method="post">
+                                    <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
+                                    <button type="submit" class="btn btn-danger">Delete Post</button>
+                                </form>
+                            <?php endif; ?>
+                        </div>
                     </div>
                     <hr>
                     <!-- Post Image -->
@@ -159,6 +168,7 @@ if (!$averageRating) {
         });
     </script>
     <script>
+        // Update the rating display when the slider is moved
         function updateRatingDisplay(value) {
             const ratingDisplay = document.getElementById('ratingDisplay');
             const rating = value / 10;
@@ -166,6 +176,7 @@ if (!$averageRating) {
         }
     </script>
     <script>
+        // Load comments using Ajax
         $(document).ready(function() {
             function loadComments() {
                 var data = {
@@ -187,7 +198,8 @@ if (!$averageRating) {
 
             loadComments(); // Load comments on page load
 
-            setInterval(loadComments, 5000); // Reload comments every 5 seconds
+            // This will reload comments every 5 seconds. User will not have to refresh the page to see new comments
+            setInterval(loadComments, 5000);
 
             $('#commentForm').on('submit', function(e) {
                 e.preventDefault();
@@ -231,6 +243,7 @@ if (!$averageRating) {
         });
     </script>
     <script>
+        // Checks if user is signed in before submitting a comment
         $(document).ready(function() {
             $('#commentForm').on('submit', function(e) {
                 var comment = $.trim($('#comment').val());
