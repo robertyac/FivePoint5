@@ -88,7 +88,7 @@ $recent_tags = $_SESSION['recent_tags'] ?? [];
         <div class="flex-grow-1 mx-2 d-none d-sm-block">
             <form class="d-flex align-items-center" action="index.php#allPosts" method="get" role="search">
                 <input class="form-control me-2" type="search" name="search" placeholder="Search FivePoint5"
-                       aria-label="Search">
+                       aria-label="Search" <?php echo (isset($_GET['search']))? 'value='.$_GET['search'] :''; ?>>
             </form>
         </div>
 

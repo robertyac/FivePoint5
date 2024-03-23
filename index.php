@@ -15,7 +15,9 @@
 </head>
 
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }
@@ -23,6 +25,9 @@ if (isset($_SESSION['alert'])) {
     $alert = $_SESSION['alert'];
     echo "<script type='text/javascript'>alert('$alert');</script>";
     unset($_SESSION['alert']);
+}
+if (isset($_GET['search']) && $_GET['search'] == "") {
+    unset($_GET['search']);
 }
 ?>
 
@@ -34,7 +39,7 @@ if (isset($_SESSION['alert'])) {
     <!--End of Navigation bar-->
 
     <!--Briefing Section -->
-    <?php if (isset($user_id)) : ?>
+    <?php if (isset($user_id) && !isset($_GET['search'])) : ?>
         <section class="text-center text-lg-start">
             <div class="container p-2">
                 <div class="row align-items-center d-flex justify-content-between">
@@ -97,7 +102,7 @@ if (isset($_SESSION['alert'])) {
         <div class="container px-4">
             <div class="d-flex align-items-center justify-content-between">
                 <h1>5<span class="text-primary">.</span>5 </h1>
-                <p class="lead my-0">All posts</p>
+                <p class="lead my-0"><?php echo (isset($_GET['search']))? "Search results" :'All posts'; ?></p>
             </div>
             <hr />
         </div>
