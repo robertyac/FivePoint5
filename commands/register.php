@@ -40,7 +40,6 @@ $hash = hash('sha256', $password);
 
 $check = testIfUsernameOrEmailIsTaken($username, $email);
 if ($check != "") {
-    echo '<script>console.log("' . $check . '")</script>';
     echo $check;
     session_start();
     $_SESSION['alert'] = $check;
@@ -50,7 +49,6 @@ if ($check != "") {
         $imagePath = $_FILES['profilePicInput']['tmp_name'];
         echo 'pic found ' . $imagePath;
     } else {
-        echo "<script>console.log('no pic found');</script>";
         $imagePath = "../img/defaultProfilePic.png";
     }
     $profilePicture = file_get_contents($imagePath);

@@ -54,8 +54,6 @@ if (!$averageRating) {
     <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
     <!-- Login modal -->
     <?php include 'display_elements/login_modal.php'; ?>
-    <!-- Close button -->
-    <a href="index.php" class="btn-close m-3 fs-2 position-absolute" style="top: 60px; left: -5px;" aria-label="Close"></a>
 
     <!-- Post Container -->
     <div class="container card mt-5 mx-auto w-75">

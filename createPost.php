@@ -23,9 +23,6 @@
     <!-- Login modal -->
     <?php include 'display_elements/login_modal.php'; ?>
 
-    <!-- Close button -->
-    <a href="index.php" class="btn-close m-3 fs-2 position-absolute" style="top: 60px; left: -5px;" aria-label="Close"></a>
-
     <!-- Post Form Container -->
     <div class="container mt-3">
         <div class="row">
