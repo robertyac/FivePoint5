@@ -68,7 +68,7 @@ if (!$averageRating) {
                             <!-- Edit button for post authors -->
                             <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $post['UserID']) : ?>
                                 <div style="margin-right: 5px;">
-                                    <form action="commands/editPost.php" method="get">
+                                    <form action="editPost.php" method="get">
                                         <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
                                         <button type="submit" class="btn btn-warning">Edit Post</button>
                                     </form>
