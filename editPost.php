@@ -48,12 +48,13 @@ if (!$averageRating) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="css/createPost.css">
-    <!--Navigation bar-->
-    <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
-    <!--End of Navigation bar-->
 </head>
 
 <body class="bg-secondary">
+    <!--Navigation bar-->
+    <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
+    <!-- Login modal -->
+    <?php include 'display_elements/login_modal.php'; ?>
     <!-- Close button -->
     <a href="index.php" class="btn-close m-3 fs-2 position-absolute" style="top: 60px; left: -5px;" aria-label="Close"></a>
 
