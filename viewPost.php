@@ -98,7 +98,7 @@ if (!$averageRating) {
                         </span>
                     </div>
                     <hr>
-                    <h4 class="text-center">Rated: <?php echo $averageRating; ?>/5.5</h4>
+                    <h4 class="text-center">This post is rated: <?php echo $averageRating; ?>/5.5</h4>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@ if (!$averageRating) {
     <!-- Rating Slider -->
     <div class="container card p-3 mx-auto mt-4 mb-0 w-75">
         <label for="rating" class="mb-3">
-            <h3 id="ratingDisplay">Rating: ?/5.5</h3>
+            <h3 id="ratingDisplay">Your Rating: ?/5.5</h3>
         </label>
         <form method="post" action="commands/addRating.php" id="ratingForm">
             <input type="range" class="form-range" id="rating" name="rating" value="30" min="0" max="55" step="1" oninput="updateRatingDisplay(this.value)">
