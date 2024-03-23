@@ -46,6 +46,8 @@ if (!$averageRating) {
     <title>View Post</title>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/createPost.css">
     <!--Navigation bar-->
     <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
     <!--End of Navigation bar-->
@@ -89,10 +91,13 @@ if (!$averageRating) {
                         <h5>Description</h5>
                         <textarea class="form-control" name="Description" rows="5" required><?php echo $post['Description']; ?></textarea>
                         <hr>
-                        <!-- Tags -->
-                        <h5>Tags</h5>
-                        <input type="text" class="form-control" name="Tags" value="<?php echo implode(',', $tags); ?>" required>
-                        <hr>
+                        <!-- Post Tags -->
+                        <div class="mb-3">
+                                <label for="postTags" class="form-label">Tags:</label>
+                                <input type="text" class="form-control" id="postTags" name="postTags" placeholder="Enter a tag">
+                                <div id="tagsContainer" class="mt-2"></div>
+                            </div>
+                            <input type="hidden" id="hiddenTags" name="hiddenTags">
                         <!-- Save button for post authors -->
                         <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $post['UserID']) : ?>
                             <div class="d-flex justify-content-end">
@@ -142,6 +147,43 @@ if (!$averageRating) {
                 $(this).parent().prev().prev('input[name="RemoveImage"]').val('1');
                 $(this).remove(); // This line removes the "Change Image" button
             });
+        });
+    </script>
+    <script>
+        // Array to store tags
+        var tags = [];
+
+        //handle tag input and display as Bootstrap 5 chips
+        document.getElementById('postTags').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ',') {
+                event.preventDefault();
+                const tag = this.value.trim();
+                this.value = '';
+                if (tag.length > 0 && !$("#tagsContainer .badge:contains('" + tag + "')").length) {
+                    // Adding tag to array
+                    tags.push(tag);
+
+                    const chip = document.createElement('span');
+                    chip.textContent = tag;
+                    chip.classList.add('badge', 'bg-primary', 'badge-pill', 'me-2','p-3','mb-3');
+                    chip.addEventListener('click', function() {
+                        // Remove tag from array
+                        const index = tags.indexOf(tag);
+                        if (index > -1) {
+                            tags.splice(index, 1);
+                        }
+                        this.remove();
+                    });
+                    document.getElementById('tagsContainer').appendChild(chip);
+                }
+            }
+        });
+    </script>
+    <script>
+        // Sends tags array to hidden input field before form submission
+        $('form[action="commands/submitPost.php"]').on('submit', function() {
+            // Update the value of the hidden input field with the tags array
+            document.getElementById('hiddenTags').value = tags.join(',');
         });
     </script>
 </body>
