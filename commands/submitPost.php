@@ -78,6 +78,39 @@ try {
         exit();
     }
 
+    // Get the tags from the $_POST array
+    $postTags = $_POST['hiddenTags'] ?? null;
+
+    // Split the tags string into an array of individual tags
+    $tags = array_unique(array_filter(explode(',', $postTags)));
+
+    // Get the ID of the last inserted post
+    $postID = $pdo->lastInsertId();
+
+    foreach ($tags as $tag) {
+        // Trim the tag to remove any leading or trailing whitespace
+        $tag = trim($tag);
+
+        // Check if the tag already exists in the database
+        $sql = "SELECT TagID FROM Tag WHERE Name = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$tag]);
+        $tagID = $stmt->fetchColumn();
+
+        // If the tag doesn't exist, insert it
+        if ($tagID === false) {
+            $sql = "INSERT INTO Tag (Name) VALUES (?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$tag]);
+            $tagID = $pdo->lastInsertId();
+        }
+
+        // Connect the post to its tag
+        $sql = "INSERT INTO PostTags (PostID, TagID) VALUES (?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$postID, $tagID]);
+    }
+
     // Redirect to index.php with success message
     header("Location: ../index.php?success=New post created successfully.");
     exit();

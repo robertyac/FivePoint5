@@ -59,6 +59,7 @@
                                 <input type="text" class="form-control" id="postTags" name="postTags" placeholder="Enter a tag">
                                 <div id="tagsContainer" class="mt-2"></div>
                             </div>
+                            <input type="hidden" id="hiddenTags" name="hiddenTags">
 
                             <!-- Post Description -->
                             <div class="mb-3">
@@ -174,6 +175,13 @@
                     document.getElementById('tagsContainer').appendChild(chip);
                 }
             }
+        });
+    </script>
+    <script>
+        // Sends tags array to hidden input field before form submission
+        $('form[action="commands/submitPost.php"]').on('submit', function() {
+            // Update the value of the hidden input field with the tags array
+            document.getElementById('hiddenTags').value = tags.join(',');
         });
     </script>
     <script>
