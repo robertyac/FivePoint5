@@ -47,12 +47,13 @@ if (!$averageRating) {
     <title>View Post</title>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!--Navigation bar-->
-    <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
-    <!--End of Navigation bar-->
 </head>
 
 <body class="bg-secondary">
+    <!--Navigation bar-->
+    <div id="nav" style="height: 100px;"><?php include 'display_elements/nav.php'; ?></div>
+    <!-- Login modal -->
+    <?php include 'display_elements/login_modal.php'; ?>
 
     <!-- Post Container -->
     <div class="container card mt-5 mx-auto w-75">
@@ -66,7 +67,7 @@ if (!$averageRating) {
                             <!-- Edit button for post authors -->
                             <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $post['UserID']) : ?>
                                 <div style="margin-right: 5px;">
-                                    <form action="commands/editPost.php" method="get">
+                                    <form action="editPost.php" method="get">
                                         <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
                                         <button type="submit" class="btn btn-warning">Edit Post</button>
                                     </form>
