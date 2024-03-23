@@ -1,5 +1,6 @@
 <!-- Styling for the slider -->
 <?php
+session_start();
 $rating = $post['AverageRating'];
 $postId = $post['PostID'];
 if ($rating > 2.75) {
@@ -40,11 +41,20 @@ if ($rating > 2.75) {
                         <span class="badge bg-light text-dark m-1 rounded-pill"><?php echo $tag; ?></span>
                     <?php endforeach; ?>
                 </span>
+                <!-- Delete button for admins -->
+                <?php if ($_SESSION['IsAdmin']) : ?>
+                    <div class="d-flex justify-content-center">
+                        <form action="commands/deletePost.php" method="post">
+                            <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                <?php endif; ?>
                 <!-- Time -->
                 <span class="badge">
                     <?php
-                        $currentDateTime = new DateTime('', new DateTimeZone('America/Vancouver'));
-                        $postDateTime = new DateTime($post['PostDateTime'], new DateTimeZone('America/Vancouver'));                        
+                    $currentDateTime = new DateTime('', new DateTimeZone('America/Vancouver'));
+                    $postDateTime = new DateTime($post['PostDateTime'], new DateTimeZone('America/Vancouver'));
                     // Calculate time difference
                     $interval = $currentDateTime->diff($postDateTime);
                     if ($interval->y > 0) {

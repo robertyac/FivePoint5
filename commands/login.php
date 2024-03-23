@@ -52,6 +52,7 @@ if ($result->num_rows == 0) {
         session_start();
         $_SESSION['user'] = $username;
         $_SESSION['user_id'] = $row['UserID'];
+        $_SESSION['IsAdmin'] = $row['IsAdmin'];
         header('Location: ../index.php');
     } else {
         echo "Incorrect password";;
