@@ -49,6 +49,7 @@
                             <div class="mb-3">
                                 <label for="postTags" class="form-label">Tags:</label>
                                 <input type="text" class="form-control" id="postTags" name="postTags" placeholder="Enter a tag">
+                                <div id="tagsCharCount"></div>
                                 <div id="tagsContainer" class="mt-2"></div>
                             </div>
                             <input type="hidden" id="hiddenTags" name="hiddenTags">
@@ -207,6 +208,23 @@
             }
 
             titleCharCountDisplay.textContent = `Character Count: ${charCount}/${maxTitleChars}`;
+        });
+    </script>
+    <script>
+        // Tags Char Count Script
+        const tagsInput = document.getElementById('postTags');
+        const tagsCharCountDisplay = document.getElementById('tagsCharCount');
+        const maxTagsChars = 12;
+
+        tagsInput.addEventListener('input', function () {
+            let charCount = this.value.length;
+
+            if (charCount > maxTagsChars) {
+                this.value = this.value.slice(0, maxTagsChars);
+                charCount = maxTagsChars;
+            }
+
+            tagsCharCountDisplay.textContent = `Character Count: ${charCount}/${maxTagsChars}`;
         });
     </script>
     <script>
