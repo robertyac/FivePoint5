@@ -115,12 +115,21 @@ if (!$averageRating) {
     <!-- End of Post Container -->
 
     <!-- Rating Slider -->
+    <?php
+    require 'commands/getUserRating.php';
+
+    $postID = $_GET['PostID'];
+    $userID = $_SESSION['user_id'];
+
+    $rating = getUserRating($postID, $userID);
+    $ratingValue = $rating !== '?' ? $rating * 10 : 27.5;
+    ?>
     <div class="container card p-3 mx-auto mt-4 mb-0 w-75">
         <label for="rating" class="mb-3">
-            <h3 id="ratingDisplay">Your Rating: ?/5.5</h3>
+            <h3 id="ratingDisplay">Your Rating: <?php echo $rating; ?>/5.5</h3>
         </label>
         <form method="post" action="commands/addRating.php" id="ratingForm">
-            <input type="range" class="form-range" id="rating" name="rating" value="30" min="0" max="55" step="1" oninput="updateRatingDisplay(this.value)">
+            <input type="range" class="form-range" id="rating" name="rating" value="<?php echo $ratingValue; ?>" min="0" max="55" step="1" oninput="updateRatingDisplay(this.value)">
             <div class="d-flex justify-content-end mt-3">
                 <button type="submit" class="btn btn-primary">Submit Rating</button>
             </div>
