@@ -12,10 +12,8 @@ function getRatedPosts($username) {
         session_start();
     }
     if (!isset($_SESSION['user_id'])) {
-        include 'commands/prepUserID.php';
-        prepUserID($username);
+        prepUserId($username);
     }
-
     try {
         $pdo = new PDO($dsn, $user, $pass);
 

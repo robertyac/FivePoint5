@@ -25,7 +25,7 @@ function prepUserId($username) {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        $_SESSION['user_id'] = $IDs[0]['UserId'];
+        $_SESSION['user_id'] = $IDs[0]['UserID'];
 
 
     } catch (PDOException $e) {

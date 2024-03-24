@@ -44,7 +44,7 @@ if ($rating > 2.75) {
                     <?php endforeach; ?>
                 </span>
                 <!-- Delete button for admins -->
-                <?php if ($_SESSION['IsAdmin']) : ?>
+                <?php if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin']) : ?>
                     <div class="d-flex justify-content-center">
                         <form action="commands/deletePost.php" method="post">
                             <input type="hidden" name="PostID" value="<?php echo $post['PostID']; ?>">
