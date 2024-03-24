@@ -20,7 +20,16 @@ try {
     $postTitle = $_POST['PostTitle'] ?? null;
     $postDescription = $_POST['Description'] ?? null;
     $postImage = $_FILES['PostImage']['tmp_name'] ?? null;
-    $postImageContent = $postImage !== null ? file_get_contents($postImage) : null;
+    $existingImagePath = $_POST['existingImagePath'] ?? null;
+    $postImageContent = null;
+
+    if ($postImage && file_exists($postImage)) {
+        // If a new file was uploaded, read its contents
+        $postImageContent = file_get_contents($postImage);
+    } elseif ($existingImagePath && file_exists($existingImagePath)) {
+        // If no new file was uploaded but an existing image path is provided, read its contents
+        $postImageContent = file_get_contents($existingImagePath);
+    }
 
     // Check if post ID, post title and description are provided
     if ($postID === null || $postTitle === null || $postDescription === null) {
@@ -66,6 +75,30 @@ try {
         // Redirect to index.php with error message
         header("Location: ../createPost.php?error=Database update failed.");
         exit();
+    }
+
+    // Retrieve the new set of tags from the form submission
+    $postTags = $_POST['hiddenTags'] ?? null;
+
+    // Convert the tags string into an array
+    $postTags = explode(',', $postTags);
+
+    // Delete the existing tags associated with the post
+    $stmt = $pdo->prepare("DELETE FROM PostTags WHERE PostID = ?");
+    $stmt->execute([$postID]);
+
+    // Prepare the SQL INSERT statement for Tag table
+    $stmtTag = $pdo->prepare("INSERT INTO Tag (Name) VALUES (?) ON DUPLICATE KEY UPDATE TagID=LAST_INSERT_ID(TagID)");
+
+    // Prepare the SQL INSERT statement for PostTags table
+    $stmtPostTag = $pdo->prepare("INSERT INTO PostTags (PostID, TagID) VALUES (?, LAST_INSERT_ID())");
+
+    foreach ($postTags as $tag) {
+        // Insert the tag into the Tag table and get its ID
+        $stmtTag->execute([$tag]);
+
+        // Insert the tag ID and the post ID into the PostTags table
+        $stmtPostTag->execute([$postID]);
     }
 
     // Redirect to index.php with success message
