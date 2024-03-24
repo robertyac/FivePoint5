@@ -139,13 +139,11 @@ $recent_tags = $_SESSION['recent_tags'] ?? [];
     </nav>
 <?php
 $current_page = substr($_SERVER['PHP_SELF'], -10, 10);
-echo "<script>console.log('get: " . json_encode(!isset($_GET['search'])) . "')</script>";
-echo "<script>console.log('home: " . $current_page != '/index.php' || isset($_GET['search']) . "')</script>";
-if ($current_page != '/index.php' || isset($_GET['search'])) { ?>
+if ($current_page !== '/index.php' || isset($_GET['search'])) { ?>
     <!-- go back home button -->
     <a style="position: absolute; top: 4em; left: 1em; color: white; text-decoration: none;
                 filter: drop-shadow(0px 0px 4px #000);" href="index.php">
         <img src="img/back-arrow.svg" height="70px">
-        <span class="text-center p-1 h5">return home</span> <!-- thoughts? -->
+        <span class="text-center p-1 h5">return home</span>
     </a>
 <?php } ?>

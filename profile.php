@@ -6,6 +6,8 @@ if (!isset($_SESSION['user'])) {
     header('Location: index.php');
 }
 include 'commands/getEmail.php';
+include 'commands/getUsersPosts.php';
+include 'commands/getRatedPosts.php';
 ?>
 
 <!DOCTYPE html>
@@ -85,97 +87,60 @@ include 'commands/getEmail.php';
                                        value="<?php echo getEmail($_SESSION['user']) ?>"
                                        aria-label="Text" name="newEmail">
                             </form>
+<!--                            <form id="tag-form">-->
+                                <h3>Favourite Tags</h3>
+                                <ul id="tag-list" class="list-group-flush"></ul>
+                                <input class="ms-4" type="text" id="new-term" placeholder="Add a new tag"><br>
+<!--                                <button class="btn btn-success ms-4 mt-2"  type="submit">Update tags</button>-->
+<!--                            </form>-->
                         </div>
                     </div>
                     <div class="tabcontent card-body mx-auto" style="display: none" id="posts">
                         <div class="container">
                             <h1>Your posts:</h1>
                         </div>
-                        <!-- Card -->
-                        <a href="/post/viewPost.html" class="text-decoration-none">
-                            <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                                <div class="card-body text-center">
-                                    <div class="d-flex justify-content-between">
-                                            <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                                HTML,
-                                                UBC</span>
-                                        <span class="text-body h6">3 mins ago</span>
-                                    </div>
-                                    <!-- post title  -->
-                                    <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                    <!-- post image -->
-                                    <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
-                                    <!-- slider rating -->
-                                    <a>
-                                        <div class="text-start">
-                                            <label for="rating">
-                                                <h4>Rating:</h4>
-                                            </label>
-                                            <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                            <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                            <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                                   max="5.5" step="0.01" disabled>
-                                        </div>
-                                    </a>
-                                    <!-- End slider rating -->
-                                </div>
-                            </div>
-                        </a>
-                        <!-- End Card -->
-                        <!-- Card -->
-                        <a href="/post/viewPost.html" class="text-decoration-none">
-                            <div class="card bg-secondary text-light mb-3 p-2 zoom">
-                                <div class="card-body text-center">
-                                    <div class="d-flex justify-content-between">
-                                            <span class="text-start h6 text-body-emphasis opacity-75 rounded">Tags: Coding,
-                                                HTML,
-                                                UBC</span>
-                                        <span class="text-body h6">3 mins ago</span>
-                                    </div>
-                                    <!-- post title  -->
-                                    <h3 class="card-title mt-4 text-light">POST TITLE</h3>
-                                    <!-- post image -->
-                                    <img src="/img/placeholder_img.webp" alt="Post Image" class="card-image img-fluid">
-                                    <!-- slider rating -->
-                                    <a>
-                                        <div class="text-start">
-                                            <label for="rating">
-                                                <h4>Rating:</h4>
-                                            </label>
-                                            <!-- Read only slider, disabled just for aggregate rating, actually rate on view page -->
-                                            <p for="rating"><span id="aggregate-rate"></span>/5.5</p>
-                                            <input type="range" class="form-range" id="rating" value="2.75" min="0"
-                                                   max="5.5" step="0.01" disabled>
-                                        </div>
-                                    </a>
-                                    <!-- End slider rating -->
-                                </div>
-                            </div>
-                        </a>
-                        <!-- End Card -->
-                    </div>
-                    <div class="tabcontent" id="comments" style="display: none">
                         <div class="container">
-                            <h1>Your Comments:</h1>
+                            <?php
+                            $myPosts = getUsersPosts($_SESSION['user']);
+                            $myPosts = array_reverse($myPosts);
+                            if (!empty($myPosts)) {
+                                foreach ($myPosts as $post) {
+                                    include "templates/postCard.php";
+                                }
+                            } else{
+                                echo "<div class='h5 m-4'>No posts found</div>";
+                            }
+                            ?>
                         </div>
+
+                    </div>
+                    <div class="tabcontent" id="commentCard" style="display: none">
+                        <div class="container">
+                            <h1>Comments you've made:</h1>
+                        </div>
+                        <div id="comments" class="mt-3"></div>
+                        <!-- Ajax -->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                        <?php include 'scripts/ajaxComments.php' ?>
                     </div>
                     <div class="tabcontent " id="rated" style="display: none">
                         <div class="container">
-                            <h1>Your Previously Rated Posts:</h1>
+                            <h1>Posts you've rated:</h1>
                         </div>
-                    </div>
-                    <div class="tabcontent " id="favourite" style="display: none">
                         <div class="container">
-                            <h1>Your Favourite Posts:</h1>
+                            <?php
+                            $myPosts = getRatedPosts($_SESSION['user']);
+                            $myPosts = array_reverse($myPosts);
+                            if (!empty($myPosts)) {
+                                foreach ($myPosts as $post) {
+                                    include "templates/postCard.php";
+                                }
+                            } else{
+                                echo "<div class='h5 m-4'>No posts found</div>";
+                            }
+                            ?>
                         </div>
                     </div>
-                    <div class="tabcontent " id="favouriteTags" style="display: none">
-                        <div class="container">
-                            <h1>Your Favourite Tags:</h1>
-                            <!-- You can add the tags here -->
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -193,19 +158,11 @@ include 'commands/getEmail.php';
                         <hr style="color:white;"/>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tablink text-light" onclick="openPage('comments')"> Comments </a>
+                        <a class="nav-link tablink text-light" onclick="openPage('commentCard')"> Comments </a>
                         <hr style="color:white;"/>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link tablink text-light" onclick="openPage('rated')"> Rated </a>
-                        <hr style="color:white;"/>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link tablink text-light" onclick="openPage('favourite')"> Favourite Posts </a>
-                        <hr style="color:white;"/>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link tablink text-light" onclick="openPage('favouriteTags')"> Favourite Tags </a>
                         <hr style="color:white;"/>
                     </li>
                 </ul>
@@ -232,6 +189,45 @@ include 'commands/getEmail.php';
     imageClick.addEventListener('click', function () {
         fileInput.click();
     });
+</script>
+
+<script>
+    const termList = document.getElementById('tag-list');
+    const newTermInput = document.getElementById('new-term');
+
+    // Function to add a new term to the list
+    function addTerm(term) {
+        const listItem = document.createElement('li');
+        listItem.classList.add('list-group-item');
+        listItem.textContent = term;
+
+        // Create and append the image for deleting
+        const deleteImage = document.createElement('img');
+        deleteImage.src = 'img/delete.svg';
+        deleteImage.alt = 'Delete';
+        deleteImage.style.height = '0.8em';
+        deleteImage.classList.add('ms-2');
+        deleteImage.addEventListener('click', function() {
+            termList.removeChild(listItem);
+        });
+
+        listItem.appendChild(deleteImage);
+        termList.appendChild(listItem);
+
+        // Clear the input field after adding
+        newTermInput.value = '';
+    }
+
+    // Add event listener to the input field for Enter key press
+    newTermInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const newTerm = newTermInput.value.trim();
+            if (newTerm) {
+                addTerm(newTerm);
+            }
+        }
+    });
+
 </script>
 </body>
 </html>

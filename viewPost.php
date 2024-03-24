@@ -162,8 +162,6 @@ if (!$averageRating) {
     </div>
     <!-- End of Discussion Area -->
 
-    <!-- Ajax -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -176,46 +174,9 @@ if (!$averageRating) {
             ratingDisplay.textContent = `Rating: ${rating.toFixed(1)}/5.5`;
         }
     </script>
-    <script>
-        // Load comments using Ajax
-        $(document).ready(function() {
-            function loadComments() {
-                var data = {
-                    postID: <?php echo json_encode($_GET['PostID']); ?>
-                };
-                <?php if (isset($_SESSION['user_id'])) : ?>
-                    data.userID = <?php echo json_encode($_SESSION['user_id']); ?>;
-                <?php endif; ?>
-
-                $.ajax({
-                    url: 'commands/getComments.php',
-                    type: 'GET',
-                    data: data,
-                    success: function(data) {
-                        $('#comments').html(data);
-                    }
-                });
-            }
-
-            loadComments(); // Load comments on page load
-
-            // This will reload comments every 5 seconds. User will not have to refresh the page to see new comments
-            setInterval(loadComments, 5000);
-
-            $('#commentForm').on('submit', function(e) {
-                e.preventDefault();
-
-                $.ajax({
-                    url: 'commands/submitComment.php',
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    success: function() {
-                        loadComments(); // Reload comments after submitting a new one
-                    }
-                });
-            });
-        });
-    </script>
+    <!-- Ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <?php include 'scripts/ajaxComments.php' ?>
     <script>
         // Comments Char Count Script
         const textarea = document.getElementById('comment');
