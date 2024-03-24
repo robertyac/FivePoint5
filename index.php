@@ -21,6 +21,9 @@ if (session_status() === PHP_SESSION_NONE) {
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+}
 if (isset($_SESSION['alert'])) {
     $alert = $_SESSION['alert'];
     echo "<script type='text/javascript'>alert('$alert');</script>";
@@ -39,7 +42,7 @@ if (isset($_GET['search']) && $_GET['search'] == "") {
     <!--End of Navigation bar-->
 
     <!--Briefing Section -->
-    <?php if (isset($user_id) && !isset($_GET['search'])) : ?>
+    <?php if (isset($user) && !isset($_GET['search'])) : ?>
         <section class="text-center text-lg-start">
             <div class="container p-2">
                 <div class="row align-items-center d-flex justify-content-between">

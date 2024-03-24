@@ -55,7 +55,7 @@ if ($result->num_rows == 0) {
         $_SESSION['IsAdmin'] = $row['IsAdmin'];
         header('Location: ../index.php');
     } else {
-        echo "Incorrect password";;
+        echo "Incorrect password";
         session_start();
         $_SESSION['alert'] = "Incorrect password";
         header('Location: ../index.php');
