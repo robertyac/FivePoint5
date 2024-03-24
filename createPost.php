@@ -4,15 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="post.css" />
     <title>Create a Post</title>
     <link rel="icon" type="image/x-icon" href="/img/5.5.ico">
     <link rel="apple-touch-icon" href="/img/5.5-white.png">
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="/post/createPost.css">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="css/createPost.css">
 </head>
@@ -49,6 +46,7 @@
                             <div class="mb-3">
                                 <label for="postTags" class="form-label">Tags:</label>
                                 <input type="text" class="form-control" id="postTags" name="postTags" placeholder="Enter a tag">
+                                <div id="tagsCharCount"></div>
                                 <div id="tagsContainer" class="mt-2"></div>
                             </div>
                             <input type="hidden" id="hiddenTags" name="hiddenTags">
@@ -76,11 +74,6 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script>
-        $(function () {
-            $("#nav").load("/nav.html");
-        });
-    </script>
     <script>
         // Function to display the selected image
         function displayImage(files) {
@@ -210,6 +203,23 @@
         });
     </script>
     <script>
+        // Tags Char Count Script
+        const tagsInput = document.getElementById('postTags');
+        const tagsCharCountDisplay = document.getElementById('tagsCharCount');
+        const maxTagsChars = 12;
+
+        tagsInput.addEventListener('input', function () {
+            let charCount = this.value.length;
+
+            if (charCount > maxTagsChars) {
+                this.value = this.value.slice(0, maxTagsChars);
+                charCount = maxTagsChars;
+            }
+
+            tagsCharCountDisplay.textContent = `Character Count: ${charCount}/${maxTagsChars}`;
+        });
+    </script>
+    <script>
         // Checks if user is signed in before submitting a post
         $(document).ready(function() {
             $('form[action="commands/submitPost.php"]').on('submit', function(e) {
@@ -220,7 +230,13 @@
             });
         });
     </script>
-
+    <!-- will show server alerts -->
+    <?php if (isset($_SESSION['error'])): ?>
+        <script>
+            alert("<?php echo $_SESSION['error']; ?>");
+        </script>
+    <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 </body>
 
 </html>

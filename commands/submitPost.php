@@ -9,30 +9,30 @@ $postDescription = $_POST['postDescription'] ?? null;
 
 // Check if the user is logged in
 if ($userID === null) {
-    // Redirect to createPost.php with error message
-    header("Location: ../createPost.php?error=You must be logged in to create a post.");
+    $_SESSION['error'] = "You must be logged in to create a post.";
+    header("Location: ../createPost.php");
     exit();
 }
 
 // Check if title is provided and its length is between 1 and 75 characters
 if ($postTitle === null || trim($postTitle) === '' || strlen($postTitle) < 1 || strlen($postTitle) > 75) {
-    // Redirect to index.php with error message
-    header("Location: ../createPost.php?error=Title is required and must be between 1 and 75 characters.");
+    $_SESSION['error'] = "Title is required and must be between 1 and 75 characters.";
+    header("Location: ../createPost.php");
     exit();
 }
 
 // Check if either image or description is provided
 if ((!isset($_FILES['postImage']) || $_FILES['postImage']['tmp_name'] === '') && 
     ($postDescription === null || trim($postDescription) === '')) {
-    // Redirect to index.php with error message
-    header("Location: ../createPost.php?error=Either image or description is required.");
+    $_SESSION['error'] = "Either image or description is required.";
+    header("Location: ../createPost.php");
     exit();
-} else
+}
 
 // If description is provided, check its length is between 1 and 1000 characters
 if ($postDescription !== null && trim($postDescription) !== '' && (strlen($postDescription) < 1 || strlen($postDescription) > 1000)) {
-    // Redirect to createPost.php with error message
-    header("Location: ../createPost.php?error=Description must be between 1 and 1000 characters.");
+    $_SESSION['error'] = "Description must be between 1 and 1000 characters.";
+    header("Location: ../createPost.php");
     exit();
 }
 
@@ -41,8 +41,8 @@ if (isset($_FILES['postImage']) && $_FILES['postImage']['tmp_name'] != '') {
     // Check if the file is an image
     $check = getimagesize($_FILES["postImage"]["tmp_name"]);
     if($check === false) {
-        // Redirect to index.php with error message
-        header("Location: ../createPost.php?error=File is not an image.");
+        $_SESSION['error'] = "File is not an image.";
+        header("Location: ../createPost.php");
         exit();
     }
 

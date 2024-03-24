@@ -42,8 +42,6 @@ if (!$averageRating) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="post.css" />
     <title>View Post</title>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -115,12 +113,21 @@ if (!$averageRating) {
     <!-- End of Post Container -->
 
     <!-- Rating Slider -->
+    <?php
+    require 'commands/getUserRating.php';
+
+    $postID = $_GET['PostID'];
+    $userID = $_SESSION['user_id'];
+
+    $rating = getUserRating($postID, $userID);
+    $ratingValue = $rating !== '?' ? $rating * 10 : 27.5;
+    ?>
     <div class="container card p-3 mx-auto mt-4 mb-0 w-75">
         <label for="rating" class="mb-3">
-            <h3 id="ratingDisplay">Your Rating: ?/5.5</h3>
+            <h3 id="ratingDisplay">Your Rating: <?php echo $rating; ?>/5.5</h3>
         </label>
         <form method="post" action="commands/addRating.php" id="ratingForm">
-            <input type="range" class="form-range" id="rating" name="rating" value="30" min="0" max="55" step="1" oninput="updateRatingDisplay(this.value)">
+            <input type="range" class="form-range" id="rating" name="rating" value="<?php echo $ratingValue; ?>" min="0" max="55" step="1" oninput="updateRatingDisplay(this.value)">
             <div class="d-flex justify-content-end mt-3">
                 <button type="submit" class="btn btn-primary">Submit Rating</button>
             </div>
@@ -161,11 +168,6 @@ if (!$averageRating) {
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script>
-        $(function() {
-            $("#nav").load("../display_elements/nav.php");
-        });
-    </script>
     <script>
         // Update the rating display when the slider is moved
         function updateRatingDisplay(value) {
