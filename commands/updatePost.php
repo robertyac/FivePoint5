@@ -106,6 +106,13 @@ try {
         $stmtPostTag = $pdo->prepare("INSERT INTO PostTags (PostID, TagID) VALUES (?, ?)");
         
         foreach ($postTags as $tag) {
+            // Validate the length of the tag
+            if (strlen($tag) < 1 || strlen($tag) > 12) {
+                $_SESSION['error'] = "Each tag must be between 1 and 12 characters.";
+                header("Location: ../editPost.php?PostID={$postID}");
+                exit();
+            }
+
             $stmtTag->execute([$tag]);
         
             $stmtGetTagID = $pdo->prepare("SELECT TagID FROM Tag WHERE Name = ?");

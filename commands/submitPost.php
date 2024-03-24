@@ -91,6 +91,13 @@ try {
         // Trim the tag to remove any leading or trailing whitespace
         $tag = trim($tag);
 
+        // Validate the length of the tag
+        if (strlen($tag) < 1 || strlen($tag) > 12) {
+            $_SESSION['error'] = "Each tag must be between 1 and 12 characters.";
+            header("Location: ../createPost.php");
+            exit();
+        }
+
         // Check if the tag already exists in the database
         $sql = "SELECT TagID FROM Tag WHERE Name = ?";
         $stmt = $pdo->prepare($sql);
