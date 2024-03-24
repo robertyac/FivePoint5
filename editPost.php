@@ -156,6 +156,13 @@ if (!$averageRating) {
         // Array to store tags
         var tags = [];
 
+        var existingTags = <?php echo json_encode($tags); ?>;
+
+        // Add existing tags to tags array
+        existingTags.forEach(function(tag) {
+            tags.push(tag.Name);
+        });
+
         //handle tag input and display as Bootstrap 5 chips
         document.getElementById('postTags').addEventListener('keydown', function(event) {
             if (event.key === 'Enter' || event.key === ',') {
@@ -180,6 +187,22 @@ if (!$averageRating) {
                     document.getElementById('tagsContainer').appendChild(chip);
                 }
             }
+        });
+
+        // Existing tags
+        existingTags.forEach(function(tag) {
+            const chip = document.createElement('span');
+            chip.textContent = tag.Name; // Use tag.Name instead of tag
+            chip.classList.add('badge', 'bg-primary', 'badge-pill', 'me-2','p-3','mb-3');
+            chip.addEventListener('click', function() {
+                // Remove tag from array
+                const index = tags.indexOf(tag.Name); // Use tag.Name instead of tag
+                if (index > -1) {
+                    tags.splice(index, 1);
+                }
+                this.remove();
+            });
+            document.getElementById('tagsContainer').appendChild(chip);
         });
     </script>
     <script>
