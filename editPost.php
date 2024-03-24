@@ -79,7 +79,7 @@ if (!$averageRating) {
                             <?php if (!empty($post['PostImage'])) : ?>
                                 <div class="d-flex flex-column align-items-center">
                                     <img id="previewImage" src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid p-3">
-                                    <button type="button" class="btn btn-danger change-image mt-2">Change Image</button>
+                                    <button type="button" class="btn btn-warning change-image mt-2">Change Image</button>
                                 </div>
                             <?php else: ?>
                                 <img id="previewImage" style="display: none;" class="img-fluid p-3">
