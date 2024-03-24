@@ -58,7 +58,7 @@ if (!$averageRating) {
 
     <!-- Post Container -->
     <div class="container card mt-5 mx-auto w-75">
-        <form action="commands/updatePost.php" method="post" enctype="multipart/form-data">
+        <form action="commands/updatePost.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card-body d-flex flex-column">
@@ -68,7 +68,7 @@ if (!$averageRating) {
                         <!-- Post Title -->
                         <h5>Title</h5>
                         <div class="d-flex justify-content-between">
-                            <input type="text" class="form-control" name="PostTitle" value="<?php echo $post['PostTitle']; ?>" id="postTitle" required>
+                            <input type="text" class="form-control" name="PostTitle" value="<?php echo $post['PostTitle']; ?>" id="postTitle">
                         </div>
                         <div id="titleCharCount"></div>
                         <div id="titleError"></div>
@@ -77,7 +77,7 @@ if (!$averageRating) {
                         <h5>Image</h5>
                         <div>
                             <input type="hidden" name="RemoveImage" value="0">
-                            <input type="file" class="form-control" name="PostImage" accept="image/*" style="display: <?php echo empty($post['PostImage']) ? 'block' : 'none'; ?>;" onchange="displayImage(this.files)">
+                            <input type="file" class="form-control" name="PostImage" id="postImage"accept="image/*" style="display: <?php echo empty($post['PostImage']) ? 'block' : 'none'; ?>;" onchange="displayImage(this.files)">
                             <?php if (!empty($post['PostImage'])) : ?>
                                 <div class="d-flex flex-column align-items-center">
                                     <img id="previewImage" src="data:image/png;base64,<?php echo base64_encode($post['PostImage']); ?>" alt="Post Image" class="img-fluid p-3">
@@ -226,7 +226,9 @@ if (!$averageRating) {
             let isValid = true;
 
             // Validate title
+            console.log('Title:', title); // Debugging line
             if (title.trim().length === 0) {
+                console.log('Title is empty'); // Debugging line
                 displayError('titleError', 'Title is required.');
                 isValid = false;
             }
@@ -296,6 +298,14 @@ if (!$averageRating) {
             });
         });
     </script>
+
+    <!-- will show server alerts -->
+    <?php if (isset($_SESSION['error'])): ?>
+        <script>
+            alert("<?php echo $_SESSION['error']; ?>");
+        </script>
+    <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 </body>
 
 </html>

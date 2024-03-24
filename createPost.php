@@ -238,7 +238,13 @@
             });
         });
     </script>
-
+    <!-- will show server alerts -->
+    <?php if (isset($_SESSION['error'])): ?>
+        <script>
+            alert("<?php echo $_SESSION['error']; ?>");
+        </script>
+    <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 </body>
 
 </html>

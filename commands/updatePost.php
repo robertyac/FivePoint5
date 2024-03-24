@@ -12,6 +12,7 @@ $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 try {
     $pdo = new PDO($dsn, $user, $pass);
 
+    $userID = $_SESSION['user_id'] ?? null;
     $postID = $_POST['postID'] ?? null;
     $postTitle = $_POST['PostTitle'] ?? null;
     $postDescription = $_POST['Description'] ?? null;
@@ -19,15 +20,49 @@ try {
     $existingImagePath = $_POST['existingImagePath'] ?? null;
     $postImageContent = null;
 
-    if ($postImage && file_exists($postImage)) {
-        $postImageContent = file_get_contents($postImage);
-    } elseif ($existingImagePath && file_exists($existingImagePath)) {
-        $postImageContent = file_get_contents($existingImagePath);
+    // Check if the user is logged in
+    if ($userID === null) {
+        $_SESSION['error'] = "You must be logged in to update a post.";
+        header("Location: ../editPost.php?PostID={$postID}");
+        exit();
     }
 
-    if ($postID === null || $postTitle === null || $postDescription === null) {
-        header("Location: ../createPost.php?error=Post ID, title and description are required.");
+    // Check if title is provided and its length is between 1 and 75 characters
+    if ($postTitle === null || trim($postTitle) === '' || strlen($postTitle) < 1 || strlen($postTitle) > 75) {
+        $_SESSION['error'] = "Title is required and must be between 1 and 75 characters.";
+        header("Location: ../editPost.php?PostID={$postID}");
         exit();
+    }
+
+    // Check if either image or description is provided
+    if ((!isset($_FILES['PostImage']) || $_FILES['PostImage']['tmp_name'] === '') && 
+        ($postDescription === null || trim($postDescription) === '')) {
+        $_SESSION['error'] = "Either image or description is required.";
+        header("Location: ../editPost.php?PostID={$postID}");
+        exit();
+    }
+
+    // If description is provided, check its length is between 1 and 1000 characters
+    if ($postDescription !== null && trim($postDescription) !== '' && (strlen($postDescription) < 1 || strlen($postDescription) > 1000)) {
+        $_SESSION['error'] = "Description must be between 1 and 1000 characters.";
+        header("Location: ../editPost.php?PostID={$postID}");
+        exit();
+    }
+
+    // Handle the file upload
+    if (isset($_FILES['PostImage']) && $_FILES['PostImage']['tmp_name'] != '') {
+        // Check if the file is an image
+        $check = getimagesize($_FILES["PostImage"]["tmp_name"]);
+        if($check === false) {
+            $_SESSION['error'] = "File is not an image.";
+            header("Location: ../editPost.php?postID={$postID}");
+            exit();
+        }
+
+        // Read the file
+        $postImageContent = file_get_contents($_FILES['PostImage']['tmp_name']);
+    } elseif ($existingImagePath && file_exists($existingImagePath)) {
+        $postImageContent = file_get_contents($existingImagePath);
     }
 
     $stmt = $pdo->prepare("SELECT * FROM Post WHERE PostID = ?");
