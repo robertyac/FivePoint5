@@ -1,5 +1,6 @@
 <?php
 $config = require 'config.php';
+require 'prepUserId.php';
 
 $host = $config['database']['host'];
 $db = $config['database']['name'];
@@ -65,8 +66,10 @@ if ($check != "") {
 // close the connection
     $mysqli->close();
     session_start();
-    $_SESSION['user'] = $_POST['usernameInput'];
+    $_SESSION['user'] = $username;
     $_SESSION['IsAdmin'] = "0";
+    prepUserId($username);
+
 // redirect to index.php
     header('Location: ../index.php');
 }
