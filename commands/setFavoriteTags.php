@@ -15,6 +15,9 @@ function updateTags($tags) {
     $query = "DELETE FROM UserFavoriteTags WHERE UserID = $userID;";
     makeQuery($query);
     foreach ($tags as $tag) {
+        if ($tag == "") {
+            continue;
+        }
         $query = "SELECT tagID FROM Tag WHERE LOWER(name) = '$tag';";
         $result = makeQuery($query);
         if (count($result) == 0) {
@@ -25,9 +28,9 @@ function updateTags($tags) {
             $query = "SELECT TagID FROM Tag";
             $result = makeQuery($query);
             foreach ($result as $row) {
-                echo $row;
+                echo json_encode($row);
                 echo "<br>";
-                echo $row['tagID'];
+                echo json_encode($row['TagID']);
                 echo "<br>";
                 echo "<br>";
             }
