@@ -15,12 +15,22 @@ function updateTags($tags) {
     $query = "DELETE FROM userFavoriteTags WHERE userID = $userID;";
     makeQuery($query);
     foreach ($tags as $tag) {
-        $query = "SELECT tagID FROM tag WHERE name = '$tag';";
+        $query = "SELECT tagID FROM tag WHERE LOWER(name) = '$tag';";
         $result = makeQuery($query);
         if (count($result) == 0) {
             echo "Tag $tag does not exist.";
             echo "<br>";
             echo $query;
+            echo "<br>";
+            $query = "SELECT tagID FROM tag";
+            $result = makeQuery($query);
+            foreach ($result as $row) {
+                echo $row;
+                echo "<br>";
+                echo $row['tagID'];
+                echo "<br>";
+                echo "<br>";
+            }
             exit();
         }
         $tagID = $result[0]['tagID'];
