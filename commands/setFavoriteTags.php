@@ -35,7 +35,7 @@ function updateTags($tags) {
             exit();
         }
         $tagID = $result[0]['tagID'];
-        $query = "INSERT INTO userFavoriteTags (userID, tagID) VALUES ($userID, $tagID);";
+        $query = "INSERT INTO UserFavoriteTags (UserID, TagID) VALUES ($userID, $tagID);";
         makeQuery($query);
     }
 }
