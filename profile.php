@@ -8,6 +8,7 @@ if (!isset($_SESSION['user'])) {
 include 'commands/getEmail.php';
 include 'commands/getUsersPosts.php';
 include 'commands/getRatedPosts.php';
+include 'commands/makeQuery.php';
 ?>
 
 <!DOCTYPE html>
@@ -75,9 +76,10 @@ include 'commands/getRatedPosts.php';
                         </div>
                         <div class="container">
                             <form action="/FivePoint5/commands/changeUsername.php" method="post"
-                                   class="d-flex align-items-center w-50 m-4" role="form" style="min-width: 300px">
+                                  class="d-flex align-items-center w-50 m-4" role="form" style="min-width: 300px">
                                 Username:
-                                <input class="form-control ms-3" id="newUsername" type="text" value="<?php echo $_SESSION['user']; ?>"
+                                <input class="form-control ms-3" id="newUsername" type="text"
+                                       value="<?php echo $_SESSION['user']; ?>"
                                        aria-label="Text" name="newUsername" required>
                             </form>
                             <form action="/FivePoint5/commands/changeEmail.php" method="post"
@@ -87,12 +89,13 @@ include 'commands/getRatedPosts.php';
                                        value="<?php echo getEmail($_SESSION['user']) ?>"
                                        aria-label="Text" name="newEmail">
                             </form>
-<!--                            <form id="tag-form">-->
-                                <h3>Favourite Tags</h3>
-                                <ul id="tag-list" class="list-group-flush"></ul>
-                                <input class="ms-4" type="text" id="new-term" placeholder="Add a new tag"><br>
-<!--                                <button class="btn btn-success ms-4 mt-2"  type="submit">Update tags</button>-->
-<!--                            </form>-->
+                            <h3>Favourite Tags</h3>
+                            <ul id="tag-list" class="list-group-flush"></ul>
+                            <input class="ms-4" type="text" id="new-term" placeholder="Add a new tag"><br>
+                            <form id="tag-form" action="commands/setFavoriteTags.php" method="POST">
+                                <input type="hidden" name="tags" id="tag-list-data">
+                                <button class="btn btn-success ms-4 mt-2" type="submit">Update tags</button>
+                            </form>
                         </div>
                     </div>
                     <div class="tabcontent card-body mx-auto" style="display: none" id="posts">
@@ -107,7 +110,7 @@ include 'commands/getRatedPosts.php';
                                 foreach ($myPosts as $post) {
                                     include "templates/postCard.php";
                                 }
-                            } else{
+                            } else {
                                 echo "<div class='h5 m-4'>No posts found</div>";
                             }
                             ?>
@@ -135,7 +138,7 @@ include 'commands/getRatedPosts.php';
                                 foreach ($myPosts as $post) {
                                     include "templates/postCard.php";
                                 }
-                            } else{
+                            } else {
                                 echo "<div class='h5 m-4'>No posts found</div>";
                             }
                             ?>
@@ -191,15 +194,29 @@ include 'commands/getRatedPosts.php';
     });
 </script>
 
+<?php
+$query = "SELECT Tag.Name FROM Tag";
+$tagArray = makeQuery($query);
+$validTags = [];
+foreach ($tagArray as $tag) {
+    $validTags[] = $tag['Name'];
+}
+?>
+
 <script>
-    const termList = document.getElementById('tag-list');
+    const tagList = document.getElementById('tag-list');
     const newTermInput = document.getElementById('new-term');
+    const validTags = <?php echo json_encode($validTags); ?>;
 
     // Function to add a new term to the list
-    function addTerm(term) {
+    function addTag(tagName) {
+        if (!validTags.includes(tagName)) {
+            newTermInput.classList.add('invalid-tag');
+            return;
+        }
         const listItem = document.createElement('li');
         listItem.classList.add('list-group-item');
-        listItem.textContent = term;
+        listItem.textContent = tagName;
 
         // Create and append the image for deleting
         const deleteImage = document.createElement('img');
@@ -207,27 +224,51 @@ include 'commands/getRatedPosts.php';
         deleteImage.alt = 'Delete';
         deleteImage.style.height = '0.8em';
         deleteImage.classList.add('ms-2');
-        deleteImage.addEventListener('click', function() {
-            termList.removeChild(listItem);
+        deleteImage.addEventListener('click', function () {
+            tagList.removeChild(listItem);
         });
 
         listItem.appendChild(deleteImage);
-        termList.appendChild(listItem);
+        tagList.appendChild(listItem);
 
         // Clear the input field after adding
         newTermInput.value = '';
     }
 
     // Add event listener to the input field for Enter key press
-    newTermInput.addEventListener('keydown', function(event) {
+    newTermInput.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
             const newTerm = newTermInput.value.trim();
             if (newTerm) {
-                addTerm(newTerm);
+                addTag(newTerm);
             }
         }
     });
 
+    newTermInput.addEventListener('input', function () {
+        newTermInput.classList.remove('invalid-tag'); // Remove red color on input change
+    });
+    // Add existing tags on page load
+    <?php
+    $query = "SELECT Tag.Name FROM UserFavoriteTags NATURAL JOIN Tag WHERE UserFavoriteTags.UserID = " . $_SESSION['user_id'];
+    $tags = makeQuery($query);
+    ?>
+    const userTags = <?php echo json_encode($tags); ?>;
+    userTags.forEach(tag => addTag(tag[0]));
+
+    // send tag list on submit
+    const tagForm = document.getElementById('tag-form');
+    const tagListInput = document.getElementById('tag-list-data');
+    tagForm.addEventListener('submit', function (event) {
+        const tagListData = tagList.querySelectorAll('li');
+        const tagNames = [];
+
+        tagListData.forEach(function (tagItem) {
+            tagNames.push(tagItem.textContent);
+        });
+
+        tagListInput.value = tagNames.join(','); // Combine names into a comma-separated string
+    });
 </script>
 </body>
 </html>

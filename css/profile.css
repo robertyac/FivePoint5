@@ -43,3 +43,7 @@
 .nav-item{
     cursor: pointer;
 }
+
+.invalid-tag{
+    background-color: #ff9191;
+}
