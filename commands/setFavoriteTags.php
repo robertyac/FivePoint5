@@ -12,17 +12,17 @@ function updateTags($tags) {
     echo "<br>";
 
     $userID = $_SESSION['user_id'];
-    $query = "DELETE FROM userFavoriteTags WHERE userID = $userID;";
+    $query = "DELETE FROM UserFavoriteTags WHERE UserID = $userID;";
     makeQuery($query);
     foreach ($tags as $tag) {
-        $query = "SELECT tagID FROM tag WHERE LOWER(name) = '$tag';";
+        $query = "SELECT tagID FROM Tag WHERE LOWER(name) = '$tag';";
         $result = makeQuery($query);
         if (count($result) == 0) {
             echo "Tag $tag does not exist.";
             echo "<br>";
             echo $query;
             echo "<br>";
-            $query = "SELECT tagID FROM tag";
+            $query = "SELECT TagID FROM Tag";
             $result = makeQuery($query);
             foreach ($result as $row) {
                 echo $row;
@@ -31,6 +31,7 @@ function updateTags($tags) {
                 echo "<br>";
                 echo "<br>";
             }
+            echo "end of results";
             exit();
         }
         $tagID = $result[0]['tagID'];
