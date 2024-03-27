@@ -6,6 +6,10 @@ function updateTags($tags) {
         session_start();
     }
     prepUserId($_SESSION['user']);
+    var_dump($tags);
+    echo "<br>";
+    echo $_SESSION['user_id'];
+    echo "<br>";
 
     $userID = $_SESSION['user_id'];
     $query = "DELETE FROM userFavoriteTags WHERE userID = $userID;";
@@ -15,6 +19,8 @@ function updateTags($tags) {
         $result = makeQuery($query);
         if (count($result) == 0) {
             echo "Tag $tag does not exist.";
+            echo "<br>";
+            echo $query;
             exit();
         }
         $tagID = $result[0]['tagID'];

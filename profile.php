@@ -94,7 +94,7 @@ include 'commands/makeQuery.php';
                             <input class="ms-4" type="text" id="new-term" placeholder="Add a new tag"><br>
                             <form id="tag-form" action="commands/setFavoriteTags.php" method="POST">
                                 <input type="hidden" name="tags" id="tag-list-data">
-                                <button class="btn btn-success ms-4 mt-2" type="submit">Update tags</button>
+                                <button class="btn btn-success ms-4 mt-2" style="display: none" type="submit" id="submit-tags">Update tags</button>
                             </form>
                         </div>
                     </div>
@@ -206,10 +206,14 @@ foreach ($tagArray as $tag) {
 <script>
     const tagList = document.getElementById('tag-list');
     const newTermInput = document.getElementById('new-term');
-    const validTags = <?php echo json_encode($validTags); ?>;
+    const submitTags = document.getElementById('submit-tags');
+
+    const tableTags = <?php echo json_encode($validTags); ?>;
+    const validTags = tableTags.map(str => str.toLowerCase());
 
     // Function to add a new term to the list
-    function addTag(tagName) {
+    function addTag(tagName, auto) {
+        tagName = tagName.trim().toLowerCase();
         if (!validTags.includes(tagName)) {
             newTermInput.classList.add('invalid-tag');
             return;
@@ -226,6 +230,7 @@ foreach ($tagArray as $tag) {
         deleteImage.classList.add('ms-2');
         deleteImage.addEventListener('click', function () {
             tagList.removeChild(listItem);
+            submitTags.style.display = 'block';
         });
 
         listItem.appendChild(deleteImage);
@@ -233,6 +238,9 @@ foreach ($tagArray as $tag) {
 
         // Clear the input field after adding
         newTermInput.value = '';
+        if (!auto){
+            submitTags.style.display = 'block';
+        }
     }
 
     // Add event listener to the input field for Enter key press
@@ -240,7 +248,7 @@ foreach ($tagArray as $tag) {
         if (event.key === 'Enter') {
             const newTerm = newTermInput.value.trim();
             if (newTerm) {
-                addTag(newTerm);
+                addTag(newTerm, false);
             }
         }
     });
@@ -254,7 +262,7 @@ foreach ($tagArray as $tag) {
     $tags = makeQuery($query);
     ?>
     const userTags = <?php echo json_encode($tags); ?>;
-    userTags.forEach(tag => addTag(tag[0]));
+    userTags.forEach(tag => addTag(tag[0], true));
 
     // send tag list on submit
     const tagForm = document.getElementById('tag-form');

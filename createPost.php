@@ -45,7 +45,7 @@
                             <!-- Post Tags -->
                             <div class="mb-3">
                                 <label for="postTags" class="form-label">Tags:</label>
-                                <input type="text" class="form-control" id="postTags" name="postTags" placeholder="Enter a tag">
+                                <input type="text" class="form-control" id="postTags" name="postTags" placeholder="Press enter after each tag">
                                 <div id="tagsCharCount"></div>
                                 <div id="tagsContainer" class="mt-2"></div>
                             </div>
