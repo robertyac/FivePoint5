@@ -5,6 +5,7 @@ session_start();
 include 'commands/getPostByID.php';
 include 'commands/getTags.php';
 include 'commands/getRating.php';
+include 'commands/updateViewCount.php';
 
 // Check if PostID is set in the URL parameters
 if (!isset($_GET['PostID'])) {
@@ -12,6 +13,8 @@ if (!isset($_GET['PostID'])) {
 }
 
 $postID = $_GET['PostID'];
+
+updateViewCount($postID);
 
 // Fetch the post details using getPostByID.php
 $post = getPostByID($postID);
