@@ -167,7 +167,7 @@ if (json_last_error() != JSON_ERROR_NONE) {
     </section>
 
     <!-- Create a div to hold the post views chart -->
-    <section id="postViewsChart" class="container mt-5">
+    <section id="postViewsChart" class="container mt-5" style="max-height: 600px; overflow-y: auto;">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card shadow">
