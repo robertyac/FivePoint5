@@ -11,6 +11,21 @@ if (!isset($users) || empty($users)) {
     die('Error: $users is not set or empty');
 }
 
+//Getting all tags
+include 'commands/tagsUsage.php';
+$tags = getAllTags();
+
+if (!isset($tags) || empty($tags)) {
+    die('Error: $tags is not set or empty');
+}
+
+$tags_utf8 = utf8ize($tags);
+$tags_json = json_encode($tags_utf8);
+
+if (json_last_error() != JSON_ERROR_NONE) {
+    die('json_encode error: ' . json_last_error_msg());
+}
+
 // force convert the data to UTF-8
 function utf8ize($mixed)
 {
@@ -136,6 +151,22 @@ if (json_last_error() != JSON_ERROR_NONE) {
         </div>
     </section>
 
+    <!-- Create a div to hold the tags chart -->
+    <section id="tagsChart" class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="text-center mb-0">Tag Usage</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="tags"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Users per day chart -->
     <script>
         var users = JSON.parse('<?php echo $users_json; ?>');
@@ -166,7 +197,24 @@ if (json_last_error() != JSON_ERROR_NONE) {
             chart.appendChild(bar);
         }
     </script>
-    
+    <!-- Tags chart -->
+    <script>
+        var tags = JSON.parse('<?php echo $tags_json; ?>');
+
+        var maxCount = Math.max(...Object.values(tags));
+
+        var chart = document.getElementById('tags');
+        for (var tag in tags) {
+            var count = tags[tag];
+
+            var bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.width = (count / maxCount * 100) + '%';
+            bar.textContent = tag + ': ' + count;
+            chart.appendChild(bar);
+        }
+    </script>
+
     <!-- Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js"></script>
 </body>
