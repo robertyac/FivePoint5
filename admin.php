@@ -8,7 +8,7 @@ if (!isset($_SESSION['IsAdmin']) || $_SESSION['IsAdmin'] != 1) {
 $users = include 'commands/getAllUsers.php';
 
 if (!isset($users) || empty($users)) {
-    die('Error: $users is not set or empty');
+    echo '<script type="text/javascript">alert("Error: $users is not set or empty");</script>';
 }
 
 //Getting all tags
@@ -73,6 +73,7 @@ if (json_last_error() != JSON_ERROR_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <!-- Style the chart with CSS -->
     <style>
         .bar {
@@ -117,7 +118,37 @@ if (json_last_error() != JSON_ERROR_NONE) {
                                 </div>
                             </div>
                         </form>
+                        <!-- Filter form -->
+                        <form class="mb-4" action="admin.php" method="get">
+                            <div class="input-group">
+                                <select name="filter" class="form-control">
+                                    <option value="">Filter by...</option>
+                                    <option value="enabled">Enabled Users</option>
+                                    <option value="disabled">Disabled Users</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                        <?php
+                        $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
 
+                        if ($filter === 'enabled') {
+                            $users = array_filter($users, function ($user) {
+                                return $user['IsEnabled'] == 1;
+                            });
+                        } elseif ($filter === 'disabled') {
+                            $users = array_filter($users, function ($user) {
+                                return $user['IsEnabled'] == 0;
+                            });
+                        }
+
+                        // Sort users alphabetically by username
+                        usort($users, function ($a, $b) {
+                            return strcasecmp($a['Username'], $b['Username']);
+                        });
+                        ?>
                         <!-- Users table -->
                         <div style="height: 400px; overflow-y: auto;">
                             <table class="table table-striped table-hover">
@@ -150,13 +181,13 @@ if (json_last_error() != JSON_ERROR_NONE) {
                         </div>
     </section>
 
-    <!-- Create a div to hold the chart -->
+    <!-- User registrations chart -->
     <section id="registrationsChart" class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white">
-                        <h2 class="text-center mb-0">User Registrations</h2>
+                        <h2 class="text-center mb-0" data-toggle="tooltip" data-placement="top" title="Note: Use the search in the 'all user' section above to filter this chart by username.">User Registrations</h2>
                     </div>
                     <div class="card-body">
                         <div id="chart"></div>
@@ -165,7 +196,6 @@ if (json_last_error() != JSON_ERROR_NONE) {
             </div>
         </div>
     </section>
-
     <!-- Create a div to hold the post views chart -->
     <section id="postViewsChart" class="container mt-5" style="max-height: 600px; overflow-y: auto;">
         <div class="row justify-content-center">
@@ -271,7 +301,16 @@ if (json_last_error() != JSON_ERROR_NONE) {
             chart.appendChild(link);
         }
     </script>
-
+    <!-- Bootstrap -->
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL' crossorigin='anonymous'></script>
+    <!-- jquery -->
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+    <!-- Initialize Bootstrap tooltip -->
+    <script>
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
     <!-- Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js"></script>
 </body>
