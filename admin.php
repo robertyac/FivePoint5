@@ -16,7 +16,7 @@ include 'commands/tagsUsage.php';
 $tags = getAllTags();
 
 if (!isset($tags) || empty($tags)) {
-    die('Error: $tags is not set or empty');
+    echo '<script type="text/javascript">alert("Error: $tags is not set or empty");</script>';
 }
 
 $tags_utf8 = utf8ize($tags);

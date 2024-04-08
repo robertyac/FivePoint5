@@ -13,9 +13,25 @@ function getAllTags() {
     try {
         $pdo = new PDO($dsn, $user, $pass);
 
-        $sql = "SELECT Tag.Name, COUNT(PostTags.TagID) as Count FROM Tag JOIN PostTags ON Tag.TagID = PostTags.TagID GROUP BY Tag.Name";
+        $sql = "SELECT Tag.Name, COUNT(PostTags.TagID) as Count FROM Tag 
+                JOIN PostTags ON Tag.TagID = PostTags.TagID 
+                JOIN Post ON PostTags.PostID = Post.PostID 
+                JOIN User ON Post.UserID = User.UserID";
+
+        // Get the search term from the query parameters
+        $searchTerm = $_GET['search'] ?? '';
+
+        $params = [];
+        // If there's a search term, append a WHERE clause to the SQL query
+        if ($searchTerm !== '') {
+            $sql .= " WHERE Post.PostID LIKE :searchTerm OR User.Username LIKE :searchTerm OR User.Email LIKE :searchTerm";
+            $params['searchTerm'] = "%$searchTerm%";
+        }
+
+        $sql .= " GROUP BY Tag.Name";
+
         $stmt = $pdo->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($params);
 
         $tags = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
