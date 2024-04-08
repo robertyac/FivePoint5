@@ -26,6 +26,21 @@ if (json_last_error() != JSON_ERROR_NONE) {
     die('json_encode error: ' . json_last_error_msg());
 }
 
+//Get post views
+include 'commands/postViewsChart.php';
+$posts = getAllPosts();
+
+if (!isset($posts) || empty($posts)) {
+    die('Error: $posts is not set or empty');
+}
+
+$posts_utf8 = utf8ize($posts);
+$posts_json = json_encode($posts_utf8);
+
+if (json_last_error() != JSON_ERROR_NONE) {
+    die('json_encode error: ' . json_last_error_msg());
+}
+
 // force convert the data to UTF-8
 function utf8ize($mixed)
 {
@@ -151,6 +166,23 @@ if (json_last_error() != JSON_ERROR_NONE) {
         </div>
     </section>
 
+    <!-- Create a div to hold the post views chart -->
+    <section id="postViewsChart" class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="text-center mb-0">Post Views</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="postViews"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <!-- Create a div to hold the tags chart -->
     <section id="tagsChart" class="container mt-5">
         <div class="row justify-content-center">
@@ -212,6 +244,31 @@ if (json_last_error() != JSON_ERROR_NONE) {
             bar.style.width = (count / maxCount * 100) + '%';
             bar.textContent = tag + ': ' + count;
             chart.appendChild(bar);
+        }
+    </script>
+    <script>
+        var posts = JSON.parse('<?php echo $posts_json; ?>');
+
+        var maxViews = Math.max(...Object.values(posts).filter(v => v && v !== 'N/A').map(Math.log10));
+
+        var chart = document.getElementById('postViews');
+        for (var post in posts) {
+            var views = posts[post];
+
+            if (!views || views === 'N/A') continue;
+
+            var logViews = Math.log10(views);
+
+            var link = document.createElement('a');
+            link.href = './viewPost.php?PostID=' + post;
+
+            var bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.width = (logViews / maxViews * 100) + '%';
+            bar.textContent = 'Post ' + post + ': ' + views;
+
+            link.appendChild(bar);
+            chart.appendChild(link);
         }
     </script>
 
