@@ -8,7 +8,7 @@ if (!isset($_SESSION['IsAdmin']) || $_SESSION['IsAdmin'] != 1) {
 $users = include 'commands/getAllUsers.php';
 
 if (!isset($users) || empty($users)) {
-    echo '<script type="text/javascript">alert("Error: $users is not set or empty");</script>';
+    echo '<script type="text/javascript">alert("Error: user does not exist: $users is empty");</script>';
 }
 
 //Getting all tags
@@ -16,7 +16,7 @@ include 'commands/tagsUsage.php';
 $tags = getAllTags();
 
 if (!isset($tags) || empty($tags)) {
-    echo '<script type="text/javascript">alert("Error: $tags is not set or empty");</script>';
+    echo '<script type="text/javascript">alert("Error: user has no tags: $tags is empty");</script>';
 }
 
 $tags_utf8 = utf8ize($tags);
@@ -31,7 +31,7 @@ include 'commands/postViewsChart.php';
 $posts = getAllPosts();
 
 if (!isset($posts) || empty($posts)) {
-    die('Error: $posts is not set or empty');
+    echo '<script type="text/javascript">alert("Error: user has no posts: $posts empty");</script>';
 }
 
 $posts_utf8 = utf8ize($posts);
