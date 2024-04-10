@@ -279,13 +279,17 @@ if (json_last_error() != JSON_ERROR_NONE) {
     <script>
         var posts = JSON.parse('<?php echo $posts_json; ?>');
 
-        var maxViews = Math.max(...Object.values(posts).filter(v => v && v !== 'N/A').map(Math.log10));
+        // Convert posts to an array and sort by views in descending order
+        var sortedPosts = Object.entries(posts)
+            .filter(([post, views]) => views && views !== 'N/A')
+            .sort((a, b) => b[1] - a[1]);
+
+        var maxViews = Math.max(...sortedPosts.map(([post, views]) => Math.log10(views)));
 
         var chart = document.getElementById('postViews');
-        for (var post in posts) {
-            var views = posts[post];
-
-            if (!views || views === 'N/A') continue;
+        for (var i = 0; i < sortedPosts.length; i++) {
+            var post = sortedPosts[i][0];
+            var views = sortedPosts[i][1];
 
             var logViews = Math.log10(views);
 
