@@ -263,11 +263,14 @@ if (json_last_error() != JSON_ERROR_NONE) {
     <script>
         var tags = JSON.parse('<?php echo $tags_json; ?>');
 
-        var maxCount = Math.max(...Object.values(tags));
+        var sortedTags = Object.entries(tags).sort((a, b) => b[1] - a[1]);
+
+        var maxCount = Math.max(...sortedTags.map(([tag, count]) => count));
 
         var chart = document.getElementById('tags');
-        for (var tag in tags) {
-            var count = tags[tag];
+        for (var i = 0; i < sortedTags.length; i++) {
+            var tag = sortedTags[i][0];
+            var count = sortedTags[i][1];
 
             var bar = document.createElement('div');
             bar.className = 'bar';
@@ -279,7 +282,6 @@ if (json_last_error() != JSON_ERROR_NONE) {
     <script>
         var posts = JSON.parse('<?php echo $posts_json; ?>');
 
-        // Convert posts to an array and sort by views in descending order
         var sortedPosts = Object.entries(posts)
             .filter(([post, views]) => views && views !== 'N/A')
             .sort((a, b) => b[1] - a[1]);
