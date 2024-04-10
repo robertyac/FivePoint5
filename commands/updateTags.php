@@ -19,7 +19,7 @@ if (!isset($_SESSION)){
 }
 
 if(!isset($_SESSION['user_id'])){
-    $_SESSION['user_id'] = getUserId($_SESSION['user']);
+    prepUserId($_SESSION['user']);
 }
 
 $sql = "UPDATE UserFavoriteTags SET TagId = ? WHERE UserId = ?";
