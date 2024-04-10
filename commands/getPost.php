@@ -14,7 +14,7 @@ try {
     $pdo = new PDO($dsn, $user, $pass);
 
     // SQL query to get the posts with the given search term and tag
-    $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, Post.UserID, GROUP_CONCAT(DISTINCT Tag.Name) AS Tags, IFNULL(ROUND(AVG(UserRatings.Rating), 1), 0) AS AverageRating
+    $sql = "SELECT Post.PostID, Post.PostTitle, Post.PostImage, Post.Description, Post.PostDateTime, Post.UserID, GROUP_CONCAT(DISTINCT Tag.Name) AS Tags, IFNULL(ROUND(AVG(UserRatings.Rating), 1), 0) AS AverageRating, IFNULL(SUM(PostViews.ViewCount), 0) AS ViewCount
     FROM (
         SELECT Post.PostID
         FROM Post
@@ -27,6 +27,7 @@ try {
     LEFT JOIN PostTags ON Post.PostID = PostTags.PostID
     LEFT JOIN Tag ON PostTags.TagID = Tag.TagID
     LEFT JOIN UserRatings ON Post.PostID = UserRatings.PostID
+    LEFT JOIN PostViews ON Post.PostID = PostViews.PostID
     GROUP BY Post.PostID";
 
     $stmt = $pdo->prepare($sql);

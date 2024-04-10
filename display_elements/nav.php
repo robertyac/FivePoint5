@@ -112,12 +112,15 @@ $recent_tags = $_SESSION['recent_tags'] ?? [];
                 <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdownMenuLink">
                     <?php
                     if ($loggedIn) {
-                    echo "<li><a class='dropdown-item' href='profile.php'>My profile</a></li>";
-                    echo "<li><a class='dropdown-item btn btn-primary' href='commands/logout.php'>Logout</a></li>";
-                } else {
-                    echo "<li><a class='dropdown-item btn btn-primary' href='#loginModal' role='button' data-bs-toggle='modal' data-bs-target='#loginModal'>Login</a></li>";
-                    echo "<li><a class='dropdown-item btn btn-primary' href='#registerModal' role='button' data-bs-toggle='modal' data-bs-target='#registerModal'>Register</a></li>";
-                }
+                        echo "<li><a class='dropdown-item' href='profile.php'>My profile</a></li>";
+                        if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'] == 1) {
+                            echo "<li><a class='dropdown-item' href='admin.php'>Admin</a></li>";
+                        }
+                        echo "<li><a class='dropdown-item btn btn-primary' href='commands/logout.php'>Logout</a></li>";
+                    } else {
+                        echo "<li><a class='dropdown-item btn btn-primary' href='#loginModal' role='button' data-bs-toggle='modal' data-bs-target='#loginModal'>Login</a></li>";
+                        echo "<li><a class='dropdown-item btn btn-primary' href='#registerModal' role='button' data-bs-toggle='modal' data-bs-target='#registerModal'>Register</a></li>";
+                    }
                 ?>
             </ul>
         </div>

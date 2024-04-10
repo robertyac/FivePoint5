@@ -2,6 +2,7 @@
 session_start();
 
 include '../commands/getPost.php';
+include '../commands/checkUserStatus.php';
 
 $userID = $_SESSION['user_id'] ?? null;
 $postTitle = $_POST['postTitle'] ?? null;
@@ -13,6 +14,8 @@ if ($userID === null) {
     header("Location: ../createPost.php");
     exit();
 }
+
+checkUserStatus($userID);
 
 // Check if title is provided and its length is between 1 and 75 characters
 if ($postTitle === null || trim($postTitle) === '' || strlen($postTitle) < 1 || strlen($postTitle) > 75) {
