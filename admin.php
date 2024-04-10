@@ -294,7 +294,7 @@ if (json_last_error() != JSON_ERROR_NONE) {
 
             var bar = document.createElement('div');
             bar.className = 'bar';
-            bar.style.width = (logViews / maxViews * 100) + '%';
+            bar.style.width = (views == 1) ? '20%' : (logViews / maxViews * 100) + '%';
             bar.textContent = 'Post ' + post + ': ' + views;
 
             link.appendChild(bar);
