@@ -104,7 +104,15 @@ if (isset($_GET['search']) && $_GET['search'] == "") {
         <div class="container px-4">
             <div class="d-flex align-items-center justify-content-between">
                 <h1>5<span class="text-primary">.</span>5 </h1>
-                <p class="lead my-0"><?php echo (isset($_GET['search']))? "Search results" :'All posts'; ?></p>
+                <div>
+                    <p class="lead my-0"><?php echo (isset($_GET['search']))? "Search results" :'All posts'; ?></p>
+                    <form method="get">
+                        <select name="sort" onchange="this.form.submit()">
+                            <option value="recent" <?php echo ($_GET['sort'] ?? 'recent') === 'recent' ? 'selected' : ''; ?>>Most Recent</option>
+                            <option value="popular" <?php echo ($_GET['sort'] ?? 'recent') === 'popular' ? 'selected' : ''; ?>>Most Popular</option>
+                        </select>
+                    </form>
+                </div>
             </div>
             <hr />
         </div>
@@ -116,8 +124,14 @@ if (isset($_GET['search']) && $_GET['search'] == "") {
                 <div class="col-md m-md-3">
                     <?php
                     $posts = include "commands/getPost.php";
-                    // reverse the array so the most recent posts are first
-                    $posts = array_reverse($posts);
+                    $sort = $_GET['sort'] ?? 'recent';
+                    if ($sort === 'popular') {
+                        usort($posts, function($a, $b) {
+                            return $b['ViewCount'] <=> $a['ViewCount'];
+                        });
+                    } else {
+                        $posts = array_reverse($posts);
+                    }
                     $counter = 0;
                     foreach ($posts as $post) {
                         if ($counter % 2 == 0) {

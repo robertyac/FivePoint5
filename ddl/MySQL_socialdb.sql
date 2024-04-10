@@ -19,6 +19,7 @@ CREATE TABLE User (
     Email VARCHAR(255) NOT NULL UNIQUE,
     ProfilePicture LONGBLOB,
     IsAdmin BOOLEAN DEFAULT FALSE,
+    IsEnabled BOOLEAN DEFAULT TRUE,
     TimeCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(UserID)
 );
@@ -108,3 +109,5 @@ INSERT INTO User (Username, PasswordHash, Email, IsAdmin)
 VALUES ('davis', SHA2('admin@03', 256), 'admin1@5POINT5.com', TRUE);
 INSERT INTO User (Username, PasswordHash, Email, IsAdmin)
 VALUES ('connor', SHA2('admin@03', 256), 'admin2@5POINT5.com', TRUE);
+
+-- ALTER TABLE User ADD COLUMN IsEnabled BOOLEAN DEFAULT TRUE;
