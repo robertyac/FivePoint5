@@ -36,4 +36,6 @@ echo "image updated successfully";
 // close the connection
 $mysqli->close();
 // redirect to index.php
+
+$_SESSION['success'] = "Email updated successfully";
 header('Location: ../profile.php');

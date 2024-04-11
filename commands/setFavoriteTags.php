@@ -46,5 +46,6 @@ function updateTags($tags) {
 if (isset($_POST['tags'])) {
     $submittedTags = explode(',', $_POST['tags']);
     updateTags($submittedTags);
+    $_SESSION['success'] = "Email updated successfully";
     header('Location: ../profile.php');
 }

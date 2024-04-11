@@ -30,6 +30,7 @@ $stmt->execute();
 $mysqli->close();
 
 // redirect to index.php
+$_SESSION['success'] = "Email updated successfully";
 header('Location: ../profile.php');
 
 echo "Email updated successfully, failed to redirect";

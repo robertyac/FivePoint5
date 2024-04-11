@@ -51,6 +51,14 @@ include 'commands/makeQuery.php';
                 <div class="bg-light mx-auto w-50 card mt-5 h-auto" style="min-width: 400px">
                     <div class="card-body mx-auto">
                         <div class="tabcontent " id="settings">
+                            <?php
+                            if (isset($_SESSION['success'])) {
+                                echo '<div id="success-message" class="text-success rounded h1 text-center">
+                                        ! Changes saved !
+                                    </div>';
+                            }
+                            unset($_SESSION['success'])
+                            ?>
                             <div class="container">
                                 <h1>Your settings:</h1>
                             </div>
