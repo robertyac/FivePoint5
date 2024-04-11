@@ -19,31 +19,35 @@ if ($_GET['by'] == 'post') {
     $comments = getCommentsByPostId($pdo, $postID);
 } else if ($_GET['by'] == 'user') {
     $comments = getCommentsByUser($pdo, $_SESSION['user_id']);
-    $postID =null;
+    $postID = null;
 }
 
 foreach ($comments as $comment) {
     $date = DateTime::createFromFormat('Y-m-d H:i:s', $comment['CreatedAt']);
     $formattedDate = $date->format('F j, Y, g:i A');
     echo '<div class="card">
-    <div class="card-body">
-    <h5 class="card-title">' . htmlspecialchars($comment['Username']) . ' <small class="badge bg-secondary text-white float-end text-wrap" style="max-width: 200px; font-size: 0.5rem;">' . htmlspecialchars($formattedDate) . '</small></h5>
-    <p class="card-text">' . htmlspecialchars($comment['Content']) . '</p>';
+    <div class="card-body" data-comment-id="'. $comment['CreatedAt'] .'"> <!-- data-comment-id is unique, and used to identify the comment when collapsing -->
+    <h5 class="card-title"><img src="img/collapse-icon.svg" alt="collapse" height="15em" style="cursor: pointer" class="collapse-button"> ';
+    echo htmlspecialchars($comment['Username']) . ' <small class="badge bg-secondary text-white float-end text-wrap" style="max-width: 200px; font-size: 0.5rem;">' . htmlspecialchars($formattedDate) . '</small></h5>
+    <div class="comment-content"><p class="card-text">' . htmlspecialchars($comment['Content']) . '</p>';
 
         if (((isset($_SESSION['user']) && $_SESSION['user'] == $comment['Username']) || (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'])) && $_GET['by'] == 'post') {
             echo '
-        <form action="commands/deleteComment.php" method="post">
-            <input type="hidden" name="CommentID" value="' . $comment['CommentID'] . '">
-            <input type="hidden" name="PostID" value="' . $postID . '">
-            <button type="submit" class="btn btn-danger">Delete Comment</button>
-        </form>';
+            <form action="commands/deleteComment.php" method="post">
+                <input type="hidden" name="CommentID" value="' . $comment['CommentID'] . '">
+                <input type="hidden" name="PostID" value="' . $postID . '">
+                <button type="submit" class="btn btn-danger">Delete Comment</button>
+            </form>';
         }
 
-    echo '
+        echo '
+        </div>
     </div>
 </div>
 ';
 }
+
+
 
 function getCommentsByPostId($pdo, $postID) {
     try {

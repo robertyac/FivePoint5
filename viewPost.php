@@ -140,7 +140,7 @@ if (!$averageRating) {
     require 'commands/getUserRating.php';
 
     $postID = $_GET['PostID'];
-    $userID = $_SESSION['user_id'];
+    $userID = $_SESSION['user_id'] ?? null;
 
     $rating = getUserRating($postID, $userID);
     $ratingValue = $rating !== '?' ? $rating * 10 : 27.5;

@@ -1,5 +1,6 @@
 <script>
     $(document).ready(function() {
+        const collapsedComments = {};
         function loadComments() {
             <?php if (isset($_SESSION['user_id'])) : ?>
             <?php endif; ?>
@@ -24,6 +25,29 @@
                 data: data,
                 success: function(data) {
                     $('#comments').html(data);
+                    const collapseButtons = document.querySelectorAll('.collapse-button');
+
+                    collapseButtons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            const parentDiv = this.closest('.card-body');
+                            const commentId = parentDiv.getAttribute('data-comment-id');
+                            console.log(commentId);
+
+                            // Toggle collapsed state in the collapsedComments object
+                            collapsedComments[commentId] = !collapsedComments[commentId];
+
+                            // Toggle display based on collapsed state
+                            const commentContent = parentDiv.querySelector('.comment-content');
+                            commentContent.style.display = collapsedComments[commentId] ? 'none' : 'block';
+                        });
+                    });
+
+                    // Set initial collapsed state based on collapsedComments object
+                    const commentContents = document.querySelectorAll('.comment-content');
+                    commentContents.forEach(commentContent => {
+                        const commentId = commentContent.closest('.card-body').getAttribute('data-comment-id');
+                        commentContent.style.display = collapsedComments[commentId] ? 'none' : 'block';
+                    });
                 }
             });
         }
